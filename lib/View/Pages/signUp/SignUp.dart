@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
-import 'package:pharma/View/Pages/Home/HomePage.dart';
+import 'package:pharma/View/Components/MyPasswordField.dart';
+import 'package:pharma/View/Components/MyTextField.dart';
+import 'package:pharma/View/Pages/WelcomePage.dart';
 import 'package:pharma/models/UserModel.dart';
 import 'package:provider/provider.dart';
 
-import 'components/SignUpPasswordField.dart';
-import 'components/SignUpTextField.dart';
 import 'components/bar.dart';
 
 class SignUp extends StatefulWidget {
@@ -41,40 +41,72 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 40,
                 ),
-                SignUpTextField(
+                MyTextField(
                   controller: pharNamec,
                   labelText: 'اسم الصيدلية',
-                  hintText: 'ادخل اسم الصيدلية من فضلك',
+                  type: TextInputType.text,
+                  validator: (String value) {
+                    if (value.length < 4) return 'اسم الصيدلية قصير للغاية';
+                    return null;
+                  },
                 ),
-                SignUpTextField(
+                MyTextField(
                   controller: namec,
                   labelText: 'الاسم الكامل',
-                  hintText: 'ادخل الاسم الكامل من فضلك',
+                  type: TextInputType.text,
+                  validator: (String value) {
+                    if (value.length < 4) return 'اسم المستخدم قصير للغاية';
+                    return null;
+                  },
                 ),
-                SignUpTextField(
+                MyTextField(
                   controller: addressc,
                   labelText: 'العنوان',
-                  hintText: 'ادخل العنوان من فضلك',
+                  type: TextInputType.text,
+                  validator: (String value) {
+                    if (value.isEmpty) return 'ادخل العنوان من فضلك';
+                    return null;
+                  },
                 ),
-                SignUpTextField(
+                MyTextField(
                   controller: mobNumc,
                   labelText: 'رقم الموبايل',
-                  hintText: 'ادخل رقم الصيدلية من فضلك',
+                  type: TextInputType.number,
+                  validator: (String value) {
+                    if (value.isEmpty) return 'ادخل رقم الجوال من فضلك';
+                    if (num.tryParse(value) == null)
+                      return 'ادخل رقماً من فضلك';
+                    return null;
+                  },
                 ),
-                SignUpTextField(
+                MyTextField(
                   controller: numc,
                   labelText: 'رقم الصيدلية',
-                  hintText: 'ادخل رقم الصيدلية من فضلك',
+                  type: TextInputType.number,
+                  validator: (String value) {
+                    if (value.isEmpty) return 'ادخل رقم الصيدلية من فضلك';
+                    if (num.tryParse(value) == null)
+                      return 'ادخل رقماً من فضلك';
+                    return null;
+                  },
                 ),
-                SignUpPasswordField(
+                MyPasswordField(
                   controller: passc,
                   labelText: 'كلمة المرور',
-                  hintText: 'كلمة السر يجب أن تكون ثماني محارف على الأقل',
+                  validator: (String value) {
+                    if (value.length < 8)
+                      return 'كلمة السر يجب أن تكون ثماني محارف على الأقل';
+                    return null;
+                  },
                 ),
-                SignUpPasswordField(
+                MyPasswordField(
                   controller: confirmPassc,
                   labelText: 'تأكيد كلمة المرور',
-                  hintText: 'تأكيد كلمة المرور لا يطابق كلمة المرور',
+                  validator: (String value) {
+                    if (value.isEmpty)
+                      return 'تأكيد كلمة المرور لا يطابق كلمة المرور';
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 15,
@@ -99,16 +131,17 @@ class _SignUpState extends State<SignUp> {
                             password: passc.text,
                           ),
                         );
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
                             content: Text(
-                          response,
-                          textAlign: TextAlign.center,
-                        )));
+                              response,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
                         if (response == 'تم التسجيل بنجاح') {
-                          Navigator.popAndPushNamed(context, HomePage.id);
+                          Navigator.popAndPushNamed(context, WelcomePage.id);
                         }
-                      } else {
-                        passc.clear();
                       }
                     },
                     child: Text(

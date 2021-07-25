@@ -1,8 +1,6 @@
 import 'package:pharma/View/Pages/Admin/components/AddProductForm.dart';
 import 'package:flutter/material.dart';
 
-// new Edit
-
 class AddProductPage extends StatelessWidget {
   static const String id = '/AddProductPage';
 

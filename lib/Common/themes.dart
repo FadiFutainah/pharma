@@ -10,4 +10,5 @@ final ThemeData primaryTheme = ThemeData(
   ),
   accentColor: Colors.grey,
   primaryColor: Color(0xffffb52d),
+  // primaryColor: Colors.blue[400]
 );

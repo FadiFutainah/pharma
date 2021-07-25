@@ -37,7 +37,7 @@ class _SignInState extends State<SignIn> {
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.75,
                     child: Image.asset(
-                      'images/splash_logo.PNG',
+                      'images/logo.jpg',
                       fit: BoxFit.fitHeight,
                     ),
                   ),

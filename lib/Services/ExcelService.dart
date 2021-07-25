@@ -26,41 +26,4 @@ class ExcelService {
     }
     sink.close();
   }
-
-  // List<List<String>> getTable(String filename) {
-  //   var file = File('$filename.csv');
-  // }
 }
-
-  // var file = Fexcel(name: 'filename');
-  // List<List<String>> data = [
-  //   [
-  //     'price',
-  //     'quantity',
-  //     'offer',
-  //   ],
-  //   [
-  //     '500.00',
-  //     '1',
-  //     '10 + 4',
-  //   ],
-  //   [
-  //     '500.00',
-  //     '4',
-  //     '2 + 1',
-  //   ],
-  //   [
-  //     '390.00',
-  //     '1',
-  //     '3 + 2',
-  //   ],
-  //   [
-  //     '5880.00',
-  //     '6',
-  //     '4 + 1',
-  //   ],
-  // ];
-  // // file.createTable(data);
-  // file.insertNewRow(
-  //   ['500.00', '5', 'non'],
-  // );

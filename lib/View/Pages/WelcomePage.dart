@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/View/Pages/Home/HomePage.dart';
 
 class WelcomePage extends StatelessWidget {
   static const String id = '/welcome';
@@ -7,6 +8,12 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.popAndPushNamed(context, HomePage.id);
+          },
+        ),
         iconTheme: IconThemeData(
           color: Colors.white,
         ),

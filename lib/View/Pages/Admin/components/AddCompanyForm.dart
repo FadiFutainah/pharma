@@ -1,101 +1,58 @@
-import 'package:pharma/View/Pages/Admin/AddProductPage.dart';
-import 'package:pharma/models/CompanyModel.dart';
+import 'package:pharma/View/Components/MyButton.dart';
+import 'package:pharma/View/Components/MyTextField.dart';
 import 'package:flutter/material.dart';
 
-//new edit
 class AddCompanyForm extends StatefulWidget {
   @override
   _AddCompanyFormState createState() => _AddCompanyFormState();
 }
 
 class _AddCompanyFormState extends State<AddCompanyForm> {
-  Future<List<CompanyModel>> futureCompanies;
-  List<CompanyModel> companies;
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController namec = TextEditingController();
+  // Future<List<CompanyModel>> futureCompanies;
+  // List<CompanyModel> companies;
 
-  @override
-  void initState() {
-    companies = futureCompanies.asStream().toList() as List<CompanyModel>;
-    super.initState();
-  }
-
-  // final _formKey = GlobalKey<FormState>();
-  TextEditingController nameFieldController;
+  // @override
+  // void initState() {
+  //   companies = futureCompanies.asStream().toList() as List<CompanyModel>;
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      // key: _formKey,
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: TextField(
-              controller: nameFieldController,
-              cursorColor: Theme.of(context).primaryColor,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 17,
-                fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
+      key: _formKey,
+      child: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 40,
               ),
-              textAlign: TextAlign.right,
-              decoration: InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromARGB(180, 106, 103, 112),
-                  ),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Theme.of(context).primaryColor),
-                ),
+              MyTextField(
+                controller: namec,
                 labelText: 'اسم الشركة',
-                labelStyle: TextStyle(
-                  color: Color.fromARGB(180, 106, 103, 112),
-                  fontSize: 18,
-                  fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.25,
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(25),
-            child: Container(
-              width: MediaQuery.of(context).size.width / 1.8,
-              height: MediaQuery.of(context).size.height / 18,
-              color: Theme.of(context).primaryColor,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.popAndPushNamed(context, AddProductPage.id);
+                type: TextInputType.text,
+                validator: (String value) {
+                  if (value == '') return 'ادخل اسم الشركة من فضلك';
+                  return null;
                 },
-                child: Text(
-                  'إضافة',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily:
-                        Theme.of(context).textTheme.bodyText1.fontFamily,
-                  ),
-                ),
               ),
-            ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.25,
+              ),
+              MyButton(
+                width: MediaQuery.of(context).size.width * 0.5,
+                text: 'إضافة',
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {}
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
-
-
-  // int id;
-  // String name;
-  // int quantity;
-  // int sale;
-  // int addSale;
-  // int price;
-  // int hossa;
-  // DateTime createdAt;
-
-
-  

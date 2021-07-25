@@ -70,17 +70,3 @@ class ProductModel {
         'id_company': this.companyModel.id,
       };
 }
-// {
-//   "id" : 1,
-//   "name" : "fofo",
-//   "formation" : "rara",
-//   "addedDate" : "1/1/1",
-//   "max" : 100,
-//   "price" : 12.23,
-//   "quantity" : 99,
-//   "alternatives" : [
-//     "koko",
-//     "toto",
-//     "soso"
-//   ]
-// }

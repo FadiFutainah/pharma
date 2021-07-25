@@ -4,25 +4,25 @@ import 'package:pharma/View/Pages/Admin/AddCompanyPage.dart';
 import 'package:pharma/View/Pages/Admin/AddProductPage.dart';
 import 'package:pharma/View/Pages/Admin/components/ExpandableFab.dart';
 import 'package:pharma/View/Pages/CompanyMedcines/components/drawer.dart';
-import 'package:pharma/View/Pages/Contact-us/ContactUsPage.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/BasketResult/BasketResult.dart';
+import 'package:pharma/View/Pages/Contact-us/SuggestionsPage.dart';
 import 'package:pharma/View/Pages/MostWantedProduct/MostWantedProducts.dart';
 import 'package:pharma/View/Pages/companies/Companies.dart';
 import 'package:pharma/controllers/BasketsController.dart';
 
 import 'components/bar.dart';
 
-class HomePage extends StatefulWidget {
-  static const String id = '/HomePage';
+class AdminHomePage extends StatefulWidget {
+  static const String id = '/AdminHomePage';
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _AdminHomePageState createState() => _AdminHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AdminHomePageState extends State<AdminHomePage> {
   BasketsController basketsController = new BasketsController();
   // CompanyController companyController;
 
@@ -61,6 +61,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: ExpandableFab(
+        distance: 112.0,
+        children: [
+          ActionButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(AddBasketPage.id);
+            },
+            icon: const Icon(Icons.shopping_basket),
+          ),
+          ActionButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(AddProductPage.id);
+            },
+            icon: const Icon(Icons.local_hospital),
+          ),
+          ActionButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(AddCompanyPage.id);
+            },
+            icon: const Icon(Icons.store),
+          ),
+        ],
+      ),
       backgroundColor: Color.fromARGB(255, 245, 245, 245),
       drawer: Container(
         width: MediaQuery.of(context).size.width / 1.7,
@@ -342,59 +365,58 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height / 8,
-                      child: Card(
-                        child: OutlinedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.white),
-                              elevation: MaterialStateProperty.all(2)),
-                          onPressed: () {
-                            Navigator.pushNamed(context, ContactUsPage.id);
-                          },
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Icon(
-                                  Icons.arrow_back_ios_sharp,
-                                  size: MediaQuery.of(context).size.height / 25,
-                                  color: Colors.grey[600],
+                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 8,
+                    child: Card(
+                      child: OutlinedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            elevation: MaterialStateProperty.all(2)),
+                        onPressed: () {
+                          Navigator.pushNamed(context, SuggestionsPage.id);
+                        },
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Icon(
+                                Icons.arrow_back_ios_sharp,
+                                size: MediaQuery.of(context).size.height / 25,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'الاقتراحات والشكاوي',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontFamily: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        .fontFamily,
+                                  ),
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'تواصل معنا',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.black,
-                                      fontFamily: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          .fontFamily,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 18,
-                                  ),
-                                  Icon(
-                                    Icons.info_outline,
-                                    size:
-                                        MediaQuery.of(context).size.height / 16,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ],
-                              ),
-                            ],
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 18,
+                                ),
+                                Icon(
+                                  Icons.info_outline,
+                                  size: MediaQuery.of(context).size.height / 16,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ],
+                            ),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         ),
                       ),
-                    )),
+                    ),
+                  ),
+                ),
 
                 /*Divider(
                 endIndent: MediaQuery.of(context).size.width / 8,

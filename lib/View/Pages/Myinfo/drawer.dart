@@ -16,8 +16,6 @@ class MainpageDrawer extends StatefulWidget {
 }
 
 class _MainpageDrawerState extends State<MainpageDrawer> {
-  UserController userController = new UserController();
-
   bool showSpinner = false;
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'components/AddCompanyForm.dart';
 
-// new Edit
-
 class AddCompanyPage extends StatelessWidget {
   static const String id = '/AddCompanyPage';
 

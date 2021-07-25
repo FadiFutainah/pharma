@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pharma/Providers/AuthProvider.dart';
-import 'package:provider/provider.dart';
 
 class PasswordField extends StatefulWidget {
   final TextEditingController controller;

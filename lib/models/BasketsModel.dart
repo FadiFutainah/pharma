@@ -1,43 +1,39 @@
 import 'SallatProducts.dart';
 
 class BasketsModel {
-  int id;
-  int sallatId;
-  int userId;
-  int fullTotal;
-  String image;
+  int id = 0;
+  String sallatName = '';
+  int fullTotal = 0;
+  int num = 0;
+  int userId = 0;
   List<SallatProducts> sallatProducts = [];
-
 
   BasketsModel({
     this.id,
     this.userId,
-    this.sallatId,
-    this.image,
-    this.fullTotal,
+    this.sallatName,
     this.sallatProducts,
+    this.num,
+    this.fullTotal,
   });
 
   BasketsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    sallatName = json['name'];
     fullTotal = json['full_total'];
-    image = json['image'];
+    num = json['num'];
     if (json['sallat_products'] != null) {
-      sallatProducts = List<SallatProducts>();
+      sallatProducts = [];
       json['sallat_products'].forEach((v) {
         sallatProducts.add(SallatProducts.fromJson(v));
       });
-
-      print('aldgkjagsdhasd'+sallatProducts.toString());
     }
   }
 
-  Map<String, dynamic> toJsonToBuy()=> {
-    
-    'id_user': this.userId,
-    'id_sallat':this.sallatId,
-    
-  };
+  Map<String, dynamic> toJsonToBuy() => {
+        'id_user': this.userId,
+        'sallat_id': this.id,
+      };
 
   /*Map<String, dynamic> toJson() {
     

@@ -32,8 +32,7 @@ class _BarState extends State<Bar> {
           color: Colors.white,
         ),
         onPressed: () {
-          Navigator.of(context).pushNamed(HomePage.id);
-          // Navigator.pop(context);
+          Navigator.pop(context);
         },
       ),
     );

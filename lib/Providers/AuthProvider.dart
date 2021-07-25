@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pharma/Common/consts.dart';
 import 'package:pharma/models/UserModel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   static bool _isAuthenticated = false;
@@ -25,7 +24,7 @@ class AuthProvider extends ChangeNotifier {
           'password': user.password
         },
       ).timeout(Duration(seconds: 15));
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return 'تم التسجيل بنجاح';
       } else {
         return 'خطأ في الشبكة';
@@ -40,7 +39,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<http.Response> logIn(String username, String password) async {
-    SharedPreferences storage = await SharedPreferences.getInstance();
+    // SharedPreferences storage = await SharedPreferences.getInstance();
 
     final response = await http.post(
       Uri.parse(baseUrl + '/login'),
@@ -53,8 +52,8 @@ class AuthProvider extends ChangeNotifier {
         notifyListeners();
         return response;
       } else {
-        storage.setString('username', username);
-        storage.setString('token', json.decode(response.body)['token']);
+        // storage.setString('username', username);
+        // storage.setString('token', json.decode(response.body)['token']);
         _isAuthenticated = true;
         notifyListeners();
         return response;
@@ -66,18 +65,30 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // Future<void> logout(String username, String password) async {
-  //   String token = await storage.getToken();
-
-  //   final response = await http.post(Uri.parse(baseUrl + '/logout'), headers: {
-  //     HttpHeaders.authorizationHeader: '$token',
-  //   }, body: {
-  //     'username': username,
-  //     'password': password,
-  //   });
-
-  //   _isAuthenticated = false;
-  //   storage.deleteToken();
-  //   notifyListeners();
-  // }
+  Future<void> logout(String username, String password) async {
+    // SharedPreferences storage = await SharedPreferences.getInstance();
+    // String token = storage.getString('token');
+    try {
+      final response =
+          await http.post(Uri.parse(baseUrl + '/logout'), headers: {
+        // HttpHeaders.authorizationHeader: '$token',
+      }, body: {
+        'username': username,
+        'password': password,
+      });
+      if (response.statusCode == 200) {
+        _isAuthenticated = false;
+        notifyListeners();
+        return 'تم تسجيل الخروج بنجاح';
+      } else {
+        return 'خطأ في الشبكة';
+      }
+    } on SocketException {
+      return 'لا يوجد اتصال بالشبكة';
+    } on TimeoutException {
+      return 'اتصال ضعيف بالشبكة';
+    } on Exception {
+      return 'لا يوجد اتصال بالشبكة';
+    }
+  }
 }

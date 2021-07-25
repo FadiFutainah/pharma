@@ -6,7 +6,7 @@ import 'Common/routes.dart';
 import 'Common/themes.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
 import 'Providers/CartProvider.dart';
-import 'View/Pages/Home/HomePage.dart';
+import 'View/Pages/Home/AdminHomePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
         home: AnimatedSplashScreen(
           duration: 500,
           splash: Image.asset(
-            'images/Screenshot (120).png',
+            'images/logo.jpg',
           ),
           splashIconSize: 150,
-          nextScreen: HomePage(),
+          nextScreen: AdminHomePage(),
           splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.white,
           pageTransitionType: PageTransitionType.fade,
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         theme: primaryTheme,
         debugShowCheckedModeBanner: debugDisableShadows,
         routes: routes,
-        // showPerformanceOverlay: true,
+        //showPerformanceOverlay: true,
         // showSemanticsDebugger: true,
       ),
     );

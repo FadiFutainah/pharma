@@ -9,6 +9,8 @@ class Cart extends ChangeNotifier {
   final List<TableRow> _items = [];
   final List<BillProductModel> _products = [];
   final List<ProductModel> _productsModel = [];
+// needs edit
+  int selectedId;
 
   UnmodifiableListView<TableRow> get items => UnmodifiableListView(_items);
   UnmodifiableListView<BillProductModel> get products =>

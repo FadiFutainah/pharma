@@ -56,39 +56,6 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
               ///mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                // ----------------------------------temp
-
-                Padding(
-                  padding:
-                      EdgeInsets.all(MediaQuery.of(context).size.height / 60),
-                  child: TextButton(
-                    style: ButtonStyle(),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.add,
-                          color: Color.fromARGB(255, 255, 142, 1),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 20),
-                          child: Text(
-                            'مسار التطبيق الباك ايند',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {
-                      Navigator.popAndPushNamed(context, TempPage.id);
-                    },
-                  ),
-                ),
-
-                // -------------------------------------
                 Padding(
                   padding:
                       EdgeInsets.all(MediaQuery.of(context).size.height / 60),

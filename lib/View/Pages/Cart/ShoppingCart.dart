@@ -221,13 +221,14 @@ class ShoppingCart extends StatelessWidget {
                           .isEmpty) {
                         return;
                       } else {
+                        // needs edit user id
+
                         billController.addBill(Services.makeBillModel(
                             Provider.of<Cart>(context, listen: false).products,
-                            6,
+                            1,
                             Provider.of<Cart>(context, listen: false)
                                 .total()
                                 .toInt()));
-
                         Provider.of<Cart>(context, listen: false).removeAll();
                       }
 

@@ -1,16 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pharma/models/BasketsModel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pharma/models/BillModel.dart';
-import 'package:pharma/models/BillProductModel.dart';
 import 'package:pharma/models/PivoitModal.dart';
 import 'package:pharma/models/ProductModel.dart';
+import 'package:pharma/models/BasketsModel.dart';
+import 'package:pharma/models/BillProductModel.dart';
 
 class Services {
   static BasketsModel makeBasketModelToBuy(int userId, int sallatId) {
     BasketsModel respons = BasketsModel();
     respons.userId = userId;
-    respons.sallatId = sallatId;
+    respons.id = sallatId;
     return respons;
   }
 

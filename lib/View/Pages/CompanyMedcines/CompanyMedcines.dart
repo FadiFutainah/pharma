@@ -1,15 +1,12 @@
+import 'package:numberpicker/numberpicker.dart';
+import 'package:pharma/Providers/CartProvider.dart';
+import 'package:pharma/Services/Services.dart';
+import 'package:pharma/View/Pages/Cart/ShoppingCart.dart';
+import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/ProductController.dart';
 import 'package:pharma/models/ProductModel.dart';
 import 'package:flutter/material.dart';
-import 'package:pharma/Providers/CartProvider.dart';
-import 'package:pharma/Services/Services.dart';
-import 'package:pharma/View/Pages/CompanyMedcines/components/bar.dart';
-import 'package:pharma/View/Pages/CompanyMedcines/components/drawer.dart';
-import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:provider/provider.dart';
-import 'package:numberpicker/numberpicker.dart';
-
-import 'components/drawer.dart';
 
 class CompanyMedcines extends StatefulWidget {
   final companyId;
@@ -38,13 +35,34 @@ class _CompanyMedcinesState extends State<CompanyMedcines> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Bar(companyName: widget.companyName),
-        drawer: Container(
-            width: MediaQuery.of(context).size.width / 1.7,
-            child: MainpageDrawer(
-              userName: 'احمد',
-              pharmacyName: 'الصيدلية المركزية',
-            )),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
+          backgroundColor: Color(0xffffb52d),
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            widget.companyName,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.shopping_cart_outlined,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(ShoppingCart.id);
+              },
+            ),
+          ],
+        ),
+        // drawer: Container(
+        //     width: MediaQuery.of(context).size.width / 1.7,
+        //     child: MainpageDrawer(
+        //       userName: 'احمد',
+        //       pharmacyName: 'الصيدلية المركزية',
+        //     )),
         body: FutureBuilder<List<ProductModel>>(
             future: futureProducts,
             builder: (context, snapshot) {

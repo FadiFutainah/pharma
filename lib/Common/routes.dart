@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/Admin/AddBasketPage.dart';
 import 'package:pharma/View/Pages/Admin/AddCompanyPage.dart';
 import 'package:pharma/View/Pages/Admin/AddProductPage.dart';
+import 'package:pharma/View/Pages/Admin/AddUserPage.dart';
 import 'package:pharma/View/Pages/BasketResult/BasketResult.dart';
 import 'package:pharma/View/Pages/Bills/Bills.dart';
 import 'package:pharma/View/Pages/Cart/ShoppingCart.dart';
 import 'package:pharma/View/Pages/CompanyMedcines/CompanyMedcines.dart';
 import 'package:pharma/View/Pages/Contact-us/ContactUsPage.dart';
+import 'package:pharma/View/Pages/Contact-us/SuggestionsPage.dart';
+import 'package:pharma/View/Pages/Home/AdminHomePage.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/View/Pages/MostWantedProduct/MostWantedProducts.dart';
 import 'package:pharma/View/Pages/Myinfo/MyInfo.dart';
@@ -35,4 +38,7 @@ final Map<String, WidgetBuilder> routes = {
   AddBasketPage.id: (context) => AddBasketPage(),
   AddCompanyPage.id: (context) => AddCompanyPage(),
   AddProductPage.id: (context) => AddProductPage(),
+  AddUserPage.id: (context) => AddUserPage(),
+  AdminHomePage.id: (context) => AdminHomePage(),
+  SuggestionsPage.id: (context) => SuggestionsPage(),
 };

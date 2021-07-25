@@ -1,9 +1,8 @@
+import 'package:pharma/View/Pages/Admin/components/AddProductForm.dart';
 import 'package:flutter/material.dart';
 
-import 'components/AddBasketForm.dart';
-
-class AddBasketPage extends StatelessWidget {
-  static const String id = '/AddBasketPage';
+class AddUserPage extends StatelessWidget {
+  static const String id = '/AddUserPage';
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class AddBasketPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'إضافة سلة',
+          'إضافة مستخدم',
           style: TextStyle(color: Colors.white),
         ),
         leading: IconButton(
@@ -27,7 +26,7 @@ class AddBasketPage extends StatelessWidget {
           },
         ),
       ),
-      body: AddBasketForm(),
+      body: AddProductForm(),
     );
   }
 }
