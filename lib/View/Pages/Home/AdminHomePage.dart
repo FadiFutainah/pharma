@@ -2,8 +2,8 @@ import 'package:pharma/View/Components/SearchField.dart';
 import 'package:pharma/View/Pages/Admin/AddBasketPage.dart';
 import 'package:pharma/View/Pages/Admin/AddCompanyPage.dart';
 import 'package:pharma/View/Pages/Admin/AddProductPage.dart';
+import 'package:pharma/View/Pages/Admin/components/AdminDrawer.dart';
 import 'package:pharma/View/Pages/Admin/components/ExpandableFab.dart';
-import 'package:pharma/View/Pages/CompanyMedcines/components/drawer.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -37,27 +37,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
     futureBaskets = basketsController.getAllBaskets();
   }
 
-  _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          title: Text(
-            'العرض الجديد',
-            textAlign: TextAlign.center,
-          ),
-          children: [
-            Container(
-              child: Center(child: Text('العرض')),
-              height: MediaQuery.of(context).size.height / 3,
-              width: MediaQuery.of(context).size.width / 2,
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +51,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
           ),
           ActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(AddProductPage.id);
+              Navigator.of(context).popAndPushNamed(AddProductPage.id);
             },
             icon: const Icon(Icons.local_hospital),
           ),
@@ -87,9 +66,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
       backgroundColor: Color.fromARGB(255, 245, 245, 245),
       drawer: Container(
         width: MediaQuery.of(context).size.width / 1.7,
-        child: MainpageDrawer(
-          userName: 'أحمد',
-          pharmacyName: 'الصيدلية المركزية',
+        child: AdminDrawer(
+          pharmacyName: 'زياد',
+          userName: 'الحساب الرئيسي',
         ),
       ),
       appBar: Bar(),
@@ -162,22 +141,27 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           },
                                           child: Stack(
                                             children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                ),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          30.0),
-                                                  child: Image.asset(
-                                                    'images/logo.jpg',
+                                              Center(
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30.0),
+                                                    child: Image.asset(
+                                                      'images/basketsImage.png',
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                              Text(snapshot.data[index]
-                                                  ['sallatName']),
+                                              Center(
+                                                child: Text(snapshot.data[index]
+                                                    ['sallatName']),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -211,7 +195,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
                                             child: Image.asset(
-                                              'images/logo.jpg',
+                                              'images/basketsImage.png',
                                             ),
                                           ),
                                         ),
@@ -234,7 +218,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
                                             child: Image.asset(
-                                              'images/logo.jpg',
+                                              'images/basketsImage.png',
                                             ),
                                           ),
                                         ),

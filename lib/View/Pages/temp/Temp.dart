@@ -15,7 +15,7 @@ class TempPage extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
-          'Url input',
+          'تغيير الصلاحية',
           style: TextStyle(
             color: Colors.white,
             fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,

@@ -1,8 +1,14 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pharma/View/Components/MyButton.dart';
 import 'package:pharma/View/Components/MyTextField.dart';
 import 'package:flutter/material.dart';
+import 'package:pharma/controllers/CompanyController.dart';
 
 class AddCompanyForm extends StatefulWidget {
+  final CompanyController companyController = CompanyController();
   @override
   _AddCompanyFormState createState() => _AddCompanyFormState();
 }
@@ -10,6 +16,7 @@ class AddCompanyForm extends StatefulWidget {
 class _AddCompanyFormState extends State<AddCompanyForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController namec = TextEditingController();
+  String path;
   // Future<List<CompanyModel>> futureCompanies;
   // List<CompanyModel> companies;
 
@@ -42,11 +49,27 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
               ),
+              IconButton(
+                onPressed: () async {
+                  ImagePicker imagePicker = ImagePicker();
+                  XFile image =
+                      await imagePicker.pickImage(source: ImageSource.gallery);
+                  var file = File(image.path);
+                  final temp = await getApplicationDocumentsDirectory();
+                },
+                icon: Icon(Icons.add_a_photo_outlined),
+                iconSize: 50,
+              ),
               MyButton(
                 width: MediaQuery.of(context).size.width * 0.5,
                 text: 'إضافة',
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {}
+                onPressed: () async {
+                  if (_formKey.currentState.validate()) {
+                    String res = await widget.companyController
+                        .addCompany('company name', path);
+                    print('respo');
+                    print(res);
+                  }
                 },
               ),
             ],
@@ -56,3 +79,19 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
     );
   }
 }
+
+
+      // final ImagePicker _picker = ImagePicker();
+      //             final File image = (await _picker.pickImage(
+      //                 source: ImageSource.gallery)) as File;
+      //             print('path');
+      //             print(path);
+      //             print('image.path');
+      //             print(image.path);
+      //             final Directory apppath =
+      //                 await getApplicationDocumentsDirectory();
+
+      //             File temp = await image.copy('${apppath.path}/fofo.jpg');
+      //             path = temp.path;
+      //             print('path');
+      //             print(path);

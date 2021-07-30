@@ -1,6 +1,5 @@
 import 'package:numberpicker/numberpicker.dart';
 import 'package:pharma/Providers/CartProvider.dart';
-import 'package:pharma/Services/Services.dart';
 import 'package:pharma/View/Pages/Cart/ShoppingCart.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/ProductController.dart';
@@ -105,14 +104,8 @@ class _CompanyMedcinesState extends State<CompanyMedcines> {
                                           print('object done');
                                           Provider.of<Cart>(context,
                                                   listen: false)
-                                              .addItem(
-                                                  snapshot.data[index],
-                                                  _controllers[index]
-                                                      .toDouble(),
-                                                  Services
-                                                      .convertProductToBillProduct(
-                                                          snapshot.data[index],
-                                                          _controllers[index]));
+                                              .addItem(snapshot.data[index],
+                                                  _controllers[index]);
                                           /*.addItem(Services.makeTableRow(
                                                   snapshot.data[index],
                                                   _controllers[index]

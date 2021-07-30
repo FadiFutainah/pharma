@@ -1,8 +1,4 @@
 import 'package:pharma/View/Components/SearchField.dart';
-import 'package:pharma/View/Pages/Admin/AddBasketPage.dart';
-import 'package:pharma/View/Pages/Admin/AddCompanyPage.dart';
-import 'package:pharma/View/Pages/Admin/AddProductPage.dart';
-import 'package:pharma/View/Pages/Admin/components/ExpandableFab.dart';
 import 'package:pharma/View/Pages/CompanyMedcines/components/drawer.dart';
 import 'package:pharma/View/Pages/Contact-us/ContactUsPage.dart';
 import 'package:carousel_pro/carousel_pro.dart';
@@ -35,27 +31,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     // futureCompany = companyController.getCompanies();
     futureBaskets = basketsController.getAllBaskets();
-  }
-
-  _showDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          title: Text(
-            'العرض الجديد',
-            textAlign: TextAlign.center,
-          ),
-          children: [
-            Container(
-              child: Center(child: Text('العرض')),
-              height: MediaQuery.of(context).size.height / 3,
-              width: MediaQuery.of(context).size.width / 2,
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
@@ -139,22 +114,27 @@ class _HomePageState extends State<HomePage> {
                                           },
                                           child: Stack(
                                             children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                ),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          30.0),
-                                                  child: Image.asset(
-                                                    'images/logo.jpg',
+                                              Center(
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30.0),
+                                                    child: Image.asset(
+                                                      'images/basketsImage.png',
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                              Text(snapshot.data[index]
-                                                  ['sallatName']),
+                                              Center(
+                                                child: Text(snapshot.data[index]
+                                                    ['sallatName']),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -188,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
                                             child: Image.asset(
-                                              'images/logo.jpg',
+                                              'images/basketsImage.png',
                                             ),
                                           ),
                                         ),
@@ -211,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
                                             child: Image.asset(
-                                              'images/logo.jpg',
+                                              'images/basketsImage.png',
                                             ),
                                           ),
                                         ),

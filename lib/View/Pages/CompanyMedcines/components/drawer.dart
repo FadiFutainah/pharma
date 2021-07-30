@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/Bills/Bills.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
+import 'package:pharma/View/Pages/Scedual/SchedualPage.dart';
 import 'package:pharma/View/Pages/signIn/SignIn.dart';
-import 'package:pharma/View/Pages/temp/Temp.dart';
 
 class MainpageDrawer extends StatefulWidget {
-  String userName;
-  String pharmacyName;
+  final String userName;
+  final String pharmacyName;
   MainpageDrawer({Key key, this.userName, this.pharmacyName}) : super(key: key);
 
   @override
@@ -167,7 +167,9 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(SchedualPage.id);
+                    },
                   ),
                 ),
               ],

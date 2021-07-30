@@ -9,19 +9,30 @@ class ProductController {
   ProductModel productModel = ProductModel();
 
   //needs edit
-
-  // Future<String> addProduct(ProductModel productModel) async {
-  //   var url = baseUrl + 'inputproduct';
-  //   Uri uri = Uri.parse(url);
-  //   final response = await http.post(
-  //     uri,
-  //     body: productModel.addProductToJson(),
-  //   );
-  //   if (response.statusCode == 200) {
-  //     return 'تم إضافة المنتج بنجاح';
-  //   }
-
-  // }
+// ossama
+  Future<String> addProduct(ProductModel productModel) async {
+    var url = baseUrl + 'inputproducts';
+    Uri uri = Uri.parse(url);
+    try {
+      final response = await http.post(
+        uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+        // body: productModel.addProductToJson(),
+      );
+      if (response.statusCode == 200) {
+        return 'تم إضافة المنتج بنجاح';
+      } else {
+        return 'يوجد خطأ في الشبكة';
+      }
+    } on SocketException {
+      return 'لا يوجد اتصال في الشبكة';
+    } on Exception {
+      return 'يوجد مشكلة في الشبكة';
+    }
+  }
 
   Future<List<ProductModel>> getByCompanyId(int id) async {
     var url = baseUrl + 'showproductsbycompany/$id';
@@ -34,11 +45,12 @@ class ProductController {
           'Authorization': 'Bearer $token',
         },
       );
+
       if (response.statusCode == 200) {
         var json = convert.jsonDecode(response.body);
         List products = json;
         return products
-            .map((product) => new ProductModel.fromJson(product))
+            .map((product) => new ProductModel.fromJsonWithModelHossa(product))
             .toList();
       } else {
         return null;
@@ -61,10 +73,11 @@ class ProductController {
       );
       if (response.statusCode == 200) {
         List json = convert.jsonDecode(response.body);
+        print(json.toString() + 'fofofofofofofofo');
         if (json.isEmpty) {
           return ProductModel(name: 'not found');
         } else {
-          return ProductModel.fromJson(json[0]);
+          return ProductModel.fromJsonWithstringHossa(json[0]);
         }
       } else {
         return ProductModel(name: 'not found');
@@ -90,7 +103,9 @@ class ProductController {
         List products = json;
         List<String> string = [''];
         List<ProductModel> s;
-        s = products.map((user) => new ProductModel.fromJson(user)).toList();
+        s = products
+            .map((user) => new ProductModel.fromJsonWithstringHossa(user))
+            .toList();
         for (int i = 0; i < s.length; i++) {
           string.add(s[i].name);
         }
@@ -118,7 +133,7 @@ class ProductController {
         var json = convert.jsonDecode(response.body);
         List products = json;
         return products
-            .map((product) => new ProductModel.fromJson(product))
+            .map((product) => new ProductModel.fromJsonForMostWanted(product))
             .toList();
       } else {
         return null;

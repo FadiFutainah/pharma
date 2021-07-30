@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:pharma/models/BillModel.dart';
+import 'package:pharma/models/BasketModel.dart';
 
-class BillTable extends StatelessWidget {
-  final BillModel billModel;
-  BillTable({Key key, this.billModel}) : super(key: key);
+// ignore: must_be_immutable
+class BasketTable extends StatelessWidget {
+  BasketsModel basketModel;
+  BasketTable({Key key, this.basketModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<TableRow> list = [];
 
-    for (int i = 0; i < billModel.products.length; i++) {
+    for (int i = 0; i < basketModel.sallatProducts.length; i++) {
       list.add(TableRow(
         children: [
           Text(
-            billModel.products[i].pivotModel.total.toString(),
+            basketModel.sallatProducts[i].total.toString(),
             textAlign: TextAlign.center,
           ),
-          Text(billModel.products[i].price.toString(),
+          Text(basketModel.sallatProducts[i].price.toString(),
               textAlign: TextAlign.center),
 
           ///Text(billModel.products[i]..toString(), textAlign: TextAlign.center),
-          Text((billModel.products[i].quantity).toString(),
+          Text((basketModel.sallatProducts[i].quentity).toString(),
               textAlign: TextAlign.center),
-          Text(billModel.products[i].name.toString(),
+          Text(basketModel.sallatProducts[i].productsName.toString(),
               textAlign: TextAlign.center),
         ],
       ));
@@ -119,7 +120,7 @@ class BillTable extends StatelessWidget {
                 TableRow(
                   children: [
                     Text(
-                      billModel.fullTotal.toString(),
+                      basketModel.fullTotal.toString(),
                       textAlign: TextAlign.center,
                     ),
                     Text('', textAlign: TextAlign.center),

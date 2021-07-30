@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CompanyGridTile extends StatefulWidget {
-  Image image;
-  String companyName;
-
-  ///CompanyGridTile({Key key, /*this.image, this.companyName*/}) : super(key: key);
-
   @override
   _CompanyGridTileState createState() => _CompanyGridTileState();
 }
@@ -43,14 +38,14 @@ class _CompanyGridTileState extends State<CompanyGridTile> {
           child: Container(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset('images/pharmacy-symbol-medical-snake-vector-3525841.jpg',
-                                  height:MediaQuery.of(context).size.height/7.4),
+              child: Image.asset(
+                  'images/pharmacy-symbol-medical-snake-vector-3525841.jpg',
+                  height: MediaQuery.of(context).size.height / 7.4),
             ),
           ),
         ),
         Text('mmzz'),
       ],
-    )
-  );
+    ));
   }
 }

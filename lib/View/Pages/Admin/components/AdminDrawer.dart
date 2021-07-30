@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/View/Pages/Admin/AddUserPage.dart';
 import 'package:pharma/View/Pages/Bills/Bills.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
+import 'package:pharma/View/Pages/Scedual/AdminSchedualPage.dart';
 import 'package:pharma/View/Pages/signIn/SignIn.dart';
 
-class MainpageDrawer extends StatefulWidget {
+class AdminDrawer extends StatefulWidget {
   final String userName;
   final String pharmacyName;
-  MainpageDrawer({Key key, this.userName, this.pharmacyName}) : super(key: key);
+  AdminDrawer({Key key, this.userName, this.pharmacyName}) : super(key: key);
 
   @override
-  _MainpageDrawerState createState() => _MainpageDrawerState();
+  _AdminDrawerState createState() => _AdminDrawerState();
 }
 
-class _MainpageDrawerState extends State<MainpageDrawer> {
+class _AdminDrawerState extends State<AdminDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -63,7 +65,7 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
                     child: Row(
                       children: <Widget>[
                         Icon(
-                          Icons.login,
+                          Icons.home,
                           color: Color.fromARGB(255, 255, 142, 1),
                         ),
                         Padding(
@@ -166,7 +168,38 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(AdminSchedualPage.id);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.height / 60),
+                  child: TextButton(
+                    style: ButtonStyle(),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.person,
+                          color: Color.fromARGB(255, 255, 142, 1),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width / 20),
+                          child: Text(
+                            'المستخدمين',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      Navigator.popAndPushNamed(context, AddUserPage.id);
+                    },
                   ),
                 ),
               ],

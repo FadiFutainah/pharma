@@ -118,6 +118,7 @@ class _SignUpState extends State<SignUp> {
                       if (confirmPassc.text != passc.text) {
                         confirmPassc.clear();
                       }
+                      // needs edit
                       if (_formKey.currentState.validate()) {
                         var response = await Provider.of<AuthProvider>(context,
                                 listen: false)
@@ -126,8 +127,8 @@ class _SignUpState extends State<SignUp> {
                             pharmacyName: pharNamec.text,
                             name: namec.text,
                             address: addressc.text,
-                            phone: numc.text,
-                            mobilePhone: mobNumc.text,
+                            phone: numc.text as int,
+                            mobilePhone: mobNumc.text as int,
                             password: passc.text,
                           ),
                         );

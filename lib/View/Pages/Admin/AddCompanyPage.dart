@@ -4,7 +4,7 @@ import 'components/AddCompanyForm.dart';
 
 class AddCompanyPage extends StatelessWidget {
   static const String id = '/AddCompanyPage';
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

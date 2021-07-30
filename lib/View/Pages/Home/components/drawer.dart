@@ -1,5 +1,6 @@
 import 'package:pharma/View/Pages/Bills/Bills.dart';
 import 'package:pharma/View/Pages/Myinfo/MyInfo.dart';
+import 'package:pharma/View/Pages/Scedual/SchedualPage.dart';
 import 'package:pharma/View/Pages/signIn/SignIn.dart';
 import 'package:flutter/material.dart';
 
@@ -140,7 +141,9 @@ class HomePageDrawer extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(SchedualPage.id);
+                    },
                   ),
                 ),
                 Padding(

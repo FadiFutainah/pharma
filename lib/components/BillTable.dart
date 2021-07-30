@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pharma/models/BillModel.dart';
 
 class BillTable extends StatelessWidget {
-  final BillModel billModel;
+  BillModel billModel;
   BillTable({Key key, this.billModel}) : super(key: key);
 
   @override

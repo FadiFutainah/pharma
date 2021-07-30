@@ -1,6 +1,6 @@
+import 'package:pharma/Providers/Services.dart';
 import 'package:pharma/View/Components/BasketTable.dart';
 import 'package:flutter/material.dart';
-import 'package:pharma/Services/Services.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/BasketsController.dart';
 import 'package:pharma/models/BasketsModel.dart';

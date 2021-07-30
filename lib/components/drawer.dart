@@ -1,14 +1,12 @@
-import 'dart:async';
-
-import 'package:pharma/View/Pages/Home/HomePage.dart';
-import 'package:pharma/View/Pages/signIn/SignIn.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:pharma/View/Pages/Bills/Bills.dart';
+import 'package:pharma/View/Pages/Myinfo/MyInfo.dart';
+import 'package:pharma/View/Pages/signIn/SignIn.dart';
 
 class MainpageDrawer extends StatefulWidget {
-  final String userName;
-  final String pharmacyName;
-  MainpageDrawer({Key key, this.userName, this.pharmacyName}) : super(key: key);
+  String pageName;
+  MainpageDrawer({Key key, this.pageName}) : super(key: key);
 
   @override
   _MainpageDrawerState createState() => _MainpageDrawerState();
@@ -24,8 +22,14 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text(widget.userName),
-              accountEmail: Text(widget.pharmacyName),
+              accountName: Text(
+                'Ahmad',
+                style: TextStyle(color: Colors.white),
+              ),
+              accountEmail: Text(
+                'pharmacy',
+                style: TextStyle(color: Colors.white),
+              ),
               currentAccountPicture: CircleAvatar(
                 child: Icon(
                   Icons.person,
@@ -35,7 +39,7 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
                 backgroundColor: Colors.white,
               ),
               decoration: BoxDecoration(
-                color: Colors.grey,
+                color: Colors.grey[400],
               ),
             ),
             Padding(
@@ -61,43 +65,6 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
                             padding: EdgeInsets.only(
                                 left: MediaQuery.of(context).size.width / 20),
                             child: Text(
-                              'الصفحة الرئيسية',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          showSpinner = true;
-                          Timer(Duration(milliseconds: 500), () {
-                            setState(() {
-                              showSpinner = false;
-                              Navigator.popAndPushNamed(context, HomePage.id);
-                            });
-                          });
-                        });
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.all(MediaQuery.of(context).size.height / 60),
-                    child: TextButton(
-                      style: ButtonStyle(),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.login,
-                            color: Color.fromARGB(255, 255, 142, 1),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 20),
-                            child: Text(
                               'تسجيل الدخول',
                               style: TextStyle(
                                 color: Colors.black,
@@ -108,15 +75,7 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
                         ],
                       ),
                       onPressed: () {
-                        setState(() {
-                          showSpinner = true;
-                          Timer(Duration(milliseconds: 500), () {
-                            setState(() {
-                              showSpinner = false;
-                              Navigator.popAndPushNamed(context, SignIn.id);
-                            });
-                          });
-                        });
+                        Navigator.popAndPushNamed(context, SignIn.id);
                       },
                     ),
                   ),
@@ -145,15 +104,7 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
                         ],
                       ),
                       onPressed: () {
-                        setState(() {
-                          showSpinner = true;
-                          Timer(Duration(milliseconds: 500), () {
-                            setState(() {
-                              showSpinner = false;
-                              Navigator.popAndPushNamed(context, SignIn.id);
-                            });
-                          });
-                        });
+                        Navigator.pushNamed(context, Bills.id);
                       },
                     ),
                   ),
@@ -181,16 +132,35 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
                           ),
                         ],
                       ),
+                      onPressed: () {},
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.all(MediaQuery.of(context).size.height / 60),
+                    child: TextButton(
+                      style: ButtonStyle(),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.account_circle_outlined,
+                            color: Color.fromARGB(255, 255, 142, 1),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 20),
+                            child: Text(
+                              'معلوماتي',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       onPressed: () {
-                        setState(() {
-                          showSpinner = true;
-                          Timer(Duration(milliseconds: 500), () {
-                            setState(() {
-                              showSpinner = false;
-                              Navigator.popAndPushNamed(context, SignIn.id);
-                            });
-                          });
-                        });
+                        Navigator.pushNamed(context, MyInfo.id);
                       },
                     ),
                   ),

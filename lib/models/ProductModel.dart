@@ -1,6 +1,6 @@
 // !!!
 
-import 'package:pharma/models/CompanyModel.dart';
+import 'HossaProductModel.dart';
 
 class ProductModel {
   int id;
@@ -10,8 +10,8 @@ class ProductModel {
   int addSale;
   int price;
   int hossa;
-  DateTime createdAt;
-  CompanyModel companyModel;
+  String nameHossa;
+  HossaProductModel hossaProduct;
   // String formation;
   // List<String> alternatives;
   // int max;
@@ -19,23 +19,55 @@ class ProductModel {
   ProductModel({
     this.id,
     this.name,
-    this.createdAt,
     this.price,
     this.quantity,
     this.addSale,
     this.sale,
     this.hossa,
+    this.nameHossa,
+    this.hossaProduct,
   });
 
-  ProductModel.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJsonWithModelHossa(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name_product'];
     price = json['price'];
     quantity = json['quantity'];
     sale = json['sale'];
     addSale = json['add_sale'];
-    hossa = json['hossa'];
-    createdAt = json['added_date'];
+    hossa = json['tahmel'];
+
+    ///print(json['name_hossa']);
+    ///print(HossaProductModel.fromJson(json['name_hossa']));
+    if (json['name_tahmel'] != null) {
+      hossaProduct = HossaProductModel.fromJson(json['name_tahmel']);
+    }
+
+    print(hossaProduct);
+    //nameHossa = json['name_hossa'];
+  }
+
+  ProductModel.fromJsonWithstringHossa(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name_product'];
+    price = json['price'];
+    quantity = json['quantity'];
+    sale = json['sale'];
+    addSale = json['add_sale'];
+    hossa = json['tahmel'];
+    nameHossa = json['name_tahmel'];
+    //nameHossa = json['name_hossa'];
+  }
+
+  ProductModel.fromJsonForMostWanted(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name_product'];
+    price = json['price'];
+    quantity = json['quantity'];
+    sale = json['sale'];
+    addSale = json['add_sale'];
+    hossa = json['tahmel'];
+    nameHossa = json['name_tahmel'];
   }
 
   ProductModel.fromJsonSallat(Map<String, dynamic> json) {
@@ -45,8 +77,7 @@ class ProductModel {
     quantity = json['quantity'];
     sale = json['sale'];
     addSale = json['add_sale'];
-    hossa = json['hossa'];
-    createdAt = json['added_date'];
+    hossa = json['tahmel'];
   }
 
   Map<String, dynamic> toJson() => {
@@ -54,19 +85,8 @@ class ProductModel {
         'name': this.name,
         'price': this.price,
         'quantity': this.quantity,
-        'createdAt': this.createdAt,
         'sale': this.sale,
         'addSale': this.addSale,
-        'hossa': this.hossa,
-      };
-
-  Map<String, dynamic> addProductToJson() => {
-        'name_product': this.name,
-        'price': this.price,
-        'quantity': this.quantity,
-        'sale': this.sale,
-        'add_sale': this.addSale,
-        'hossa': this.hossa,
-        'id_company': this.companyModel.id,
+        'tahmel': this.hossa,
       };
 }

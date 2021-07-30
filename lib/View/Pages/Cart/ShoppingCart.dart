@@ -1,20 +1,25 @@
+import 'package:pharma/Providers/Services.dart';
 import 'package:pharma/controllers/BillController.dart';
-import 'package:pharma/models/ProductModel.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/Providers/CartProvider.dart';
-import 'package:pharma/Services/Services.dart';
 import 'package:provider/provider.dart';
 
-class ShoppingCart extends StatelessWidget {
+class ShoppingCart extends StatefulWidget {
+  //const ShoppingCart({ Key? key }) : super(key: key);
   static const String id = '/cart';
-  const ShoppingCart({Key key}) : super(key: key);
 
+  @override
+  _ShoppingCartState createState() => _ShoppingCartState();
+}
+
+class _ShoppingCartState extends State<ShoppingCart> {
   @override
   Widget build(BuildContext context) {
     BillController billController = new BillController();
-    final List<TableRow> products = Provider.of<Cart>(context).items;
-    final List<ProductModel> editableList =
-        Provider.of<Cart>(context, listen: false).product;
+    final List<TableRow> products = Provider.of<Cart>(context).productitems;
+    final List<TableRow> hossa = Provider.of<Cart>(context).hossaitems;
+    /*List<ProductModel> editableList =
+        Provider.of<Cart>(context, listen: false).product;*/
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -59,7 +64,9 @@ class ShoppingCart extends StatelessWidget {
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: ListView.builder(
-                      itemCount: editableList.length,
+                      itemCount: Provider.of<Cart>(context, listen: false)
+                          .product
+                          .length,
                       itemBuilder: (context, index) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,11 +74,11 @@ class ShoppingCart extends StatelessWidget {
                             IconButton(
                               icon: Icon(Icons.delete),
                               onPressed: () {
-                                editableList.removeAt(index);
+                                // editableList.removeAt(index);
                                 Provider.of<Cart>(context, listen: false)
-                                    .deleteItemFromCart(editableList[index]);
-
-                                //editableProducts.removeAt(index);
+                                    .deleteItem(Provider.of<Cart>(context,
+                                            listen: false)
+                                        .product[index]);
                               },
                             ),
                             Text(
@@ -163,6 +170,35 @@ class ShoppingCart extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 8, left: 8),
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: hossa.length,
+                  itemBuilder: (context, index) => Container(
+                    child: Table(
+                      columnWidths: {
+                        1: FixedColumnWidth(
+                            MediaQuery.of(context).size.width * 0.15),
+                        4: FixedColumnWidth(
+                            MediaQuery.of(context).size.width * 0.3),
+                      },
+                      border: TableBorder(
+                        bottom: BorderSide(color: Colors.black),
+                        left: BorderSide(color: Colors.black),
+                        right: BorderSide(color: Colors.black),
+                        top: BorderSide(color: Colors.black),
+                        horizontalInside: BorderSide(color: Colors.black),
+                        verticalInside: BorderSide(color: Colors.black),
+                      ),
+                      children: [
+                        hossa[index],
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 8, left: 8),
                 child: Container(
                   child: Table(
                     columnWidths: {
@@ -194,7 +230,7 @@ class ShoppingCart extends StatelessWidget {
                         children: [
                           Text(
                             Provider.of<Cart>(context, listen: true)
-                                .total()
+                                .total
                                 .toString(),
                             textAlign: TextAlign.center,
                           ),
@@ -217,17 +253,19 @@ class ShoppingCart extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {
                       if (Provider.of<Cart>(context, listen: false)
-                          .items
+                          .productitems
                           .isEmpty) {
                         return;
                       } else {
                         // needs edit user id
 
                         billController.addBill(Services.makeBillModel(
-                            Provider.of<Cart>(context, listen: false).products,
+                            Provider.of<Cart>(context, listen: false)
+                                .billProducts,
+                            Provider.of<Cart>(context, listen: false).billHossa,
                             1,
                             Provider.of<Cart>(context, listen: false)
-                                .total()
+                                .total
                                 .toInt()));
                         Provider.of<Cart>(context, listen: false).removeAll();
                       }
@@ -248,19 +286,3 @@ class ShoppingCart extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-/*ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(products[index].name),
-          trailing: IconButton(
-            icon: Icon(Icons.remove_shopping_cart_outlined),
-            onPressed: () => Provider.of<Cart>(context, listen: false)
-                .removeItem(products[index]),
-          ),
-        ),
-      ),*/

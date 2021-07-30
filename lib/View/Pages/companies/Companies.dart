@@ -57,19 +57,19 @@ class _CompaniesState extends State<Companies> {
                           ),
                         );
                       },
-                      child: Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
+                      child: Center(
+                        child: Container(
+                          // decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(60)),
                           child: Image.network(
                             imgUrl + snapshot.data[index].image,
+                            fit: BoxFit.fill,
                             errorBuilder: (BuildContext context,
                                 Object exception, StackTrace stackTrace) {
-                              return Center(
-                                child: Icon(
-                                  Icons.photo,
-                                  color: Colors.grey,
-                                  size: 100,
-                                ),
+                              return Icon(
+                                Icons.photo,
+                                color: Colors.grey,
+                                size: 150,
                               );
                             },
                           ),

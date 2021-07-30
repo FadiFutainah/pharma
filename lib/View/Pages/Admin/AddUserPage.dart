@@ -1,5 +1,6 @@
-import 'package:pharma/View/Pages/Admin/components/AddProductForm.dart';
 import 'package:flutter/material.dart';
+
+import 'SignedUsersPage.dart';
 
 class AddUserPage extends StatelessWidget {
   static const String id = '/AddUserPage';
@@ -26,7 +27,7 @@ class AddUserPage extends StatelessWidget {
           },
         ),
       ),
-      body: AddProductForm(),
+      body: SignedUsersPage(),
     );
   }
 }

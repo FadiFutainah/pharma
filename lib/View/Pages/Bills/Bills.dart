@@ -2,7 +2,6 @@ import 'package:pharma/View/Components/BillTable.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/controllers/BillController.dart';
 import 'package:pharma/models/BillModel.dart';
-import 'package:intl/intl.dart';
 
 class Bills extends StatefulWidget {
   static const String id = 'Bills';
@@ -24,7 +23,6 @@ class _BillsState extends State<Bills> {
 
   @override
   Widget build(BuildContext context) {
-    var dateFormat = DateFormat('yyyy-MM-dd');
     return Scaffold(
       ///backgroundColor: Color(0xffffb52d),
       appBar: AppBar(

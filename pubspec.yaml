@@ -33,22 +33,19 @@ dependencies:
   flutter_native_splash: ^1.1.8+4
   flutter_progress_hud: ^2.0.0 
   modal_progress_hud: ^0.1.3
-  http: ^0.12.2
+  http: ^0.13.3
   get: ^4.1.4
   textfield_search: ^0.8.0
   provider: ^5.0.0
   google_fonts_arabic: ^1.1.7
   numberpicker: ^2.1.1
   flutter_spinbox: ^0.5.2
-  intl: ^0.17.0
   animated_splash_screen: ^1.1.0
-  # flutter_secure_storage: ^4.2.0
   path_provider: ^2.0.1
   open_file: ^3.2.1
-  universal_html: ^2.0.8
-  # image_picker: ^0.6.7+22
   page_transition: ^2.0.1-nullsafety.0
   shared_preferences: ^2.0.6
+  image_picker: ^0.8.2
 
 
 
@@ -64,6 +61,8 @@ flutter:
   assets:
     - images/basketsImage.png
     - images/logo.jpg
+    - images/animatedSplash.gif
+  
   uses-material-design: true
 
 

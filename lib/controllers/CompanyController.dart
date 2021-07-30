@@ -1,4 +1,5 @@
 import 'dart:convert' as convert;
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:pharma/Common/consts.dart';
 import 'package:pharma/models/CompanyModel.dart';
@@ -8,13 +9,41 @@ class CompanyController {
 
 // needs edit
 
-  // Future<String> addCompany(CompanyModel companyModel) async {
-  //   var url = baseUrl + 'inputcompany';
-  //   Uri uri = Uri.parse(url);
-  //   final respone = await http.post(url, body: companyModel.toJson(), headers: {
-  //     'Authorization': 'Bearer $token',
-  //   });
-  // }
+  Future<String> addCompany(String companyName, String path) async {
+    var url = baseUrl + 'inputcompany';
+    Uri uri = Uri.parse(url);
+
+    try {
+      var request = http.MultipartRequest('POST', uri);
+      request.headers.addAll(<String, String>{
+        'Authorization': 'Bearer $token',
+      });
+
+      request.fields['name_company'] = companyName;
+
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'image',
+          path,
+          // contentType: MediaType('application', 'x-tar'),
+        ),
+      );
+
+      final response = await request.send();
+      print('response.statusCode');
+
+      print(response.statusCode);
+      print(response.request);
+      if (response.statusCode == 200) {
+        return 'Uploaded';
+      }
+      return 'failed';
+    } on SocketException {
+      return 'لا يوجد اتصال بالشبكة';
+    } on Exception {
+      return 'يوجد مشكلة في الشبكة';
+    }
+  }
 
   Future<List<CompanyModel>> getCompanies() async {
     var url = baseUrl + 'showcompany';
@@ -41,4 +70,6 @@ class CompanyController {
       return null;
     }
   }
+  // ossama
+  // delete company
 }

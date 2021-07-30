@@ -16,7 +16,7 @@ class _ImageSliderState extends State<ImageSlider> {
       builder: (BuildContext context) {
         return SimpleDialog(
           title: Text(
-            'العرض s',
+            'العرض ',
             textAlign: TextAlign.center,
           ),
           children: [

@@ -5,7 +5,7 @@ import 'package:pharma/View/Pages/Myinfo/MyInfo.dart';
 import 'package:pharma/View/Pages/signIn/SignIn.dart';
 
 class MainpageDrawer extends StatefulWidget {
-  String pageName;
+  final String pageName;
   MainpageDrawer({Key key, this.pageName}) : super(key: key);
 
   @override

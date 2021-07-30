@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pharma/Providers/CartProvider.dart';
-import 'package:pharma/Services/Services.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/View/Pages/searchResults/bar.dart';
 import 'package:pharma/controllers/ProductController.dart';
@@ -73,13 +72,7 @@ class _SearchResoltsState extends State<SearchResolts> {
                                     onPressed: () {
                                       print('object done');
                                       Provider.of<Cart>(context, listen: false)
-                                          .addItem(
-                                              snapshot.data,
-                                              _controller.toDouble(),
-                                              Services
-                                                  .convertProductToBillProduct(
-                                                      snapshot.data,
-                                                      _controller));
+                                          .addItem(snapshot.data, _controller);
                                       print('object done');
                                     },
                                   ),

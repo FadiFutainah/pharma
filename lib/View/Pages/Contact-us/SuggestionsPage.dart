@@ -50,6 +50,11 @@ class _SuggestionsPageState extends State<SuggestionsPage> {
         builder:
             (BuildContext context, AsyncSnapshot<List<NoteModel>> snapshot) {
           if (snapshot.hasData) {
+            if (snapshot.data.length == 0) {
+              return Center(
+                child: Text('لا يوجد أي اقتراحات أو شكاوي'),
+              );
+            }
             return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
@@ -74,6 +79,7 @@ class _SuggestionsPageState extends State<SuggestionsPage> {
                                 response,
                                 textAlign: TextAlign.center,
                               ),
+                              duration: Duration(seconds: 2),
                             ),
                           );
                           Navigator.of(context)

@@ -3,8 +3,8 @@ class UserModel {
   String name;
   String pharmacyName;
   String address;
-  String mobilePhone;
-  String phone;
+  int mobilePhone;
+  int phone;
   String password;
   String createdAt;
   String updatedAt;
