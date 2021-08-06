@@ -1,19 +1,18 @@
-import 'package:pharma/View/Pages/Cart/ShoppingCart.dart';
 import 'package:flutter/material.dart';
 
-class Bar extends StatefulWidget implements PreferredSizeWidget {
-  Bar({Key key})
+class AdminAppBar extends StatefulWidget implements PreferredSizeWidget {
+  AdminAppBar({Key key})
       : preferredSize = Size.fromHeight(60),
         super(key: key);
 
   @override
-  _BarState createState() => _BarState();
+  _AdminAppBarState createState() => _AdminAppBarState();
 
   @override
   final Size preferredSize; // default is 56.0
 }
 
-class _BarState extends State<Bar> {
+class _AdminAppBarState extends State<AdminAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -28,20 +27,6 @@ class _BarState extends State<Bar> {
           fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
         ),
       ),
-      // leading: IconButton(
-      //   icon: Icon(Icons.more_vert),
-      //   onPressed: () => Scaffold.of(context).openDrawer(),
-      // ),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.shopping_cart_outlined,
-          ),
-          onPressed: () {
-            Navigator.of(context).pushNamed(ShoppingCart.id);
-          },
-        ),
-      ],
     );
   }
 }

@@ -13,7 +13,7 @@ import 'package:pharma/View/Pages/MostWantedProduct/MostWantedProducts.dart';
 import 'package:pharma/View/Pages/companies/Companies.dart';
 import 'package:pharma/controllers/BasketsController.dart';
 
-import 'components/bar.dart';
+import 'components/AdminAppBar.dart';
 
 class AdminHomePage extends StatefulWidget {
   static const String id = '/AdminHomePage';
@@ -71,7 +71,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
           userName: 'الحساب الرئيسي',
         ),
       ),
-      appBar: Bar(),
+      appBar: AdminAppBar(),
       body: SingleChildScrollView(
         child: Stack(
           children: [

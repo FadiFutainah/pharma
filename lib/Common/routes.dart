@@ -14,18 +14,16 @@ import 'package:pharma/View/Pages/Home/AdminHomePage.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/View/Pages/MostWantedProduct/MostWantedProducts.dart';
 import 'package:pharma/View/Pages/Myinfo/MyInfo.dart';
-import 'package:pharma/View/Pages/Scedual/AdminSchedualPage.dart';
-import 'package:pharma/View/Pages/Scedual/SchedualPage.dart';
+import 'package:pharma/View/Pages/Schedual/AdminSchedualPage.dart';
+import 'package:pharma/View/Pages/Schedual/SchedualPage.dart';
 import 'package:pharma/View/Pages/WelcomePage.dart';
 import 'package:pharma/View/Pages/companies/Companies.dart';
 import 'package:pharma/View/Pages/searchResults/SearchResolts.dart';
 import 'package:pharma/View/Pages/signIn/SignIn.dart';
 import 'package:pharma/View/Pages/signUp/SignUp.dart';
-import 'package:pharma/View/Pages/temp/Temp.dart';
 
 final Map<String, WidgetBuilder> routes = {
   ContactUsPage.id: (context) => ContactUsPage(),
-  TempPage.id: (context) => TempPage(),
   HomePage.id: (context) => HomePage(),
   SignIn.id: (context) => SignIn(),
   SignUp.id: (context) => SignUp(),
@@ -45,6 +43,6 @@ final Map<String, WidgetBuilder> routes = {
   AdminHomePage.id: (context) => AdminHomePage(),
   SuggestionsPage.id: (context) => SuggestionsPage(),
   SchedualPage.id: (context) => SchedualPage(),
-  AdminSchedualPage.id: (context) => AdminHomePage(),
+  AdminSchedualPage.id: (context) => AdminSchedualPage(),
   SignedUsersPage.id: (context) => SignedUsersPage(),
 };

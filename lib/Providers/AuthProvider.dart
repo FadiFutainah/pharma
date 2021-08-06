@@ -67,17 +67,16 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> logout(String username, String password) async {
+  Future<void> logout() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     String token = storage.getString('token');
     try {
-      final response =
-          await http.post(Uri.parse(baseUrl + '/logout'), headers: {
-        HttpHeaders.authorizationHeader: '$token',
-      }, body: {
-        'username': username,
-        'password': password,
-      });
+      final response = await http.post(
+        Uri.parse(baseUrl + '/logout'),
+        headers: {
+          HttpHeaders.authorizationHeader: '$token',
+        },
+      );
       if (response.statusCode == 200) {
         _isAuthenticated = false;
         notifyListeners();

@@ -17,6 +17,7 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController namec = TextEditingController();
   String path;
+  File file;
   // Future<List<CompanyModel>> futureCompanies;
   // List<CompanyModel> companies;
 
@@ -26,6 +27,13 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
   //   super.initState();
   // }
 
+  void pickercamera() async {
+    final myfile = await ImagePicker().getImage(source: ImageSource.gallery);
+    setState(() {
+      file = File(myfile.path);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -33,6 +41,7 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
       child: SingleChildScrollView(
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               SizedBox(
                 height: MediaQuery.of(context).size.height / 40,
@@ -60,15 +69,15 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
                 icon: Icon(Icons.add_a_photo_outlined),
                 iconSize: 50,
               ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
               MyButton(
                 width: MediaQuery.of(context).size.width * 0.5,
                 text: 'إضافة',
-                onPressed: () async {
+                onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    String res = await widget.companyController
-                        .addCompany('company name', path);
-                    print('respo');
-                    print(res);
+                    // String res = await widget.companyController
+                    //     .addCompany('company name', path);
+                    pickercamera();
                   }
                 },
               ),

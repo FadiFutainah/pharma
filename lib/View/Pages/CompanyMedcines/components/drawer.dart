@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/Bills/Bills.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
-import 'package:pharma/View/Pages/Scedual/SchedualPage.dart';
+import 'package:pharma/View/Pages/Schedual/SchedualPage.dart';
 import 'package:pharma/View/Pages/signIn/SignIn.dart';
 
 class MainpageDrawer extends StatefulWidget {

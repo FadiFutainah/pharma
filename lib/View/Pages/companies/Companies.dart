@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pharma/Common/consts.dart';
 import 'package:pharma/View/Pages/CompanyMedcines/CompanyMedcines.dart';
 import 'package:pharma/View/Pages/Home/components/bar.dart';
@@ -15,7 +18,6 @@ class Companies extends StatefulWidget {
 
 class _CompaniesState extends State<Companies> {
   CompanyController companyController = new CompanyController();
-
   Future<List<CompanyModel>> futureCompany;
 
   @override

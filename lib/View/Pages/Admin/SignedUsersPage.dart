@@ -25,7 +25,7 @@ class _SignedUsersPageState extends State<SignedUsersPage> {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: futureUsers,
-      builder: (BuildContext context, AsyncSnapshot<List<UserModel>> snapshot) {
+      builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data.length == 0) {
             return Center(
@@ -131,9 +131,8 @@ class _SignedUsersPageState extends State<SignedUsersPage> {
           );
         } else if (snapshot.hasError) {
           return Center(child: Text('لا يوجد اتصال بالانترنت'));
-        } else {
-          return Center(child: CircularProgressIndicator());
         }
+        return Center(child: CircularProgressIndicator());
       },
     );
   }

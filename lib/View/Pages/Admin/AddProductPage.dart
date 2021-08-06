@@ -1,6 +1,6 @@
 import 'package:pharma/View/Pages/Admin/components/AddProductForm.dart';
 import 'package:flutter/material.dart';
-import 'package:pharma/View/Pages/Home/HomePage.dart';
+import 'package:pharma/View/Pages/Home/AdminHomePage.dart';
 
 class AddProductPage extends StatelessWidget {
   static const String id = '/AddProductPage';
@@ -23,7 +23,7 @@ class AddProductPage extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).popAndPushNamed(HomePage.id);
+            Navigator.of(context).popAndPushNamed(AdminHomePage.id);
           },
         ),
       ),

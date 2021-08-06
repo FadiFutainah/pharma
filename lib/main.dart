@@ -14,24 +14,47 @@ void main() {
   runApp(MyApp());
 }
 
-class Authorize {
-  static Future<bool> isAdmin() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    return sharedPreferences.get('ADMIN') != null;
+Future<void> initRole(BuildContext context) async {
+  try {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    // needs edit
+    // if (Provider.of<AuthProvider>(context).isAuthenticated) {
+    sharedPreferences.setString('role', 'ADMIN');
+    String role = sharedPreferences.get('role');
+    if (role != null && role == 'ADMIN') {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
+    } else {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(HomePage.id, (route) => false);
+    }
+    //  else {
+    //   Navigator.of(context)
+    //       .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
+    // }
+  } on Exception {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(HomePage.id, (route) => false);
   }
+}
 
-  static Future<bool> isAuthenticated() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    return sharedPreferences.get('USER') != null;
+class LoadingScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    initRole(context);
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: CircularProgressIndicator(color: Color(0xffffb52d)),
+      ),
+    );
   }
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    bool auth;
+    initRole(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthProvider()),
@@ -44,7 +67,7 @@ class MyApp extends StatelessWidget {
             'images/animatedSplash.gif',
           ),
           splashIconSize: 150,
-          nextScreen: HomePage(),
+          nextScreen: LoadingScreen(),
           splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.white,
           pageTransitionType: PageTransitionType.fade,

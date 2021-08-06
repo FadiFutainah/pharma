@@ -10,7 +10,7 @@ class ProductController {
 
   //needs edit
 // ossama
-  Future<String> addProduct(ProductModel productModel) async {
+  Future<String> addProduct(ProductModel productModel, int companyId) async {
     var url = baseUrl + 'inputproducts';
     Uri uri = Uri.parse(url);
     try {
@@ -101,7 +101,7 @@ class ProductController {
       if (response.statusCode == 200) {
         var json = convert.jsonDecode(response.body);
         List products = json;
-        List<String> string = [''];
+        List<String> string = [];
         List<ProductModel> s;
         s = products
             .map((user) => new ProductModel.fromJsonWithstringHossa(user))

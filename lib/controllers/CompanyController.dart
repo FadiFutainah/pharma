@@ -30,10 +30,7 @@ class CompanyController {
       );
 
       final response = await request.send();
-      print('response.statusCode');
 
-      print(response.statusCode);
-      print(response.request);
       if (response.statusCode == 200) {
         return 'Uploaded';
       }
@@ -43,6 +40,17 @@ class CompanyController {
     } on Exception {
       return 'يوجد مشكلة في الشبكة';
     }
+  }
+
+  // Future<String> addCompany(String companyName, String path) async {}
+
+  Future<List<String>> getCompaniesNames() async {
+    List<CompanyModel> res = await getCompanies();
+    List<String> items = [];
+    for (var item in res) {
+      items.add(item.name);
+    }
+    return items;
   }
 
   Future<List<CompanyModel>> getCompanies() async {

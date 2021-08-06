@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/Providers/AuthProvider.dart';
+import 'package:pharma/View/Components/MyButton.dart';
 import 'package:pharma/View/Pages/Admin/AddUserPage.dart';
-import 'package:pharma/View/Pages/Bills/Bills.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
-import 'package:pharma/View/Pages/Scedual/AdminSchedualPage.dart';
-import 'package:pharma/View/Pages/signIn/SignIn.dart';
+import 'package:pharma/View/Pages/Schedual/AdminSchedualPage.dart';
+import 'package:provider/provider.dart';
 
 class AdminDrawer extends StatefulWidget {
   final String userName;
@@ -53,8 +54,6 @@ class _AdminDrawerState extends State<AdminDrawer> {
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height / 10),
             child: Column(
-              ///mainAxisSize: MainAxisSize.min,
-              ///mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Padding(
@@ -82,7 +81,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                       ],
                     ),
                     onPressed: () {
-                      Navigator.popAndPushNamed(context, HomePage.id);
+                      Navigator.of(context).pop();
                     },
                   ),
                 ),
@@ -94,14 +93,14 @@ class _AdminDrawerState extends State<AdminDrawer> {
                     child: Row(
                       children: <Widget>[
                         Icon(
-                          Icons.login,
+                          Icons.logout,
                           color: Color.fromARGB(255, 255, 142, 1),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
                               left: MediaQuery.of(context).size.width / 20),
                           child: Text(
-                            'تسجيل الدخول',
+                            'تسجيل الخروج',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 18,
@@ -111,36 +110,36 @@ class _AdminDrawerState extends State<AdminDrawer> {
                       ],
                     ),
                     onPressed: () {
-                      Navigator.popAndPushNamed(context, SignIn.id);
-                    },
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.all(MediaQuery.of(context).size.height / 60),
-                  child: TextButton(
-                    style: ButtonStyle(),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.fact_check_outlined,
-                          color: Color.fromARGB(255, 255, 142, 1),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 20),
-                          child: Text(
-                            'الفواتير',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            'تأكيد تسجيل الخروج',
+                            textAlign: TextAlign.center,
                           ),
+                          actions: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                            ),
+                            Center(
+                              child: MyButton(
+                                text: 'موافق',
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                onPressed: () {
+                                  Provider.of<AuthProvider>(context,
+                                          listen: false)
+                                      .logout();
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      HomePage.id, (route) => false);
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.01,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    onPressed: () {
-                      Navigator.popAndPushNamed(context, Bills.id);
+                      );
                     },
                   ),
                 ),
@@ -169,7 +168,8 @@ class _AdminDrawerState extends State<AdminDrawer> {
                       ],
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(AdminSchedualPage.id);
+                      Navigator.of(context)
+                          .popAndPushNamed(AdminSchedualPage.id);
                     },
                   ),
                 ),
@@ -198,7 +198,7 @@ class _AdminDrawerState extends State<AdminDrawer> {
                       ],
                     ),
                     onPressed: () {
-                      Navigator.popAndPushNamed(context, AddUserPage.id);
+                      Navigator.pushNamed(context, AddUserPage.id);
                     },
                   ),
                 ),
