@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/View/Pages/Home/AdminHomePage.dart';
 
 import 'components/AddBasketForm.dart';
 
@@ -23,7 +24,7 @@ class AddBasketPage extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).popAndPushNamed(AdminHomePage.id);
           },
         ),
       ),

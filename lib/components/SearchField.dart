@@ -9,6 +9,8 @@ import 'package:pharma/models/ProductModel.dart';
 import 'package:textfield_search/textfield_search.dart';
 
 class SearchField extends StatefulWidget {
+  ///const SearchFiled({ Key? key }) : super(key: key);
+
   @override
   _SearchFiledState createState() => _SearchFiledState();
 }

@@ -64,7 +64,10 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
                   XFile image =
                       await imagePicker.pickImage(source: ImageSource.gallery);
                   var file = File(image.path);
+                  print(image.path);
+                  print(file.path);
                   final temp = await getApplicationDocumentsDirectory();
+                  print(temp);
                 },
                 icon: Icon(Icons.add_a_photo_outlined),
                 iconSize: 50,

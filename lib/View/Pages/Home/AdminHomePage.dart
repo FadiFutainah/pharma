@@ -45,7 +45,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
         children: [
           ActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(AddBasketPage.id);
+              Navigator.of(context).popAndPushNamed(AddBasketPage.id);
             },
             icon: const Icon(Icons.shopping_basket),
           ),
@@ -57,7 +57,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
           ),
           ActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(AddCompanyPage.id);
+              Navigator.of(context).popAndPushNamed(AddCompanyPage.id);
             },
             icon: const Icon(Icons.store),
           ),

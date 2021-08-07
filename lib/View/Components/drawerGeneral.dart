@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/Bills/Bills.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
-import 'package:pharma/View/Pages/Schedual/SchedualPage.dart';
+import 'package:pharma/View/Pages/Scheduale/SchedualPage.dart';
 import 'package:pharma/View/Pages/signIn/SignIn.dart';
 
-class MainpageDrawer extends StatefulWidget {
-  final String userName;
-  final String pharmacyName;
-  MainpageDrawer({Key key, this.userName, this.pharmacyName}) : super(key: key);
+class DrawerGeneral extends StatelessWidget {
+  ///const DrawerGeneral({ Key? key }) : super(key: key);
 
-  @override
-  _MainpageDrawerState createState() => _MainpageDrawerState();
-}
-
-class _MainpageDrawerState extends State<MainpageDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -23,7 +16,8 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
             child: Column(
               children: [
                 Text(
-                  widget.userName,
+                  //////// user name drawer/////
+                  'Ahmad',
                   style: TextStyle(
                     fontFamily:
                         Theme.of(context).textTheme.bodyText1.fontFamily,
@@ -33,7 +27,8 @@ class _MainpageDrawerState extends State<MainpageDrawer> {
                   ),
                 ),
                 Text(
-                  widget.pharmacyName,
+                  //////// pharmacy name drawer /////
+                  'Pharmacy',
                   style: TextStyle(
                     fontFamily:
                         Theme.of(context).textTheme.bodyText1.fontFamily,

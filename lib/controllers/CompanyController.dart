@@ -65,9 +65,11 @@ class CompanyController {
           'Authorization': 'Bearer $token',
         },
       );
+
       if (response.statusCode == 200) {
         var json = convert.jsonDecode(response.body);
         List companies = json;
+
         return companies
             .map((company) => new CompanyModel.fromJson(company))
             .toList();

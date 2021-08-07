@@ -34,8 +34,8 @@ class ProductController {
     }
   }
 
-  Future<List<ProductModel>> getByCompanyId(int id) async {
-    var url = baseUrl + 'showproductsbycompany/$id';
+  Future<List<ProductModel>> getByCompanyId(int id, int userId) async {
+    var url = baseUrl + 'showproductsbycompany/$id/2';
     Uri uri = Uri.parse(url);
     try {
       final response = await http.get(
@@ -49,13 +49,16 @@ class ProductController {
       if (response.statusCode == 200) {
         var json = convert.jsonDecode(response.body);
         List products = json;
+
         return products
             .map((product) => new ProductModel.fromJsonWithModelHossa(product))
             .toList();
       } else {
         return null;
       }
-    } on Exception {
+    } on Exception catch (e) {
+      print('e');
+      print(e);
       return null;
     }
   }

@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/Cart/ShoppingCart.dart';
 
-class Bar extends StatefulWidget implements PreferredSizeWidget {
-  final String companyName;
-
-  Bar({Key key, this.companyName})
-      : preferredSize = Size.fromHeight(60),
-        super(key: key);
+class BarGeneral extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  const BarGeneral({Key key, this.title}) : super(key: key);
 
   @override
-  _BarState createState() => _BarState();
+  Size get preferredSize => Size.fromHeight(60);
 
-  @override
-  final Size preferredSize; // default is 56.0
-}
-
-class _BarState extends State<Bar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -24,10 +16,18 @@ class _BarState extends State<Bar> {
       elevation: 0,
       centerTitle: true,
       title: Text(
-        widget.companyName,
+        title,
         style: TextStyle(
           color: Colors.white,
         ),
+      ),
+      leading: IconButton(
+        icon: Icon(
+          Icons.arrow_back,
+        ),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
       actions: <Widget>[
         IconButton(

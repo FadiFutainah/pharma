@@ -1,4 +1,4 @@
-import 'package:pharma/models/BillProductModel.dart';
+import 'BillProductModel.dart';
 
 class BillModel {
   int UserId = 0;

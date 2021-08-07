@@ -3,7 +3,7 @@ import 'package:pharma/Providers/AuthProvider.dart';
 import 'package:pharma/View/Components/MyButton.dart';
 import 'package:pharma/View/Pages/Admin/AddUserPage.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
-import 'package:pharma/View/Pages/Schedual/AdminSchedualPage.dart';
+import 'package:pharma/View/Pages/Scheduale/AdminSchedualPage.dart';
 import 'package:provider/provider.dart';
 
 class AdminDrawer extends StatefulWidget {

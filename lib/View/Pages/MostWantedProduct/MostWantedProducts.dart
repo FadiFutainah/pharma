@@ -1,6 +1,6 @@
 import 'package:pharma/Controllers/ProductController.dart';
 import 'package:flutter/material.dart';
-import 'package:pharma/View/Pages/CompanyMedcines/components/drawer.dart';
+import 'package:pharma/View/Components/barGanaral.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/View/Pages/MostWantedProduct/components/bar.dart';
 import 'package:pharma/models/ProductModel.dart';
@@ -27,20 +27,17 @@ class _MostWantedState extends State<MostWanted> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Bar(
-          barTitle: 'الأكثر طلباً',
+        appBar: BarGeneral(
+          title: 'الأكثر طلباً',
         ),
-        drawer: Container(
-            width: MediaQuery.of(context).size.width / 1.7,
-            child: MainpageDrawer(
-              userName: 'احمد',
-              pharmacyName: 'الصيدلية المركزية',
-            )),
         body: FutureBuilder<List<ProductModel>>(
             future: futureProducts,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return ListView.builder(
+                if (snapshot.data.isEmpty) {
+                  return Center(child: Text('لا يوجد معلومات'));
+                } else {
+                  return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       return Container(
@@ -93,7 +90,9 @@ class _MostWantedState extends State<MostWanted> {
                           ),
                         ),
                       );
-                    });
+                    },
+                  );
+                }
               } else if (snapshot.hasError) {
                 return Center(child: Text('لا يوجد اتصال بالانترنت'));
               }

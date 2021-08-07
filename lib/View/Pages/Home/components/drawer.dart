@@ -1,6 +1,6 @@
 import 'package:pharma/View/Pages/Bills/Bills.dart';
 import 'package:pharma/View/Pages/Myinfo/MyInfo.dart';
-import 'package:pharma/View/Pages/Schedual/SchedualPage.dart';
+import 'package:pharma/View/Pages/Scheduale/SchedualPage.dart';
 import 'package:pharma/View/Pages/signIn/SignIn.dart';
 import 'package:flutter/material.dart';
 

@@ -1,15 +1,14 @@
-import 'package:pharma/View/Components/SearchField.dart';
-import 'package:pharma/View/Pages/CompanyMedcines/components/drawer.dart';
-import 'package:pharma/View/Pages/Contact-us/ContactUsPage.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:pharma/View/Components/SearchField.dart';
+import 'package:pharma/View/Components/barHomeBage.dart';
+import 'package:pharma/View/Components/drawerGeneral.dart';
 import 'package:pharma/View/Pages/BasketResult/BasketResult.dart';
+import 'package:pharma/View/Pages/Contact-us/ContactUsPage.dart';
 import 'package:pharma/View/Pages/MostWantedProduct/MostWantedProducts.dart';
 import 'package:pharma/View/Pages/companies/Companies.dart';
 import 'package:pharma/controllers/BasketsController.dart';
-
-import 'components/bar.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = '/HomePage';
@@ -39,12 +38,9 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color.fromARGB(255, 245, 245, 245),
       drawer: Container(
         width: MediaQuery.of(context).size.width / 1.7,
-        child: MainpageDrawer(
-          userName: 'أحمد',
-          pharmacyName: 'الصيدلية المركزية',
-        ),
+        child: DrawerGeneral(),
       ),
-      appBar: Bar(),
+      appBar: BarHomePage(),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -84,16 +80,55 @@ class _HomePageState extends State<HomePage> {
                           child: FutureBuilder<List<Map<String, dynamic>>>(
                             future: futureBaskets,
                             builder: (context, snapshot) {
+                              //////////////////// if there is no sallat ////////////////
                               if (snapshot.hasData) {
-                                return CarouselSlider.builder(
+                                if (snapshot.data == null) {
+                                  return Carousel(
+                                    borderRadius: true,
+                                    radius: Radius.circular(30),
+                                    autoplay: true,
+                                    dotColor: Colors.transparent,
+                                    dotIncreaseSize: 1.2,
+                                    dotHorizontalPadding: 2,
+                                    dotBgColor: Colors.transparent,
+                                    dotIncreasedColor: Colors.transparent,
+                                    images: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: InkWell(
+                                          onTap: () {},
+                                          child: Stack(
+                                            children: [
+                                              Center(
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30.0),
+                                                    child: Image.asset(
+                                                      'images/basketsImage.png',
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Center(
+                                                child: Text('لا يوجد عروض'),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return CarouselSlider.builder(
                                     options: CarouselOptions(
                                       autoPlay: true,
-
-                                      ///dotColor: Colors.grey[400],
-                                      //dotIncreaseSize: 1.2,
-                                      //dotHorizontalPadding: 2,
-                                      //dotBgColor: Colors.grey.withOpacity(0.1),
-                                      //dotIncreasedColor: Colors.orange,
                                     ),
                                     itemCount: snapshot.data.length,
                                     itemBuilder: (context, index, index1) {
@@ -139,66 +174,50 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                       );
-                                    }
-
-                                    ////////////// slider images here //////////////////
-                                    );
+                                    },
+                                  );
+                                }
                               } else if (snapshot.hasError) {
                                 return Carousel(
                                   borderRadius: true,
                                   radius: Radius.circular(30),
                                   autoplay: true,
-                                  dotColor: Colors.grey[400],
+                                  dotColor: Colors.transparent,
                                   dotIncreaseSize: 1.2,
                                   dotHorizontalPadding: 2,
-                                  dotBgColor: Colors.grey.withOpacity(0.1),
-                                  dotIncreasedColor: Colors.orange,
-
+                                  dotBgColor: Colors.transparent,
+                                  dotIncreasedColor: Colors.transparent,
                                   images: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(30),
                                       child: InkWell(
                                         onTap: () {},
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                            child: Image.asset(
-                                              'images/basketsImage.png',
+                                        child: Stack(
+                                          children: [
+                                            Center(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30.0),
+                                                  child: Image.asset(
+                                                    'images/basketsImage.png',
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: InkWell(
-                                        onTap: () {
-                                          setState(
-                                            () {},
-                                          );
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                            child: Image.asset(
-                                              'images/basketsImage.png',
+                                            Center(
+                                              child: Text('لا يوجد عروض'),
                                             ),
-                                          ),
+                                          ],
                                         ),
                                       ),
                                     ),
                                   ],
-                                  ////////////// slider images here //////////////////
                                 );
                               }
                               return const Center(

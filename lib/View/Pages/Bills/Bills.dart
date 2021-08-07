@@ -1,5 +1,6 @@
 import 'package:pharma/View/Components/BillTable.dart';
 import 'package:flutter/material.dart';
+import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/BillController.dart';
 import 'package:pharma/models/BillModel.dart';
 
@@ -29,6 +30,12 @@ class _BillsState extends State<Bills> {
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, HomePage.id);
+          },
+        ),
         backgroundColor: Color(0xffffb52d),
         elevation: 0,
         title: Text(
@@ -54,7 +61,9 @@ class _BillsState extends State<Bills> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 8, bottom: 8),
-                          child: Text(snapshot.data[index].createdAt),
+                          child: Text(snapshot.data[index].createdAt
+                              .toString()
+                              .substring(0, 10)),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8),

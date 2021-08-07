@@ -15,27 +15,26 @@ void main() {
 }
 
 Future<void> initRole(BuildContext context) async {
-  try {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    // needs edit
-    // if (Provider.of<AuthProvider>(context).isAuthenticated) {
-    sharedPreferences.setString('role', 'ADMIN');
-    String role = sharedPreferences.get('role');
-    if (role != null && role == 'ADMIN') {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
-    } else {
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(HomePage.id, (route) => false);
-    }
-    //  else {
-    //   Navigator.of(context)
-    //       .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
-    // }
-  } on Exception {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil(HomePage.id, (route) => false);
-  }
+  // try {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   // needs edit
+  //   if (Provider.of<AuthProvider>(context).isAuthenticated) {
+  //     sharedPreferences.setString('role', 'ADMIN');
+  //     String role = sharedPreferences.get('role');
+  //     if (role != null && role == 'ADMIN') {
+  //       Navigator.of(context)
+  //           .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
+  //     } else {
+  //       Navigator.of(context)
+  //           .pushNamedAndRemoveUntil(HomePage.id, (route) => false);
+  //     }
+  //   } else {
+  //     Navigator.of(context)
+  //         .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
+  //   }
+  // } on Exception {
+  Navigator.of(context).pushNamedAndRemoveUntil(HomePage.id, (route) => false);
+  // }
 }
 
 class LoadingScreen extends StatelessWidget {
@@ -67,7 +66,7 @@ class MyApp extends StatelessWidget {
             'images/animatedSplash.gif',
           ),
           splashIconSize: 150,
-          nextScreen: LoadingScreen(),
+          nextScreen: AdminHomePage(),
           splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.white,
           pageTransitionType: PageTransitionType.fade,

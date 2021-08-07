@@ -66,9 +66,11 @@ class _SuggestionsPageState extends State<SuggestionsPage> {
                   child: Padding(
                     padding: EdgeInsets.all(8),
                     child: ListTile(
-                      title: Text(snapshot.data[index].pharmacyName),
-                      subtitle: Text(snapshot.data[index].notes),
-                      trailing: IconButton(
+                      title: Text(snapshot.data[index].pharmacyName,
+                          textAlign: TextAlign.right),
+                      subtitle: Text(snapshot.data[index].notes,
+                          textAlign: TextAlign.right),
+                      leading: IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () async {
                           var response = await notesController

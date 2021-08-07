@@ -127,8 +127,8 @@ class _SignUpState extends State<SignUp> {
                             pharmacyName: pharNamec.text,
                             name: namec.text,
                             address: addressc.text,
-                            phone: int.parse(numc.text),
-                            mobilePhone: int.parse(mobNumc.text),
+                            phone: numc.text,
+                            mobilePhone: mobNumc.text,
                             password: passc.text,
                           ),
                         );

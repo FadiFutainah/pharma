@@ -1,9 +1,11 @@
-import 'package:pharma/Providers/Services.dart';
+import 'package:pharma/Providers/CartProvider.dart';
+import 'package:pharma/Services/Services.dart';
 import 'package:pharma/View/Components/BasketTable.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/BasketsController.dart';
 import 'package:pharma/models/BasketsModel.dart';
+import 'package:provider/provider.dart';
 
 class BasketResults extends StatelessWidget {
   static const String id = '/BasketModel';
@@ -48,10 +50,49 @@ class BasketResults extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 2,
               color: Color(0xffffb52d),
               child: TextButton(
-                onPressed: () {
-                  basketsController.buyBasket(Services.makeBasketModelToBuy(
-                      1, basketsModel.sallatProducts[0].sallatId));
-                  Navigator.pushNamed(context, HomePage.id);
+                onPressed: () async {
+                  await basketsController
+                      .buyBasket(Services.makeBasketModelToBuy(
+                          1, basketsModel.sallatProducts[0].sallatId))
+                      .then((result) {
+                    Provider.of<Cart>(context, listen: false).basketRespons =
+                        result;
+                  });
+
+                  if (Provider.of<Cart>(context, listen: false)
+                          .basketRespons
+                          .compareTo('تم الشراء بنجاح') ==
+                      0) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          Provider.of<Cart>(context, listen: false)
+                              .basketRespons
+                              .toString(),
+                          textAlign: TextAlign.center,
+                        ),
+                        duration: Duration(seconds: 4),
+                      ),
+                    );
+
+                    Navigator.of(context).pushReplacementNamed(HomePage.id);
+
+                    return;
+                  }
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        Provider.of<Cart>(context, listen: false)
+                            .basketRespons
+                            .toString(),
+                        textAlign: TextAlign.center,
+                      ),
+                      duration: Duration(seconds: 4),
+                    ),
+                  );
+
+                  return;
 
                   ///Provider.of<Cart>(context,listen: false).removeAllProducts();
                 },

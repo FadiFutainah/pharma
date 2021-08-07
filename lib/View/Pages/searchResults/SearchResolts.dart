@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharma/Providers/CartProvider.dart';
+import 'package:pharma/View/Components/barGanaral.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
-import 'package:pharma/View/Pages/searchResults/bar.dart';
 import 'package:pharma/controllers/ProductController.dart';
 import 'package:pharma/models/ProductModel.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -21,7 +21,9 @@ class SearchResolts extends StatefulWidget {
 class _SearchResoltsState extends State<SearchResolts> {
   int counter = 0;
 
-  int _controller = 1;
+  int _controller = 0;
+
+  int maxVal = 1;
 
   ProductController productController = new ProductController();
 
@@ -36,7 +38,9 @@ class _SearchResoltsState extends State<SearchResolts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Bar(),
+        appBar: BarGeneral(
+          title: 'نتائج البحث',
+        ),
         body: FutureBuilder<ProductModel>(
             future: futureProducts,
             builder: (context, snapshot) {
@@ -70,9 +74,49 @@ class _SearchResoltsState extends State<SearchResolts> {
                                       Icons.shopping_cart_outlined,
                                     ),
                                     onPressed: () {
+                                      if (snapshot.data.maxHossaModify == 0) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'لا يمكنك الإضافة .. ليس لديك حصة من هذا المنتج',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            duration: Duration(seconds: 4),
+                                          ),
+                                        );
+                                        return;
+                                      }
+
+                                      if (_controller == 0) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'يرجى وضع الكمية المطلوبة',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            duration: Duration(seconds: 4),
+                                          ),
+                                        );
+                                        return;
+                                      }
+
+                                      print(snapshot.data.price /
+                                          snapshot.data.sale);
                                       print('object done');
                                       Provider.of<Cart>(context, listen: false)
                                           .addItem(snapshot.data, _controller);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'تم إضافة المنتج إلى الفاتورة',
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          duration: Duration(seconds: 2),
+                                        ),
+                                      );
                                       print('object done');
                                     },
                                   ),
@@ -97,17 +141,30 @@ class _SearchResoltsState extends State<SearchResolts> {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 5,
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                7,
                                         child: Card(
                                           color: Theme.of(context).primaryColor,
-                                          child: NumberPicker(
-                                            textStyle:
-                                                TextStyle(color: Colors.white),
-                                            value: _controller,
-                                            minValue: 1,
-                                            maxValue: 1000,
-                                            zeroPad: false,
-                                            onChanged: (value) => setState(
-                                                () => _controller = value),
+                                          child: Center(
+                                            child: NumberPicker(
+                                              textStyle: TextStyle(
+                                                  color: Colors.white),
+                                              value: _controller,
+                                              minValue: 0,
+                                              selectedTextStyle: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height /
+                                                          22,
+                                                  color: Colors.white),
+                                              maxValue: maxVal,
+                                              itemCount: 1,
+                                              zeroPad: false,
+                                              onChanged: (value) => setState(
+                                                  () => _controller = value),
+                                            ),
                                           ),
                                         ),
                                       ),

@@ -10,8 +10,11 @@ class ProductModel {
   int addSale;
   int price;
   int hossa;
+  int addTahmel;
   String nameHossa;
   HossaProductModel hossaProduct;
+  int maxHossa;
+  int maxHossaModify;
   // String formation;
   // List<String> alternatives;
   // int max;
@@ -26,6 +29,9 @@ class ProductModel {
     this.hossa,
     this.nameHossa,
     this.hossaProduct,
+    this.maxHossa,
+    this.maxHossaModify,
+    this.addTahmel,
   });
 
   ProductModel.fromJsonWithModelHossa(Map<String, dynamic> json) {
@@ -36,14 +42,17 @@ class ProductModel {
     sale = json['sale'];
     addSale = json['add_sale'];
     hossa = json['tahmel'];
-
+    addTahmel = json["add_tahmel"];
     ///print(json['name_hossa']);
     ///print(HossaProductModel.fromJson(json['name_hossa']));
     if (json['name_tahmel'] != null) {
       hossaProduct = HossaProductModel.fromJson(json['name_tahmel']);
     }
 
-    print(hossaProduct);
+    maxHossa = json["max_hossa"];
+    maxHossaModify = json["max_hossa_modify"];
+
+    
     //nameHossa = json['name_hossa'];
   }
 
@@ -56,6 +65,8 @@ class ProductModel {
     addSale = json['add_sale'];
     hossa = json['tahmel'];
     nameHossa = json['name_tahmel'];
+    maxHossa = json["max_hossa"];
+    maxHossaModify = json["max_hossa_modify"];
     //nameHossa = json['name_hossa'];
   }
 
@@ -67,7 +78,10 @@ class ProductModel {
     sale = json['sale'];
     addSale = json['add_sale'];
     hossa = json['tahmel'];
+    addTahmel = json["add_tahmel"];
     nameHossa = json['name_tahmel'];
+    maxHossa = json["max_hossa"];
+    maxHossaModify = json["max_hossa_modify"];
   }
 
   ProductModel.fromJsonSallat(Map<String, dynamic> json) {
@@ -76,8 +90,11 @@ class ProductModel {
     price = json['price'];
     quantity = json['quantity'];
     sale = json['sale'];
+    addTahmel = json["add_tahmel"];
     addSale = json['add_sale'];
     hossa = json['tahmel'];
+    maxHossa = json["max_hossa"];
+    maxHossaModify = json["max_hossa_modify"];
   }
 
   Map<String, dynamic> toJson() => {

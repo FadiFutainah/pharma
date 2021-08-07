@@ -1,47 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/Cart/ShoppingCart.dart';
 
-class Bar extends StatefulWidget implements PreferredSizeWidget {
-  final String companyName;
-
-  Bar({Key key, this.companyName})
-      : preferredSize = Size.fromHeight(60),
-        super(key: key);
+class BarHomePage extends StatelessWidget implements PreferredSizeWidget {
+  ///const BarHomePage({ Key key }) : super(key: key);
 
   @override
-  _BarState createState() => _BarState();
+  Size get preferredSize => Size.fromHeight(60);
 
-  @override
-  final Size preferredSize; // default is 56.0
-}
-
-class _BarState extends State<Bar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
       iconTheme: IconThemeData(color: Colors.white),
-      backgroundColor: Color(0xffffb52d),
+      backgroundColor: Theme.of(context).primaryColor,
       elevation: 0,
       centerTitle: true,
       title: Text(
-        'نتائج البحث',
+        'زياد فارما',
         style: TextStyle(
           color: Colors.white,
+          fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
         ),
-      ),
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back,
-        ),
-        onPressed: () {
-          Navigator.pop(context);
-        },
       ),
       actions: <Widget>[
         IconButton(
           icon: Icon(
             Icons.shopping_cart_outlined,
           ),
+          //open the current bill----------------------------------//
           onPressed: () {
             Navigator.of(context).pushNamed(ShoppingCart.id);
           },

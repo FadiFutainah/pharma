@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/View/Pages/Home/AdminHomePage.dart';
 
 import 'components/AddCompanyForm.dart';
 
 class AddCompanyPage extends StatelessWidget {
   static const String id = '/AddCompanyPage';
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class AddCompanyPage extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).popAndPushNamed(AdminHomePage.id);
           },
         ),
       ),
