@@ -34,23 +34,15 @@ class BasketsModel {
         'id_user': this.userId,
         'id_sallat': this.id,
       };
-
-  /*Map<String, dynamic> toJson() {
-    
-    List<Map<String, dynamic>> test = List<Map<String, dynamic>>();
-    
-    if (this.products != null) {
-      this.products.forEach((v) {
-        test.add(v.toJson1());
-      });
+  Map<String, dynamic> toJsonToAdd() {
+    Map<String, dynamic> json;
+    json['num'] = this.num;
+    json['full_total'] = this.fullTotal;
+    json['name'] = this.sallatName;
+    json['products'] = List<Map<String, dynamic>>.empty();
+    for (var product in this.sallatProducts) {
+      json['products'].add(product.addBasketToJson());
     }
-
-    Map<String, dynamic> map = {
-      'id_user': this.UserId,
-      'full_total': this.fullTotal,
-      'id_product': test,
-    };
-
-    return map;
-  }*/
+    return json;
+  }
 }

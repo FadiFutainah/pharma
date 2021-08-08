@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/View/Pages/About-us/AboutUs.dart';
 import 'package:pharma/View/Pages/Admin/AddBasketPage.dart';
 import 'package:pharma/View/Pages/Admin/AddCompanyPage.dart';
 import 'package:pharma/View/Pages/Admin/AddProductPage.dart';
@@ -45,4 +46,5 @@ final Map<String, WidgetBuilder> routes = {
   SchedualPage.id: (context) => SchedualPage(),
   AdminSchedualPage.id: (context) => AdminSchedualPage(),
   SignedUsersPage.id: (context) => SignedUsersPage(),
+  AboutUsPage.id: (context) => AboutUsPage(),
 };

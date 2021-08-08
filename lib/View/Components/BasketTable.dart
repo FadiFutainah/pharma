@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pharma/models/BasketsModel.dart';
+import 'package:pharma/models/BasketModel.dart';
 
 // ignore: must_be_immutable
 class BasketTable extends StatelessWidget {

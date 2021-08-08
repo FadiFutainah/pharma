@@ -28,37 +28,3 @@ class CompanyModel {
     return data;
   }
 }
-// {
-//     "id": 1,
-//     "name": "fofo",
-//     "products": [
-//         {
-//             "id": 1,
-//             "name": "fofo",
-//             "formation": "rara",
-//             "addedDate": "1/1/1",
-//             "max": 100,
-//             "price": 12.23,
-//             "quantity": 99,
-//             "alternatives": [
-//                 "koko",
-//                 "toto",
-//                 "soso"
-//             ]
-//         },
-//         {
-//             "id": 2,
-//             "name": "fofo",
-//             "formation": "rara",
-//             "addedDate": "1/1/1",
-//             "max": 100,
-//             "price": 12.23,
-//             "quantity": 99,
-//             "alternatives": [
-//                 "koko",
-//                 "toto",
-//                 "soso"
-//             ]
-//         }
-//     ]
-// }

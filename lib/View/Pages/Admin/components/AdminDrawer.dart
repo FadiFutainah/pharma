@@ -202,6 +202,52 @@ class _AdminDrawerState extends State<AdminDrawer> {
                     },
                   ),
                 ),
+                Padding(
+                  padding:
+                      EdgeInsets.all(MediaQuery.of(context).size.height / 60),
+                  child: TextButton(
+                    style: ButtonStyle(),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.info_outline,
+                          color: Color.fromARGB(255, 255, 142, 1),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width / 20),
+                          child: Text(
+                            'حول',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            child: Column(
+                              children: [
+                                Text('about-us'),
+                                Text('Z- pharma App'),
+                                Text('released by Z -tech Team'),
+                                Text('Damascus - syria'),
+                                Text('0944602916'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),

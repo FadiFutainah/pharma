@@ -10,7 +10,7 @@ class ProductController {
 
   //needs edit
 // ossama
-  Future<String> addProduct(ProductModel productModel, int companyId) async {
+  Future<String> addProduct(ProductModel productModel) async {
     var url = baseUrl + 'inputproducts';
     Uri uri = Uri.parse(url);
     try {
@@ -20,9 +20,11 @@ class ProductController {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
-        // body: productModel.addProductToJson(),
+        body: productModel.toJsonForAdd(),
       );
       if (response.statusCode == 200) {
+        if (response.body == 'عليك إدخال شركة صحيحة')
+          return 'يوجد خطأ في عملية الإضافة';
         return 'تم إضافة المنتج بنجاح';
       } else {
         return 'يوجد خطأ في الشبكة';
@@ -35,7 +37,7 @@ class ProductController {
   }
 
   Future<List<ProductModel>> getByCompanyId(int id, int userId) async {
-    var url = baseUrl + 'showproductsbycompany/$id/2';
+    var url = baseUrl + 'showproductsbycompany/$id/$userId';
     Uri uri = Uri.parse(url);
     try {
       final response = await http.get(
@@ -56,9 +58,7 @@ class ProductController {
       } else {
         return null;
       }
-    } on Exception catch (e) {
-      print('e');
-      print(e);
+    } on Exception {
       return null;
     }
   }
@@ -76,7 +76,6 @@ class ProductController {
       );
       if (response.statusCode == 200) {
         List json = convert.jsonDecode(response.body);
-        print(json.toString() + 'fofofofofofofofo');
         if (json.isEmpty) {
           return ProductModel(name: 'not found');
         } else {

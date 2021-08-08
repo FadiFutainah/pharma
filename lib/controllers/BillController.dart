@@ -48,7 +48,12 @@ class BillController {
           .timeout(Duration(seconds: 15));
       log(response.body);
       if (response.statusCode == 200) {
+        if (response.body.toString().contains('لا يمكنك أن تشتري')) {
+          return 'يوجد خطأ في عملية الشراء';
+        }
         return 'تم الشراء بنجاح';
+      } else {
+        return 'يوجد خطأ في عملية الشراء';
       }
     } on SocketException {
       return 'لا يوجد اتصال بالشبكة';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pharma/models/BasketModel.dart';
 import 'package:pharma/models/BillModel.dart';
 import 'package:pharma/models/HossaProductModel.dart';
 import 'package:pharma/models/PivoitModal.dart';
 import 'package:pharma/models/ProductModel.dart';
-import 'package:pharma/models/BasketsModel.dart';
 import 'package:pharma/models/BillProductModel.dart';
 
 class Services {
@@ -34,7 +34,7 @@ class Services {
     }
 
     BillModel respons = BillModel();
-    respons.UserId = 1;
+    respons.userId = 1;
     respons.fullTotal = fullTotal;
     respons.products = [];
     for (int i = 0; i < listProduct.length; i++) {

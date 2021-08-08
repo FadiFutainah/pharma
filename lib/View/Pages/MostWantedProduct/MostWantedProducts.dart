@@ -2,7 +2,6 @@ import 'package:pharma/Controllers/ProductController.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Components/barGanaral.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
-import 'package:pharma/View/Pages/MostWantedProduct/components/bar.dart';
 import 'package:pharma/models/ProductModel.dart';
 
 class MostWanted extends StatefulWidget {

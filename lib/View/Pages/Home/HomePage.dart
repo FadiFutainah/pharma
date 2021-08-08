@@ -97,29 +97,8 @@ class _HomePageState extends State<HomePage> {
                                         borderRadius: BorderRadius.circular(30),
                                         child: InkWell(
                                           onTap: () {},
-                                          child: Stack(
-                                            children: [
-                                              Center(
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                  ),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                    child: Image.asset(
-                                                      'images/basketsImage.png',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Center(
-                                                child: Text('لا يوجد عروض'),
-                                              ),
-                                            ],
+                                          child: Center(
+                                            child: Text('لا يوجد عروض'),
                                           ),
                                         ),
                                       ),
@@ -147,30 +126,12 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             );
                                           },
-                                          child: Stack(
-                                            children: [
-                                              Center(
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                  ),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                    child: Image.asset(
-                                                      'images/basketsImage.png',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Center(
-                                                child: Text(snapshot.data[index]
-                                                    ['sallatName']),
-                                              ),
-                                            ],
+                                          child: Center(
+                                            child: Text(
+                                              snapshot.data[index]
+                                                  ['sallatName'],
+                                              style: TextStyle(fontSize: 30),
+                                            ),
                                           ),
                                         ),
                                       );
@@ -204,14 +165,14 @@ class _HomePageState extends State<HomePage> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           30.0),
-                                                  child: Image.asset(
-                                                    'images/basketsImage.png',
-                                                  ),
                                                 ),
                                               ),
                                             ),
                                             Center(
-                                              child: Text('لا يوجد عروض'),
+                                              child: Text(
+                                                'لا يوجد عروض',
+                                                style: TextStyle(fontSize: 30),
+                                              ),
                                             ),
                                           ],
                                         ),

@@ -42,8 +42,6 @@ class CompanyController {
     }
   }
 
-  // Future<String> addCompany(String companyName, String path) async {}
-
   Future<List<String>> getCompaniesNames() async {
     List<CompanyModel> res = await getCompanies();
     List<String> items = [];

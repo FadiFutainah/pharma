@@ -68,10 +68,10 @@ flutter_icons:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - images/basketsImage.png
     - images/logo.jpg
     - images/animatedSplash.gif
-  
+    - images/Intro.png
+
   uses-material-design: true
 
 

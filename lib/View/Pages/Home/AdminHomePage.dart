@@ -139,30 +139,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                               ),
                                             );
                                           },
-                                          child: Stack(
-                                            children: [
-                                              Center(
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                  ),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                    child: Image.asset(
-                                                      'images/basketsImage.png',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Center(
-                                                child: Text(snapshot.data[index]
-                                                    ['sallatName']),
-                                              ),
-                                            ],
+                                          child: Center(
+                                            child: Text(
+                                              snapshot.data[index]
+                                                  ['sallatName'],
+                                              style: TextStyle(fontSize: 30),
+                                            ),
                                           ),
                                         ),
                                       );
@@ -194,32 +176,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
-                                            child: Image.asset(
-                                              'images/basketsImage.png',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: InkWell(
-                                        onTap: () {
-                                          setState(
-                                            () {},
-                                          );
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                            child: Image.asset(
-                                              'images/basketsImage.png',
-                                            ),
                                           ),
                                         ),
                                       ),

@@ -1,5 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:pharma/View/Pages/Home/AdminHomePage.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
@@ -15,26 +16,26 @@ void main() {
 }
 
 Future<void> initRole(BuildContext context) async {
-  // try {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   // needs edit
-  //   if (Provider.of<AuthProvider>(context).isAuthenticated) {
-  //     sharedPreferences.setString('role', 'ADMIN');
-  //     String role = sharedPreferences.get('role');
-  //     if (role != null && role == 'ADMIN') {
-  //       Navigator.of(context)
-  //           .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
-  //     } else {
-  //       Navigator.of(context)
-  //           .pushNamedAndRemoveUntil(HomePage.id, (route) => false);
-  //     }
-  //   } else {
-  //     Navigator.of(context)
-  //         .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
-  //   }
-  // } on Exception {
-  Navigator.of(context).pushNamedAndRemoveUntil(HomePage.id, (route) => false);
-  // }
+  try {
+    SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance().timeout(Duration(seconds: 30));
+    if (Provider.of<AuthProvider>(context).isAuthenticated) {
+      sharedPreferences.setString('role', 'ADMIN');
+      String role = sharedPreferences.get('role');
+      if (role != null && role == 'ADMIN') {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
+      } else {
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(HomePage.id, (route) => false);
+      }
+    } else {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(AdminHomePage.id, (route) => false);
+    }
+  } on Exception {
+    Get.offAll(HomePage());
+  }
 }
 
 class LoadingScreen extends StatelessWidget {
@@ -59,14 +60,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => Cart()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         home: AnimatedSplashScreen(
           duration: 500,
           splash: Image.asset(
-            'images/animatedSplash.gif',
+            'images/Intro.png',
           ),
           splashIconSize: 150,
-          nextScreen: AdminHomePage(),
+          nextScreen: LoadingScreen(),
           splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.white,
           pageTransitionType: PageTransitionType.fade,

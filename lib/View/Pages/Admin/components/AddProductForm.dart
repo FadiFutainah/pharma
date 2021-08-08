@@ -257,11 +257,12 @@ class _AddProductFormState extends State<AddProductForm> {
                           price: int.parse(pricec.text),
                           quantity: int.parse(quantityc.text),
                           sale: int.parse(salec.text),
+                          companyId: companies
+                              .where(
+                                  (element) => element.name == selectedCompany)
+                              .first
+                              .id,
                         ),
-                        companies
-                            .where((element) => element.name == selectedCompany)
-                            .first
-                            .id,
                       );
                     }
                   }

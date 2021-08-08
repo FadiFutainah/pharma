@@ -1,7 +1,7 @@
 import 'BillProductModel.dart';
 
 class BillModel {
-  int UserId = 0;
+  int userId = 0;
   int id = 0;
   int fullTotal = 0;
   String createdAt;
@@ -19,7 +19,8 @@ class BillModel {
     fullTotal = json['id_user'];
     createdAt = json['created_at'];
     if (json['products'] != null) {
-      products = List<BillProductModel>();
+      // edited now
+      // products = List<BillProductModel>();
       json['products'].forEach((v) {
         products.add(BillProductModel.fromJson(v));
       });
@@ -28,7 +29,7 @@ class BillModel {
 
 /////// needs edit /////////
   Map<String, dynamic> toJson() {
-    List<Map<String, dynamic>> test = List<Map<String, dynamic>>();
+    List<Map<String, dynamic>> test = [];
 
     if (this.products != null) {
       this.products.forEach((v) {
@@ -37,7 +38,7 @@ class BillModel {
     }
 
     Map<String, dynamic> map = {
-      'id_user': this.UserId,
+      'id_user': this.userId,
       'full_total': this.fullTotal,
       'products': test,
     };

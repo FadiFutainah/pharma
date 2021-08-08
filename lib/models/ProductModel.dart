@@ -1,5 +1,3 @@
-// !!!
-
 import 'HossaProductModel.dart';
 
 class ProductModel {
@@ -15,6 +13,8 @@ class ProductModel {
   HossaProductModel hossaProduct;
   int maxHossa;
   int maxHossaModify;
+  int companyId;
+  String nameTahmel;
   // String formation;
   // List<String> alternatives;
   // int max;
@@ -32,6 +32,8 @@ class ProductModel {
     this.maxHossa,
     this.maxHossaModify,
     this.addTahmel,
+    this.companyId,
+    this.nameTahmel,
   });
 
   ProductModel.fromJsonWithModelHossa(Map<String, dynamic> json) {
@@ -43,6 +45,7 @@ class ProductModel {
     addSale = json['add_sale'];
     hossa = json['tahmel'];
     addTahmel = json["add_tahmel"];
+
     ///print(json['name_hossa']);
     ///print(HossaProductModel.fromJson(json['name_hossa']));
     if (json['name_tahmel'] != null) {
@@ -52,7 +55,6 @@ class ProductModel {
     maxHossa = json["max_hossa"];
     maxHossaModify = json["max_hossa_modify"];
 
-    
     //nameHossa = json['name_hossa'];
   }
 
@@ -97,6 +99,17 @@ class ProductModel {
     maxHossaModify = json["max_hossa_modify"];
   }
 
+  Map<String, dynamic> toJsonForAdd() => {
+        'name_product': this.name,
+        'price': this.price,
+        'quantity': this.quantity,
+        'sale': this.sale,
+        'add_sale': this.addSale,
+        'tahmel': this.hossa,
+        'max_hossa': this.maxHossa,
+        'id_company': this.companyId,
+        'name_tahmel': this.nameTahmel,
+      };
   Map<String, dynamic> toJson() => {
         'id': this.id,
         'name': this.name,

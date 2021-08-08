@@ -1,8 +1,7 @@
 import 'package:pharma/View/Components/barGanaral.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:pharma/Providers/CartProvider.dart';
-import 'package:pharma/View/Pages/Cart/ShoppingCart.dart';
-import 'package:pharma/View/Pages/Home/HomePage.dart';
+
 import 'package:pharma/controllers/ProductController.dart';
 import 'package:pharma/models/ProductModel.dart';
 import 'package:flutter/material.dart';

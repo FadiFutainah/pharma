@@ -4,7 +4,7 @@ import 'package:pharma/View/Components/BasketTable.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/BasketsController.dart';
-import 'package:pharma/models/BasketsModel.dart';
+import 'package:pharma/models/BasketModel.dart';
 import 'package:provider/provider.dart';
 
 class BasketResults extends StatelessWidget {

@@ -6,18 +6,18 @@ class SallatProducts {
   int quentity = 0;
   int price = 0;
   String createdAt = '';
+  int sale;
+  SallatProducts(
+      {this.id,
+      this.sale,
+      this.productsName,
+      this.total,
+      this.price,
+      this.sallatId,
+      this.quentity,
+      this.createdAt});
 
-  SallatProducts({
-    this.id,
-    this.productsName,
-    this.total,
-    this.price,
-    this.sallatId,
-    this.quentity,
-    this.createdAt
-  });
-
-  SallatProducts.fromJson(Map<String, dynamic>json){
+  SallatProducts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     productsName = json['name_product'];
     total = json['total'];
@@ -27,19 +27,11 @@ class SallatProducts {
     createdAt = json['created_at'];
   }
 
-  
-
-
-  /*Map<String, dynamic> toJson() => {
-        'id': this.id,
-        'name': this.name,
-        'price': this.price,
-        'quantity': this.quantity,
-        'createdAt': this.createdAt,
-        'sale': this.sale,
-        'addSale': this.addSale,
-        'hossa': this.hossa,
-        
-      };*/              
-  
+  Map<String, dynamic> addBasketToJson() => {
+        'name_product': productsName,
+        'quantity': quentity,
+        'price': price,
+        'sale': sale,
+        'total': total,
+      };
 }

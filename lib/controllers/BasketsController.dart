@@ -4,7 +4,7 @@ import 'dart:convert' as convert;
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:pharma/Common/consts.dart';
-import 'package:pharma/models/BasketsModel.dart';
+import 'package:pharma/models/BasketModel.dart';
 
 class BasketsController {
   Future<List<Map<String, dynamic>>> getAllBaskets() async {
@@ -63,7 +63,28 @@ class BasketsController {
   }
   // ossama
 
-  // Future<String> addBasket(BasketsModel basketsModel) {}
+  Future<String> addBasket(BasketsModel basketsModel) async {
+    var url = baseUrl + 'inputfullsallat';
+    try {
+      var response = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(basketsModel.toJsonToAdd()),
+      );
+      if (response.statusCode == 200) {
+        return 'تم إضافة السلة بنجاح';
+      } else {
+        return 'يوجد خطأ في الشبكة';
+      }
+    } on SocketException {
+      return 'لا يوجد اتصال بالشبكة';
+    } on Exception {
+      return 'حصل خطأ في عملية الإضافة';
+    }
+  }
 
   // Future<String> deleteBasket(BasketsModel basketsModel) {}
 }
