@@ -64,7 +64,7 @@ class _CompaniesState extends State<Companies> {
                               errorBuilder: (BuildContext context,
                                   Object exception, StackTrace stackTrace) {
                                 return Icon(
-                                  Icons.photo,
+                                  Icons.broken_image_outlined,
                                   color: Colors.grey,
                                   size: 150,
                                 );

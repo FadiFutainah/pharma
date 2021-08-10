@@ -45,9 +45,6 @@ class ProductModel {
     addSale = json['add_sale'];
     hossa = json['tahmel'];
     addTahmel = json["add_tahmel"];
-
-    ///print(json['name_hossa']);
-    ///print(HossaProductModel.fromJson(json['name_hossa']));
     if (json['name_tahmel'] != null) {
       hossaProduct = HossaProductModel.fromJson(json['name_tahmel']);
     }

@@ -25,7 +25,6 @@ class _BillsState extends State<Bills> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      ///backgroundColor: Color(0xffffb52d),
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: Colors.white,
@@ -42,7 +41,8 @@ class _BillsState extends State<Bills> {
           'الفواتير',
           style: TextStyle(
               color: Colors.white,
-              fontSize: MediaQuery.of(context).size.height / 25),
+              fontSize: 20,
+              fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily),
         ),
         centerTitle: true,
       ),

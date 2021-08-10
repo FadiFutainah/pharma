@@ -25,7 +25,6 @@ class AuthProvider extends ChangeNotifier {
           'password': user.password
         },
       ).timeout(Duration(seconds: 15));
-      print(response.statusCode);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return 'تم التسجيل بنجاح';
       } else {
@@ -41,29 +40,51 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<http.Response> logIn(String username, String password) async {
-    SharedPreferences storage = await SharedPreferences.getInstance();
+    try {
+      SharedPreferences storage = await SharedPreferences.getInstance();
 
-    final response = await http.post(
-      Uri.parse(baseUrl + '/login'),
-      body: {'username': username, 'password': password},
-    );
-    if (response.statusCode == 200) {
-      if (response.body == 'wrong password' ||
-          response.body == 'wrong username') {
+      final response = await http.post(
+        Uri.parse(baseUrl + '/login'),
+        body: {'username': username, 'password': password},
+      );
+      if (response.statusCode == 200) {
+        if (response.body == 'wrong password' ||
+            response.body == 'wrong username') {
+          _isAuthenticated = false;
+          notifyListeners();
+          return response;
+        } else {
+          storage.setString('username', username);
+          storage.setString('token', json.decode(response.body)['token']);
+          _isAuthenticated = true;
+          notifyListeners();
+          return response;
+        }
+      } else {
         _isAuthenticated = false;
         notifyListeners();
         return response;
-      } else {
-        storage.setString('username', username);
-        storage.setString('token', json.decode(response.body)['token']);
-        _isAuthenticated = true;
-        notifyListeners();
-        return response;
       }
-    } else {
-      _isAuthenticated = false;
-      notifyListeners();
-      return response;
+    } on Exception {
+      return null;
+    }
+  }
+
+  Future<bool> tryLogin(BuildContext context) async {
+    try {
+      SharedPreferences storage = await SharedPreferences.getInstance();
+      if (isAuthenticated) {
+        return true;
+      } else {
+        logIn(storage.get('username'), storage.get('password'));
+        if (isAuthenticated) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } on Exception {
+      return false;
     }
   }
 

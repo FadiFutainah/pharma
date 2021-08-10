@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pharma/View/Components/MyButton.dart';
 import 'package:pharma/View/Components/MyTextField.dart';
 import 'package:flutter/material.dart';
@@ -16,23 +15,8 @@ class AddCompanyForm extends StatefulWidget {
 class _AddCompanyFormState extends State<AddCompanyForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController namec = TextEditingController();
-  String path;
+
   File file;
-  // Future<List<CompanyModel>> futureCompanies;
-  // List<CompanyModel> companies;
-
-  // @override
-  // void initState() {
-  //   companies = futureCompanies.asStream().toList() as List<CompanyModel>;
-  //   super.initState();
-  // }
-
-  void pickercamera() async {
-    final myfile = await ImagePicker().getImage(source: ImageSource.gallery);
-    setState(() {
-      file = File(myfile.path);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,16 +42,20 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
               ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: (file == null)
+                    ? Icon(Icons.ac_unit_outlined)
+                    : Icon(Icons.access_alarm),
+              ),
               IconButton(
-                onPressed: () async {
-                  ImagePicker imagePicker = ImagePicker();
-                  XFile image =
-                      await imagePicker.pickImage(source: ImageSource.gallery);
-                  var file = File(image.path);
-                  print(image.path);
-                  print(file.path);
-                  final temp = await getApplicationDocumentsDirectory();
-                  print(temp);
+                onPressed: () {
+                  setState(() async {
+                    ImagePicker imagePicker = ImagePicker();
+                    XFile image = await imagePicker.pickImage(
+                        source: ImageSource.gallery);
+                    file = File(image.path);
+                  });
                 },
                 icon: Icon(Icons.add_a_photo_outlined),
                 iconSize: 50,
@@ -76,11 +64,15 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
               MyButton(
                 width: MediaQuery.of(context).size.width * 0.5,
                 text: 'إضافة',
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState.validate()) {
-                    // String res = await widget.companyController
-                    //     .addCompany('company name', path);
-                    pickercamera();
+                    String res = await widget.companyController
+                        .addCompany('company name', file.path);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                      res,
+                      textAlign: TextAlign.center,
+                    )));
                   }
                 },
               ),
@@ -91,19 +83,3 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
     );
   }
 }
-
-
-      // final ImagePicker _picker = ImagePicker();
-      //             final File image = (await _picker.pickImage(
-      //                 source: ImageSource.gallery)) as File;
-      //             print('path');
-      //             print(path);
-      //             print('image.path');
-      //             print(image.path);
-      //             final Directory apppath =
-      //                 await getApplicationDocumentsDirectory();
-
-      //             File temp = await image.copy('${apppath.path}/fofo.jpg');
-      //             path = temp.path;
-      //             print('path');
-      //             print(path);

@@ -1,7 +1,6 @@
 import 'package:pharma/Controllers/ProductController.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/View/Components/barGanaral.dart';
-import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/models/ProductModel.dart';
 
 class MostWanted extends StatefulWidget {
@@ -48,14 +47,9 @@ class _MostWantedState extends State<MostWanted> {
                           ),
                           child: Row(
                             children: [
-                              IconButton(
-                                icon: Icon(
-                                  Icons.info_outline_rounded,
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).pushNamed(HomePage.id);
-                                },
-                              ),
+                              Center(
+                                  child: Text(
+                                      snapshot.data[index].price.toString())),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
@@ -84,6 +78,7 @@ class _MostWantedState extends State<MostWanted> {
                                   ),
                                 ),
                               ),
+                              Center(child: Text(index.toString()))
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),

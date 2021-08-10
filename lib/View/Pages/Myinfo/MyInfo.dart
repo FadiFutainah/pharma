@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'drawer.dart';
+import 'package:pharma/View/Components/drawerGeneral.dart';
 
 class MyInfo extends StatelessWidget {
   static const String id = 'MyInfo';
@@ -8,13 +7,7 @@ class MyInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffffb52d),
-      drawer: Container(
-        width: MediaQuery.of(context).size.width / 1.7,
-        child: MainpageDrawer(
-          pharmacyName: 'الصيدلية المركزية',
-          userName: 'احمد',
-        ),
-      ),
+      drawer: DrawerGeneral(),
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: Colors.white,

@@ -11,8 +11,8 @@ class BasketsController {
     var url = baseUrl + 'getallsallats';
 
     try {
-      Uri uri = Uri.parse(url);
-      final response = await http.get(uri);
+      final response =
+          await http.get(Uri.parse(url)).timeout(Duration(seconds: 30));
       if (response.statusCode == 200) {
         var json = convert.jsonDecode(response.body);
         List baskets = json;
@@ -23,6 +23,8 @@ class BasketsController {
                 })
             .toList();
       }
+      return null;
+    } on SocketException {
       return null;
     } on Exception {
       return null;

@@ -118,7 +118,6 @@ class _SignUpState extends State<SignUp> {
                       if (confirmPassc.text != passc.text) {
                         confirmPassc.clear();
                       }
-                      // needs edit
                       if (_formKey.currentState.validate()) {
                         var response = await Provider.of<AuthProvider>(context,
                                 listen: false)
@@ -160,6 +159,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                 ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
               ],
             ),
           ),

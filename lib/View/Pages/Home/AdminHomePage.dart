@@ -14,6 +14,7 @@ import 'package:pharma/View/Pages/companies/Companies.dart';
 import 'package:pharma/controllers/BasketsController.dart';
 
 import 'components/AdminAppBar.dart';
+import 'components/HomePageButton.dart';
 
 class AdminHomePage extends StatefulWidget {
   static const String id = '/AdminHomePage';
@@ -24,16 +25,13 @@ class AdminHomePage extends StatefulWidget {
 
 class _AdminHomePageState extends State<AdminHomePage> {
   BasketsController basketsController = new BasketsController();
-  // CompanyController companyController;
 
   Future<List<Map<String, dynamic>>> futureBaskets;
-  // Future<List<CompanyModel>> futureCompany;
   List<String> images;
 
   @override
   void initState() {
     super.initState();
-    // futureCompany = companyController.getCompanies();
     futureBaskets = basketsController.getAllBaskets();
   }
 
@@ -66,10 +64,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
       backgroundColor: Color.fromARGB(255, 245, 245, 245),
       drawer: Container(
         width: MediaQuery.of(context).size.width / 1.7,
-        child: AdminDrawer(
-          pharmacyName: 'زياد',
-          userName: 'الحساب الرئيسي',
-        ),
+        child: AdminDrawer(),
       ),
       appBar: AdminAppBar(),
       body: SingleChildScrollView(
@@ -78,7 +73,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
             Container(
               height: MediaQuery.of(context).size.height / 5,
               color: Theme.of(context).primaryColor,
-              //child: SearchField(),
             ),
             SearchField(),
             Column(
@@ -196,173 +190,25 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
 ////////////////////////////////
 
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 8,
-                    child: Card(
-                      child: OutlinedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            elevation: MaterialStateProperty.all(2)),
-                        onPressed: () {
-                          Navigator.pushNamed(context, MostWanted.id);
-                        },
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Icon(
-                                Icons.arrow_back_ios_sharp,
-                                size: MediaQuery.of(context).size.height / 25,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'الأكثر مبيعاً',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontFamily: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        .fontFamily,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 18,
-                                ),
-                                Icon(
-                                  Icons.turned_in_not_outlined,
-                                  size: MediaQuery.of(context).size.height / 16,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ],
-                            ),
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                HomePageButton(
+                    function: () {
+                      Navigator.of(context).pushNamed(MostWanted.id);
+                    },
+                    icon: Icons.turned_in_not_outlined,
+                    text: 'الأكثر مبيعاً'),
 
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 8,
-                    child: Card(
-                      child: OutlinedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            elevation: MaterialStateProperty.all(2)),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Companies.id);
-                        },
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Icon(
-                                Icons.arrow_back_ios_sharp,
-                                size: MediaQuery.of(context).size.height / 25,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'الشركات',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontFamily: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        .fontFamily,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 18,
-                                ),
-                                Icon(
-                                  Icons.work_outline_sharp,
-                                  size: MediaQuery.of(context).size.height / 16,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ],
-                            ),
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 8,
-                    child: Card(
-                      child: OutlinedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            elevation: MaterialStateProperty.all(2)),
-                        onPressed: () {
-                          Navigator.pushNamed(context, SuggestionsPage.id);
-                        },
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Icon(
-                                Icons.arrow_back_ios_sharp,
-                                size: MediaQuery.of(context).size.height / 25,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'الاقتراحات والشكاوي',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontFamily: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        .fontFamily,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 18,
-                                ),
-                                Icon(
-                                  Icons.info_outline,
-                                  size: MediaQuery.of(context).size.height / 16,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ],
-                            ),
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                /*Divider(
-                endIndent: MediaQuery.of(context).size.width / 8,
-                indent: MediaQuery.of(context).size.width / 8,
-                color: Colors.black.withOpacity(0.4),
-              ),*/
+                HomePageButton(
+                    function: () {
+                      Navigator.of(context).pushNamed(Companies.id);
+                    },
+                    icon: Icons.work_outline_sharp,
+                    text: 'الشركات'),
+                HomePageButton(
+                    function: () {
+                      Navigator.of(context).pushNamed(SuggestionsPage.id);
+                    },
+                    icon: Icons.info_outline,
+                    text: 'الاقتراحات والشكاوي'),
               ],
             ),
           ],

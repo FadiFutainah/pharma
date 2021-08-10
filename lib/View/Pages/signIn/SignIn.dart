@@ -98,7 +98,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     child: Text(
-                      'الدخول',
+                      'دخول',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -11,7 +12,7 @@ class WelcomePage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.popAndPushNamed(context, HomePage.id);
+            Get.offAll(HomePage());
           },
         ),
         iconTheme: IconThemeData(

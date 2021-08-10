@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
-import 'package:pharma/View/Components/DrawerComponent.dart';
-import 'package:pharma/View/Components/DrawerTile.dart';
-import 'package:pharma/View/Components/MyButton.dart';
 import 'package:pharma/View/Pages/About-us/AboutUs.dart';
-import 'package:pharma/View/Pages/Admin/SignedUsersPage.dart';
+import 'package:pharma/View/Pages/Bills/Bills.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
-import 'package:pharma/View/Pages/Scheduale/AdminSchedualPage.dart';
+import 'package:pharma/View/Pages/Scheduale/SchedualPage.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AdminDrawer extends StatelessWidget {
+import 'DrawerComponent.dart';
+import 'DrawerTile.dart';
+import 'MyButton.dart';
+
+class DrawerGeneralAuth extends StatelessWidget {
   Future<Map<String, String>> getCredentials() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     return {
@@ -52,6 +53,27 @@ class AdminDrawer extends StatelessWidget {
                   },
                 ),
                 DrawerTile(
+                  icon: Icons.fact_check_outlined,
+                  text: 'الفواتير',
+                  function: () {
+                    Navigator.popAndPushNamed(context, Bills.id);
+                  },
+                ),
+                DrawerTile(
+                  icon: Icons.wysiwyg_outlined,
+                  text: 'جدول التوزيع اليومي',
+                  function: () {
+                    Navigator.of(context).pushNamed(SchedualPage.id);
+                  },
+                ),
+                DrawerTile(
+                  icon: Icons.info_outline,
+                  text: 'حول',
+                  function: () {
+                    Navigator.of(context).pushNamed(AboutUsPage.id);
+                  },
+                ),
+                DrawerTile(
                   icon: Icons.logout,
                   text: 'تسجيل الخروج',
                   function: () {
@@ -83,27 +105,6 @@ class AdminDrawer extends StatelessWidget {
                         ],
                       ),
                     );
-                  },
-                ),
-                DrawerTile(
-                  icon: Icons.wysiwyg_outlined,
-                  text: 'جدول التوزيع اليومي',
-                  function: () {
-                    Navigator.of(context).pushNamed(AdminSchedualPage.id);
-                  },
-                ),
-                DrawerTile(
-                  icon: Icons.person,
-                  text: 'المستخدمين',
-                  function: () {
-                    Navigator.of(context).pushNamed(SignedUsersPage.id);
-                  },
-                ),
-                DrawerTile(
-                  icon: Icons.info_outline,
-                  text: 'حول',
-                  function: () {
-                    Navigator.of(context).pushNamed(AboutUsPage.id);
                   },
                 ),
               ],

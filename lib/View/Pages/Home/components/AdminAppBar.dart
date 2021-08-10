@@ -21,7 +21,7 @@ class _AdminAppBarState extends State<AdminAppBar> {
       elevation: 0,
       centerTitle: true,
       title: Text(
-        'زياد فارما',
+        'Z_Pharma',
         style: TextStyle(
           color: Colors.white,
           fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pharma/View/Components/barGanaral.dart';
 
 class AboutUsPage extends StatelessWidget {
   static const String id = '/AboutUsPage';
@@ -7,14 +6,36 @@ class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BarGeneral(title: 'حول'),
-      body: Column(
-        children: [
-          Text('Z- pharma App'),
-          Text('released by Z -tech Team'),
-          Text('Damascus - syria'),
-          Text('0944602916'),
-        ],
+      appBar: AppBar(
+        title: Text(
+          'حول',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        backgroundColor: Theme.of(context).primaryColor,
+        centerTitle: true,
+        elevation: 0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Text(
+            'Z_Pharma App ' +
+                '\n'
+                    ' released By Z-tech Team' +
+                '\n'
+                    'Damascus - Syria' +
+                '\n'
+                    '0944602916',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
+              fontSize: 24,
+            ),
+          ),
+        ),
       ),
     );
   }

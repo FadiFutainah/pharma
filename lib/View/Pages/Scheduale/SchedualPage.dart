@@ -8,11 +8,43 @@ class SchedualPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
+        centerTitle: true,
+        title: Text(
+          'جدول التوزيع اليومي    ',
+          style: TextStyle(
+            fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Center(
         child: Image.network(
           schedUrl,
+          frameBuilder: (BuildContext context, Widget child, int frame,
+              bool wasSynchronouslyLoaded) {
+            return Padding(
+              padding: EdgeInsets.all(8.0),
+              child: child,
+            );
+          },
+          errorBuilder:
+              (BuildContext context, Object exception, StackTrace stackTrace) {
+            return Center(
+              child: Icon(
+                Icons.image_not_supported_outlined,
+                size: 100,
+                color: Colors.grey,
+              ),
+            );
+          },
           fit: BoxFit.fitWidth,
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return CircularProgressIndicator();
+          },
         ),
       ),
     );

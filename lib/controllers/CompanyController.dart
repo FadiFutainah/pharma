@@ -6,9 +6,6 @@ import 'package:pharma/models/CompanyModel.dart';
 
 class CompanyController {
   CompanyModel companyModel = CompanyModel();
-
-// needs edit
-
   Future<String> addCompany(String companyName, String path) async {
     var url = baseUrl + 'inputcompany';
     Uri uri = Uri.parse(url);
@@ -25,16 +22,16 @@ class CompanyController {
         await http.MultipartFile.fromPath(
           'image',
           path,
-          // contentType: MediaType('application', 'x-tar'),
         ),
       );
 
       final response = await request.send();
 
       if (response.statusCode == 200) {
-        return 'Uploaded';
+        return 'تم رفع الصورة بنجاح';
+      } else {
+        return 'يوجد مشكلة في الشبكة';
       }
-      return 'failed';
     } on SocketException {
       return 'لا يوجد اتصال بالشبكة';
     } on Exception {

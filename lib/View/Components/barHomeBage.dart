@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/Cart/ShoppingCart.dart';
 
 class BarHomePage extends StatelessWidget implements PreferredSizeWidget {
-  ///const BarHomePage({ Key key }) : super(key: key);
-
   @override
   Size get preferredSize => Size.fromHeight(60);
 
@@ -15,7 +13,7 @@ class BarHomePage extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       centerTitle: true,
       title: Text(
-        'زياد فارما',
+        'Z_Pharma',
         style: TextStyle(
           color: Colors.white,
           fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
@@ -26,7 +24,6 @@ class BarHomePage extends StatelessWidget implements PreferredSizeWidget {
           icon: Icon(
             Icons.shopping_cart_outlined,
           ),
-          //open the current bill----------------------------------//
           onPressed: () {
             Navigator.of(context).pushNamed(ShoppingCart.id);
           },

@@ -10,6 +10,8 @@ import 'package:pharma/View/Pages/MostWantedProduct/MostWantedProducts.dart';
 import 'package:pharma/View/Pages/companies/Companies.dart';
 import 'package:pharma/controllers/BasketsController.dart';
 
+import 'components/HomePageButton.dart';
+
 class HomePage extends StatefulWidget {
   static const String id = '/HomePage';
 
@@ -19,17 +21,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   BasketsController basketsController = new BasketsController();
-  // CompanyController companyController;
 
   Future<List<Map<String, dynamic>>> futureBaskets;
-  // Future<List<CompanyModel>> futureCompany;
-  List<String> images;
+
+  // delete when end
+
+  // Future<void> test() async {
+  //   SharedPreferences s = await SharedPreferences.getInstance();
+  //   s.clear();
+  // }
 
   @override
   void initState() {
-    super.initState();
-    // futureCompany = companyController.getCompanies();
+    // test();
     futureBaskets = basketsController.getAllBaskets();
+    super.initState();
   }
 
   @override
@@ -47,7 +53,6 @@ class _HomePageState extends State<HomePage> {
             Container(
               height: MediaQuery.of(context).size.height / 5,
               color: Theme.of(context).primaryColor,
-              //child: SearchField(),
             ),
             SearchField(),
             Column(
@@ -55,11 +60,6 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 7,
                 ),
-
-///////////////////////////////////////
-
-////////////// first slider //////////////////
-
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                   child: Container(
@@ -80,7 +80,6 @@ class _HomePageState extends State<HomePage> {
                           child: FutureBuilder<List<Map<String, dynamic>>>(
                             future: futureBaskets,
                             builder: (context, snapshot) {
-                              //////////////////// if there is no sallat ////////////////
                               if (snapshot.hasData) {
                                 if (snapshot.data == null) {
                                   return Carousel(
@@ -190,177 +189,27 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-
-////////////////////////////////
-
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 8,
-                    child: Card(
-                      child: OutlinedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            elevation: MaterialStateProperty.all(2)),
-                        onPressed: () {
-                          Navigator.pushNamed(context, MostWanted.id);
-                        },
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Icon(
-                                Icons.arrow_back_ios_sharp,
-                                size: MediaQuery.of(context).size.height / 25,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'الأكثر مبيعاً',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontFamily: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        .fontFamily,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 18,
-                                ),
-                                Icon(
-                                  Icons.turned_in_not_outlined,
-                                  size: MediaQuery.of(context).size.height / 16,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ],
-                            ),
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        ),
-                      ),
-                    ),
-                  ),
+                HomePageButton(
+                  function: () {
+                    Navigator.of(context).pushNamed(MostWanted.id);
+                  },
+                  icon: Icons.turned_in_not_outlined,
+                  text: 'الأكثر مبيعاً',
                 ),
-
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height / 8,
-                    child: Card(
-                      child: OutlinedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                            elevation: MaterialStateProperty.all(2)),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Companies.id);
-                        },
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Icon(
-                                Icons.arrow_back_ios_sharp,
-                                size: MediaQuery.of(context).size.height / 25,
-                                color: Colors.grey[600],
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'الشركات',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontFamily: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        .fontFamily,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 18,
-                                ),
-                                Icon(
-                                  Icons.work_outline_sharp,
-                                  size: MediaQuery.of(context).size.height / 16,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ],
-                            ),
-                          ],
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        ),
-                      ),
-                    ),
-                  ),
+                HomePageButton(
+                  function: () {
+                    Navigator.of(context).pushNamed(Companies.id);
+                  },
+                  icon: Icons.work_outline_sharp,
+                  text: 'الشركات',
                 ),
-
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height / 8,
-                      child: Card(
-                        child: OutlinedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.white),
-                              elevation: MaterialStateProperty.all(2)),
-                          onPressed: () {
-                            Navigator.pushNamed(context, ContactUsPage.id);
-                          },
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Icon(
-                                  Icons.arrow_back_ios_sharp,
-                                  size: MediaQuery.of(context).size.height / 25,
-                                  color: Colors.grey[600],
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'تواصل معنا',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.black,
-                                      fontFamily: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          .fontFamily,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 18,
-                                  ),
-                                  Icon(
-                                    Icons.info_outline,
-                                    size:
-                                        MediaQuery.of(context).size.height / 16,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ],
-                              ),
-                            ],
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          ),
-                        ),
-                      ),
-                    )),
-
-                /*Divider(
-                endIndent: MediaQuery.of(context).size.width / 8,
-                indent: MediaQuery.of(context).size.width / 8,
-                color: Colors.black.withOpacity(0.4),
-              ),*/
+                HomePageButton(
+                  function: () {
+                    Navigator.of(context).pushNamed(ContactUsPage.id);
+                  },
+                  icon: Icons.info_outline,
+                  text: 'تواصل معنا',
+                ),
               ],
             ),
           ],

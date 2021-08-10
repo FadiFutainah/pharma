@@ -3,11 +3,9 @@ import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/BillController.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/Providers/CartProvider.dart';
-import 'package:pharma/models/ProductModel.dart';
 import 'package:provider/provider.dart';
 
 class ShoppingCart extends StatefulWidget {
-  //const ShoppingCart({ Key? key }) : super(key: key);
   static const String id = '/cart';
 
   @override
@@ -20,8 +18,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     BillController billController = new BillController();
     final List<TableRow> products = Provider.of<Cart>(context).productitems;
     final List<TableRow> hossa = Provider.of<Cart>(context).hossaitems;
-    List<ProductModel> editableList =
-        Provider.of<Cart>(context, listen: false).product;
+
     return OrientationBuilder(
       builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
@@ -255,7 +252,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             ),
           );
         } else {
-////////////////////////////// on rotation ///////////////////////////////////////////////
+          ////////////////////////////// on rotation ///////////////////////////////////////////////
 
           return Scaffold(
             appBar: AppBar(

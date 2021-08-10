@@ -23,7 +23,6 @@ class BillController {
       if (response.statusCode == 200) {
         var json = convert.jsonDecode(response.body);
         List bills = json;
-        print(json.toString() + 'aaaaaaaaaaaaaaaaaaaaaaaa');
         return bills.map((bill) => new BillModel.fromJson(bill)).toList();
       } else {
         return null;

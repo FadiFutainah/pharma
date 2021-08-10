@@ -32,7 +32,7 @@ class _CompanyMedcinesState extends State<CompanyMedcines> {
     super.initState();
 
     /////// user Id //////
-    futureProducts = productController.getByCompanyId(widget.companyId, 3);
+    futureProducts = productController.getByCompanyId(widget.companyId, 1);
   }
 
   @override
@@ -115,9 +115,6 @@ class _CompanyMedcinesState extends State<CompanyMedcines> {
                                       return;
                                     }
 
-                                    print(snapshot.data[index].price /
-                                        snapshot.data[index].sale);
-                                    print('object done');
                                     Provider.of<Cart>(context, listen: false)
                                         .addItem(snapshot.data[index],
                                             _controllers[index]);
@@ -130,7 +127,6 @@ class _CompanyMedcinesState extends State<CompanyMedcines> {
                                         duration: Duration(seconds: 2),
                                       ),
                                     );
-                                    print('object done');
                                   },
                                 ),
                                 Padding(

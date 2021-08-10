@@ -50,7 +50,7 @@ class _PasswordFieldState extends State<PasswordField> {
         ),
         validator: (value) {
           if (value.length < 8) {
-            return 'كلمة السر يجب أن تكون ثماني محارف على الأقل';
+            return 'ادخل ثماني محارف على الأقل';
           }
           return null;
         },
