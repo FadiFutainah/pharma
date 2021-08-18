@@ -3,7 +3,9 @@ import 'package:pharma/View/Pages/Cart/ShoppingCart.dart';
 
 class BarGeneral extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const BarGeneral({Key key, this.title}) : super(key: key);
+  final bool hasShoppingCart;
+  const BarGeneral({Key key, this.title, this.hasShoppingCart = true})
+      : super(key: key);
 
   @override
   Size get preferredSize => Size.fromHeight(60);
@@ -29,16 +31,18 @@ class BarGeneral extends StatelessWidget implements PreferredSizeWidget {
           Navigator.of(context).pop();
         },
       ),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.shopping_cart_outlined,
-          ),
-          onPressed: () {
-            Navigator.of(context).pushNamed(ShoppingCart.id);
-          },
-        ),
-      ],
+      actions: (hasShoppingCart)
+          ? <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.shopping_cart_outlined,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(ShoppingCart.id);
+                },
+              ),
+            ]
+          : [],
     );
   }
 }

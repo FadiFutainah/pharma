@@ -3,31 +3,40 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/Providers/ImagesProvider.dart';
 import 'package:pharma/View/Components/SearchField.dart';
+import 'package:pharma/View/Components/barHomeBage.dart';
 import 'package:pharma/View/Components/drawerGeneral.dart';
+import 'package:pharma/View/Components/drawerGeneralAuth.dart';
 import 'package:pharma/View/Pages/BasketResult/BasketResult.dart';
 import 'package:pharma/View/Pages/Contact-us/ContactUsPage.dart';
 import 'package:pharma/View/Pages/MostWantedProduct/MostWantedProducts.dart';
 import 'package:pharma/View/Pages/companies/Companies.dart';
 import 'package:pharma/controllers/BasketsController.dart';
 
-import 'components/DefaultAppBar.dart';
 import 'components/HomePageButton.dart';
 
-class HomePage extends StatefulWidget {
+class UserHomePage extends StatefulWidget {
   static const String id = '/HomePage';
   final ImagesProvider provider = ImagesProvider();
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _UserHomePageState createState() => _UserHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _UserHomePageState extends State<UserHomePage> {
   BasketsController basketsController = new BasketsController();
 
   Future<List<Map<String, dynamic>>> futureBaskets;
 
+  // delete when end
+
+  // Future<void> test() async {
+  //   SharedPreferences s = await SharedPreferences.getInstance();
+  //   s.clear();
+  // }
+
   @override
   void initState() {
+    // test();
     futureBaskets = basketsController.getAllBaskets();
     super.initState();
   }
@@ -35,13 +44,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     widget.provider.loadLogo(context);
+    widget.provider.loadLogo(context);
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 245, 245, 245),
       drawer: Container(
         width: MediaQuery.of(context).size.width / 1.7,
-        child: DrawerGeneral(),
+        child: DrawerGeneralAuth(),
       ),
-      appBar: DefaultBarHomePage(),
+      appBar: BarHomePage(),
       body: SingleChildScrollView(
         child: Stack(
           children: [

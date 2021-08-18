@@ -15,7 +15,7 @@ class AuthProvider extends ChangeNotifier {
   Future<String> signup(UserModel user) async {
     try {
       final http.Response response = await http.post(
-        Uri.parse(baseUrl + '/inputsignup'),
+        Uri.parse(baseUrl + 'inputsignup'),
         body: {
           'name_pharmacy': user.pharmacyName,
           'name': user.name,
@@ -39,34 +39,36 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<http.Response> logIn(String username, String password) async {
+  Future<String> logIn(String username, String password) async {
     try {
       SharedPreferences storage = await SharedPreferences.getInstance();
-
       final response = await http.post(
-        Uri.parse(baseUrl + '/login'),
+        Uri.parse(baseUrl + 'login'),
         body: {'username': username, 'password': password},
       );
       if (response.statusCode == 200) {
-        if (response.body == 'wrong password' ||
-            response.body == 'wrong username') {
+        if (response.body == 'يجب عليك إنشاء حساب أولاً يا فهمان' ||
+            response.body == 'كلمة السر غير صحيحة ') {
           _isAuthenticated = false;
           notifyListeners();
-          return response;
+          return response.body;
         } else {
+          // implement authorization
           storage.setString('username', username);
           storage.setString('token', json.decode(response.body)['token']);
           _isAuthenticated = true;
           notifyListeners();
-          return response;
+          return 'تم تسجيل الدخول بنجاح';
         }
       } else {
         _isAuthenticated = false;
         notifyListeners();
-        return response;
+        return 'response.body';
       }
+    } on SocketException {
+      return 'لا يوجد اتصال بالشبكة';
     } on Exception {
-      return null;
+      return 'يوجد مشكلة في الشبكة';
     }
   }
 

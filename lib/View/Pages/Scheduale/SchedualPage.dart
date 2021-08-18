@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pharma/Common/consts.dart';
 
 class SchedualPage extends StatelessWidget {
-  static const String id = 'schedual';
+  static const String id = 'scheduale';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +20,7 @@ class SchedualPage extends StatelessWidget {
       body: Center(
         child: Image.network(
           schedUrl,
+          fit: BoxFit.contain,
           frameBuilder: (BuildContext context, Widget child, int frame,
               bool wasSynchronouslyLoaded) {
             return Padding(
@@ -37,7 +38,6 @@ class SchedualPage extends StatelessWidget {
               ),
             );
           },
-          fit: BoxFit.fitWidth,
           loadingBuilder: (BuildContext context, Widget child,
               ImageChunkEvent loadingProgress) {
             if (loadingProgress == null) {

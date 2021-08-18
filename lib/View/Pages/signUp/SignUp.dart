@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
 import 'package:pharma/View/Components/MyPasswordField.dart';
 import 'package:pharma/View/Components/MyTextField.dart';
+import 'package:pharma/View/Components/barGanaral.dart';
 import 'package:pharma/View/Pages/WelcomePage.dart';
 import 'package:pharma/models/UserModel.dart';
 import 'package:provider/provider.dart';
-
-import 'components/bar.dart';
 
 class SignUp extends StatefulWidget {
   static const String id = 'SignUp';
@@ -31,7 +31,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: Bar(),
+      appBar: BarGeneral(title: 'تسجيل الدخول', hasShoppingCart: false),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 MyTextField(
                   controller: addressc,
-                  labelText: 'العنوان',
+                  labelText: 'العنوان بالتفصيل',
                   type: TextInputType.text,
                   validator: (String value) {
                     if (value.isEmpty) return 'ادخل العنوان من فضلك';
@@ -94,7 +94,7 @@ class _SignUpState extends State<SignUp> {
                   controller: passc,
                   labelText: 'كلمة المرور',
                   validator: (String value) {
-                    if (value.length < 8)
+                    if (value.length < 7)
                       return 'كلمة السر يجب أن تكون ثماني محارف على الأقل';
                     return null;
                   },
@@ -115,7 +115,8 @@ class _SignUpState extends State<SignUp> {
                   width: MediaQuery.of(context).size.width / 2,
                   child: ElevatedButton(
                     onPressed: () async {
-                      if (confirmPassc.text != passc.text) {
+                      if (passc.text.length > 7 &&
+                          confirmPassc.text != passc.text) {
                         confirmPassc.clear();
                       }
                       if (_formKey.currentState.validate()) {
@@ -140,7 +141,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                         );
                         if (response == 'تم التسجيل بنجاح') {
-                          Navigator.popAndPushNamed(context, WelcomePage.id);
+                          Get.to(WelcomePage());
                         }
                       }
                     },

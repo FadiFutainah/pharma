@@ -2,12 +2,12 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:provider/provider.dart';
 import 'Common/routes.dart';
 import 'Common/themes.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
 import 'Providers/CartProvider.dart';
+import 'View/Pages/Home/UserHomePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       ],
       child: GetMaterialApp(
         home: AnimatedSplashScreen(
-          duration: 500,
+          duration: 50,
           splash: Image.asset(
             'images/Intro.png',
           ),
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           // splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.white,
           pageTransitionType: PageTransitionType.fade,
-          nextScreen: HomePage(),
+          nextScreen: UserHomePage(),
         ),
 
         theme: primaryTheme,

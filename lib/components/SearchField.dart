@@ -86,11 +86,6 @@ class _SearchFiledState extends State<SearchField> {
               alignLabelWithHint: true,
               hintTextDirection: TextDirection.rtl,
             ),
-            // ----------------------------------//
-            // autofillHints: ,
-            //------------------------------------//
-            /*cursorColor: Colors.grey,
-            textAlign: TextAlign.right,*/
           ),
         ),
       ),

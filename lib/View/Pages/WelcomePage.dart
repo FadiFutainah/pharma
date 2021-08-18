@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'package:pharma/View/Components/barGanaral.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -8,32 +10,38 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Get.offAll(HomePage());
-          },
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Text(
-            'سيتم التواصل معكم لتأكد المعلومات ونرحب باقتراحاتكم نأمل أن نقدم لكم الفائدة دائماً',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
-              fontSize: 24,
+      appBar: BarGeneral(title: 'أهلاً وسهلاً', hasShoppingCart: false),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: Center(
+              child: Text(
+                'سيتم التواصل معكم لتأكد المعلومات ونرحب باقتراحاتكم نأمل أن نقدم لكم الفائدة دائماً',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
+                  fontSize: 24,
+                ),
+              ),
             ),
           ),
-        ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+          GestureDetector(
+            onTap: () {
+              Get.offAll(HomePage());
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.arrow_back, color: Colors.grey[700]),
+                Text('   عودة إلى الصفحة الرئيسية',
+                    style: TextStyle(color: Colors.grey, fontSize: 18)),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

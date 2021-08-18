@@ -9,7 +9,6 @@ import 'components/UsernameField.dart';
 
 class SignIn extends StatefulWidget {
   static const String id = '/SignIn';
-
   @override
   _SignInState createState() => _SignInState();
 }
@@ -39,6 +38,22 @@ class _SignInState extends State<SignIn> {
                     child: Image.asset(
                       'images/logo.jpg',
                       fit: BoxFit.fitHeight,
+                      frameBuilder: (BuildContext context, Widget child,
+                          int frame, bool wasSynchronouslyLoaded) {
+                        if (wasSynchronouslyLoaded) {
+                          return child;
+                        } else {
+                          return AnimatedSwitcher(
+                            duration: Duration(milliseconds: 200),
+                            child: frame != null
+                                ? child
+                                : Container(
+                                    height: MediaQuery.of(context).size.width *
+                                        0.53,
+                                  ),
+                          );
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -67,17 +82,20 @@ class _SignInState extends State<SignIn> {
                         var response = await Provider.of<AuthProvider>(context,
                                 listen: false)
                             .logIn(userc.text, passc.text);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                          response,
+                          textAlign: TextAlign.center,
+                        )));
                         if (Provider.of<AuthProvider>(context, listen: false)
                             .isAuthenticated) {
                           Navigator.of(context).pushNamed(HomePage.id);
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(response.body)));
-                          switch (response.body) {
-                            case 'worng username':
+                          switch (response) {
+                            case 'يجب عليك إنشاء حساب أولاً يا فهمان':
                               userc.clear();
                               break;
-                            case 'wrong password':
+                            case 'كلمة السر غير صحيحة ':
                               passc.clear();
                               break;
                             default:

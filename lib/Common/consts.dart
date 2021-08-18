@@ -1,4 +1,4 @@
-String editableUrl = '192.168.137.182';
+String editableUrl = '127.0.0.1';
 String baseUrl = 'http://' + editableUrl + ':8000/api/';
 String token = '2|JX7JM19r1UCUHtC3KXtMFXOXomWrIYbmKSMalq99';
 String imgUrl = 'http://' + editableUrl + ':8000/upload/image_company/';
