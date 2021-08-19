@@ -27,6 +27,7 @@ class DefaultBarHomePage extends StatelessWidget
           onPressed: () {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
+                duration: Duration(milliseconds: 700),
                 content: Text(
                   'يرجى تسجيل الدخول أولاً',
                   textAlign: TextAlign.center,

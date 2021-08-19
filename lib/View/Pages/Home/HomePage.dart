@@ -2,12 +2,8 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/Providers/ImagesProvider.dart';
-import 'package:pharma/View/Components/SearchField.dart';
+import 'package:pharma/View/Components/DefaultSearchField.dart';
 import 'package:pharma/View/Components/drawerGeneral.dart';
-import 'package:pharma/View/Pages/BasketResult/BasketResult.dart';
-import 'package:pharma/View/Pages/Contact-us/ContactUsPage.dart';
-import 'package:pharma/View/Pages/MostWantedProduct/MostWantedProducts.dart';
-import 'package:pharma/View/Pages/companies/Companies.dart';
 import 'package:pharma/controllers/BasketsController.dart';
 
 import 'components/DefaultAppBar.dart';
@@ -49,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               height: MediaQuery.of(context).size.height / 5,
               color: Theme.of(context).primaryColor,
             ),
-            SearchField(),
+            DefaultSearchField(),
             Column(
               children: <Widget>[
                 SizedBox(
@@ -109,13 +105,14 @@ class _HomePageState extends State<HomePage> {
                                         borderRadius: BorderRadius.circular(30),
                                         child: InkWell(
                                           onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    BasketResults(
-                                                  basketsModel: snapshot
-                                                      .data[index]["basket"],
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                duration:
+                                                    Duration(milliseconds: 700),
+                                                content: Text(
+                                                  'يرجى تسجيل الدخول أولاً',
+                                                  textAlign: TextAlign.center,
                                                 ),
                                               ),
                                             );
@@ -186,21 +183,45 @@ class _HomePageState extends State<HomePage> {
                 ),
                 HomePageButton(
                   function: () {
-                    Navigator.of(context).pushNamed(MostWanted.id);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(milliseconds: 700),
+                        content: Text(
+                          'يرجى تسجيل الدخول أولاً',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
                   },
                   icon: Icons.turned_in_not_outlined,
                   text: 'الأكثر مبيعاً',
                 ),
                 HomePageButton(
                   function: () {
-                    Navigator.of(context).pushNamed(Companies.id);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(milliseconds: 700),
+                        content: Text(
+                          'يرجى تسجيل الدخول أولاً',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
                   },
                   icon: Icons.work_outline_sharp,
                   text: 'الشركات',
                 ),
                 HomePageButton(
                   function: () {
-                    Navigator.of(context).pushNamed(ContactUsPage.id);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: Duration(milliseconds: 700),
+                        content: Text(
+                          'يرجى تسجيل الدخول أولاً',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
                   },
                   icon: Icons.info_outline,
                   text: 'تواصل معنا',

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:pharma/Providers/ImagesProvider.dart';
 import 'package:pharma/View/Components/SearchField.dart';
 import 'package:pharma/View/Components/barHomeBage.dart';
-import 'package:pharma/View/Components/drawerGeneral.dart';
 import 'package:pharma/View/Components/drawerGeneralAuth.dart';
 import 'package:pharma/View/Pages/BasketResult/BasketResult.dart';
 import 'package:pharma/View/Pages/Contact-us/ContactUsPage.dart';

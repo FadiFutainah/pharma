@@ -7,12 +7,13 @@ import 'Common/routes.dart';
 import 'Common/themes.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
 import 'Providers/CartProvider.dart';
-import 'View/Pages/Home/UserHomePage.dart';
+import 'View/Pages/Home/HomePage.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+// this edit now
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           // splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.white,
           pageTransitionType: PageTransitionType.fade,
-          nextScreen: UserHomePage(),
+          nextScreen: HomePage(),
         ),
 
         theme: primaryTheme,
