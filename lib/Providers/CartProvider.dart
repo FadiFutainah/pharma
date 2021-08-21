@@ -106,7 +106,7 @@ class Cart extends ChangeNotifier {
   void addItem(ProductModel model, int quentity) {
     int temp = 0;
 
-    if (model.hossa != null) {
+    if (model.hossa != null && model.hossa != 0) {
       temp = quentity ~/ model.hossa;
     }
 

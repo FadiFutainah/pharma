@@ -47,38 +47,59 @@ class _MostWantedState extends State<MostWanted> {
                           ),
                           child: Row(
                             children: [
-                              Center(
+                              Container(
+                                width: MediaQuery.of(context).size.width / 4,
+                                child: Center(
                                   child: Text(
-                                      snapshot.data[index].price.toString())),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  snapshot.data[index].addSale.toString() +
-                                      ' + ' +
-                                      snapshot.data[index].sale.toString(),
-                                  style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              35),
+                                    snapshot.data[index].price.toString(),
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                20),
+                                  ),
                                 ),
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width / 4,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 10),
+                                child: Center(
+                                  child: Text(
+                                    snapshot.data[index].addSale.toString() +
+                                        ' + ' +
+                                        snapshot.data[index].sale.toString(),
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                20),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width / 4,
+                                child: Center(
                                   child: Text(
                                     snapshot.data[index].name,
                                     textDirection: TextDirection.rtl,
                                     overflow: TextOverflow.clip,
                                     style: TextStyle(
                                       fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              35,
+                                          MediaQuery.of(context).size.width /
+                                              20,
                                     ),
                                   ),
                                 ),
                               ),
-                              Center(child: Text(index.toString()))
+                              Container(
+                                width: MediaQuery.of(context).size.width / 4,
+                                child: Center(
+                                  child: Text(
+                                    index.toString(),
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                20),
+                                  ),
+                                ),
+                              )
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),

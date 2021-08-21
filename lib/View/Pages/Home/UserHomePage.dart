@@ -133,7 +133,12 @@ class _UserHomePageState extends State<UserHomePage> {
                                             child: Text(
                                               snapshot.data[index]
                                                   ['sallatName'],
-                                              style: TextStyle(fontSize: 30),
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          15),
                                             ),
                                           ),
                                         ),

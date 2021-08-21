@@ -191,24 +191,26 @@ class _AdminHomePageState extends State<AdminHomePage> {
 ////////////////////////////////
 
                 HomePageButton(
-                    function: () {
-                      Navigator.of(context).pushNamed(MostWanted.id);
-                    },
-                    icon: Icons.turned_in_not_outlined,
-                    text: 'الأكثر مبيعاً'),
-
+                  function: () {
+                    Navigator.of(context).pushNamed(MostWanted.id);
+                  },
+                  icon: Icons.turned_in_not_outlined,
+                  text: 'الأكثر مبيعاً',
+                ),
                 HomePageButton(
-                    function: () {
-                      Navigator.of(context).pushNamed(Companies.id);
-                    },
-                    icon: Icons.work_outline_sharp,
-                    text: 'الشركات'),
+                  function: () {
+                    Navigator.of(context).pushNamed(Companies.id);
+                  },
+                  icon: Icons.work_outline_sharp,
+                  text: 'الشركات',
+                ),
                 HomePageButton(
-                    function: () {
-                      Navigator.of(context).pushNamed(SuggestionsPage.id);
-                    },
-                    icon: Icons.info_outline,
-                    text: 'الاقتراحات والشكاوي'),
+                  function: () {
+                    Navigator.of(context).pushNamed(SuggestionsPage.id);
+                  },
+                  icon: Icons.info_outline,
+                  text: 'الاقتراحات والشكاوي',
+                ),
               ],
             ),
           ],

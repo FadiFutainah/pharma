@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pharma/models/BasketModel.dart';
 import 'package:pharma/models/BillModel.dart';
+import 'package:pharma/models/BillProductModel.dart';
 import 'package:pharma/models/HossaProductModel.dart';
 import 'package:pharma/models/PivoitModal.dart';
 import 'package:pharma/models/ProductModel.dart';
-import 'package:pharma/models/BillProductModel.dart';
 
 class Services {
   static ProductModel convartFromHossaProductModelTProductModel(
@@ -70,8 +70,12 @@ class Services {
 
   static TableRow makeTableRow(ProductModel productModel, double quantity) {
     //////// need edit /////
+    int freeProduct = 0;
 
-    int freeProduct = quantity ~/ productModel.sale * productModel.addSale;
+    if (quantity >= productModel.sale) {
+      freeProduct = quantity ~/ productModel.sale * productModel.addSale;
+    }
+
     double safi = (quantity % productModel.sale == 0)
         ? productModel.price.toDouble()
         : ((productModel.sale * productModel.price) /

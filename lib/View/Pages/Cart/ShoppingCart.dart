@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:pharma/Providers/CartProvider.dart';
 import 'package:pharma/Services/Services.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/BillController.dart';
-import 'package:flutter/material.dart';
-import 'package:pharma/Providers/CartProvider.dart';
 import 'package:provider/provider.dart';
 
 class ShoppingCart extends StatefulWidget {
