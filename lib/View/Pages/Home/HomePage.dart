@@ -106,6 +106,9 @@ class _HomePageState extends State<HomePage> {
                                         child: InkWell(
                                           onTap: () {
                                             ScaffoldMessenger.of(context)
+                                                .removeCurrentSnackBar();
+
+                                            ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               SnackBar(
                                                 duration:
@@ -117,12 +120,10 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             );
                                           },
-                                          child: Center(
-                                            child: Text(
-                                              snapshot.data[index]
-                                                  ['sallatName'],
-                                              style: TextStyle(fontSize: 30),
-                                            ),
+                                          child: Text(
+                                            snapshot.data[index]['sallatName'],
+                                            style: TextStyle(fontSize: 30),
+                                            textAlign: TextAlign.center,
                                           ),
                                         ),
                                       );

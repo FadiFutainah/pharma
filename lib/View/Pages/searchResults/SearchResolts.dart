@@ -48,139 +48,147 @@ class _SearchResoltsState extends State<SearchResolts> {
               return Center(child: Text('لا يوجد نتائج بحث'));
             } else {
               return Container(
+                decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Colors.grey)),
+                ),
                 height: MediaQuery.of(context).size.height * 0.1,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(color: Colors.grey)),
-                  ),
-                  child: Row(
-                    children: [
-                      Row(
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.15,
-                                    child: Center(
-                                      child: Text(
-                                        snapshot.data.price.toString(),
-                                        style: TextStyle(fontSize: 18),
-                                      ),
-                                    )),
-                              ),
-                              IconButton(
-                                icon: Icon(
-                                  Icons.shopping_cart_outlined,
-                                ),
-                                onPressed: () {
-                                  if (snapshot.data.maxHossaModify == 0) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'لا يمكنك الإضافة .. ليس لديك حصة من هذا المنتج',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        duration: Duration(seconds: 4),
-                                      ),
-                                    );
-                                    return;
-                                  }
-
-                                  if (_controller == 0) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'يرجى وضع الكمية المطلوبة',
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        duration: Duration(seconds: 4),
-                                      ),
-                                    );
-                                    return;
-                                  }
-
-                                  Provider.of<Cart>(context, listen: false)
-                                      .addItem(snapshot.data, _controller);
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'تم إضافة المنتج إلى الفاتورة',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      duration: Duration(seconds: 2),
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.shopping_cart_outlined,
+                            ),
+                            onPressed: () {
+                              if (snapshot.data.maxHossaModify == 0) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'لا يمكنك الإضافة .. ليس لديك حصة من هذا المنتج',
+                                      textAlign: TextAlign.center,
                                     ),
-                                  );
-                                  print('object done');
-                                },
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  snapshot.data.addSale.toString() +
-                                      ' + ' +
-                                      snapshot.data.sale.toString(),
-                                  style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height /
-                                              35),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 5,
-                                    height:
-                                        MediaQuery.of(context).size.height / 7,
-                                    child: Card(
-                                      color: Theme.of(context).primaryColor,
-                                      child: Center(
-                                        child: NumberPicker(
-                                          textStyle:
-                                              TextStyle(color: Colors.white),
-                                          value: _controller,
-                                          minValue: 0,
-                                          selectedTextStyle: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  22,
-                                              color: Colors.white),
-                                          maxValue: maxVal,
-                                          itemCount: 1,
-                                          zeroPad: false,
-                                          onChanged: (value) => setState(
-                                              () => _controller = value),
-                                        ),
-                                      ),
-                                    ),
+                                    duration: Duration(seconds: 4),
                                   ),
+                                );
+                                return;
+                              }
+
+                              if (_controller == 0) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'يرجى وضع الكمية المطلوبة',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    duration: Duration(seconds: 4),
+                                  ),
+                                );
+                                return;
+                              }
+
+                              Provider.of<Cart>(context, listen: false)
+                                  .addItem(snapshot.data, _controller);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'تم إضافة المنتج إلى الفاتورة',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  duration: Duration(seconds: 2),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width / 4,
-                        child: Text(
-                          snapshot.data.name,
-                          textDirection: TextDirection.rtl,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height / 35,
+                              );
+                            },
                           ),
                         ),
-                      ),
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 5,
+                            height: MediaQuery.of(context).size.height / 7,
+                            child: Card(
+                              color: Theme.of(context).primaryColor,
+                              child: Center(
+                                child: NumberPicker(
+                                  textStyle: TextStyle(color: Colors.white),
+                                  value: _controller,
+                                  minValue: 0,
+                                  selectedTextStyle: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height /
+                                              34,
+                                      color: Colors.white),
+                                  maxValue: maxVal,
+                                  itemCount: 1,
+                                  zeroPad: false,
+                                  onChanged: (value) =>
+                                      setState(() => _controller = value),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 8,
+                            child: Text(
+                              snapshot.data.price.toString(),
+                              textDirection: TextDirection.rtl,
+                              overflow: TextOverflow.clip,
+                              style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 42,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 7,
+                            child: Text(
+                              snapshot.data.addSale.toString() +
+                                  ' + ' +
+                                  snapshot.data.sale.toString(),
+                              style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.height / 42,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.20,
+                                  child: Center(
+                                    child: Text(
+                                      snapshot.data.name.toString(),
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              38),
+                                    ),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    ),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               );
             }

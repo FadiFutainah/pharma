@@ -339,6 +339,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               ],
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.transparent,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       ListView.builder(
@@ -354,13 +364,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               padding:
                                   const EdgeInsets.only(right: 10, left: 10),
                               child: GestureDetector(
-                                onTap: () {
-                                  Provider.of<Cart>(context, listen: false)
-                                      .deleteItem(Provider.of<Cart>(context,
-                                              listen: false)
-                                          .product[index]);
-                                },
-                                child: Icon(Icons.close),
+                                onTap: () {},
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.transparent,
+                                ),
                               ),
                             ),
                             Container(
@@ -385,6 +393,19 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 children: [
                                   products[index],
                                 ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 10, left: 10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Provider.of<Cart>(context, listen: false)
+                                      .deleteItem(Provider.of<Cart>(context,
+                                              listen: false)
+                                          .product[index]);
+                                },
+                                child: Icon(Icons.close),
                               ),
                             ),
                           ],
@@ -429,6 +450,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 children: [
                                   hossa[index],
                                 ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 10, left: 10),
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.transparent,
+                                ),
                               ),
                             ),
                           ],
@@ -490,6 +522,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   ],
                                 ),
                               ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10, left: 10),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.transparent,
+                              ),
                             ),
                           ),
                         ],

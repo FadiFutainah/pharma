@@ -73,9 +73,10 @@ class Services {
 
     int freeProduct = quantity ~/ productModel.sale * productModel.addSale;
     double safi = (quantity % productModel.sale == 0)
-        ? productModel.price
+        ? productModel.price.toDouble()
         : ((productModel.sale * productModel.price) /
-            (productModel.sale + productModel.addSale));
+                (productModel.sale + productModel.addSale))
+            .toDouble();
     double total = quantity % productModel.sale * safi +
         (quantity - (quantity % productModel.sale)) * productModel.price;
 
@@ -95,7 +96,7 @@ class Services {
           textAlign: TextAlign.center, /*style: TextStyle(fontSize: 25)*/
         ),
         Text(
-          quantity.toString(),
+          quantity.toInt().toString(),
           textAlign: TextAlign.center, /*style: TextStyle(fontSize: 25)*/
         ),
         Text(
@@ -110,9 +111,10 @@ class Services {
       ProductModel productModel, double quantity) {
     int freeProduct = quantity ~/ productModel.sale * productModel.addSale;
     double safi = (quantity % productModel.sale == 0)
-        ? productModel.price
+        ? productModel.price.toDouble()
         : ((productModel.sale * productModel.price) /
-            (productModel.sale + productModel.addSale));
+                (productModel.sale + productModel.addSale))
+            .toDouble();
     double total = quantity % productModel.sale * safi +
         (quantity - (quantity % productModel.sale)) * productModel.price;
 

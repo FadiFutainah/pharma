@@ -43,7 +43,6 @@ class _UserHomePageState extends State<UserHomePage> {
   @override
   Widget build(BuildContext context) {
     widget.provider.loadLogo(context);
-    widget.provider.loadLogo(context);
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 245, 245, 245),
