@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pharma/View/Pages/About-us/AboutUs.dart';
 import 'package:pharma/View/Pages/Admin/AddBasketPage.dart';
 import 'package:pharma/View/Pages/Admin/AddCompanyPage.dart';
+import 'package:pharma/View/Pages/Admin/AddNewAdminPage.dart';
 import 'package:pharma/View/Pages/Admin/AddProductPage.dart';
 import 'package:pharma/View/Pages/Admin/AddUserPage.dart';
 import 'package:pharma/View/Pages/Admin/SignedUsersPage.dart';
@@ -19,7 +20,7 @@ import 'package:pharma/View/Pages/Scheduale/AdminSchedualPage.dart';
 import 'package:pharma/View/Pages/Scheduale/SchedualPage.dart';
 import 'package:pharma/View/Pages/WelcomePage.dart';
 import 'package:pharma/View/Pages/companies/Companies.dart';
-import 'package:pharma/View/Pages/searchResults/SearchResolts.dart';
+import 'package:pharma/View/Pages/searchResults/SearchResults.dart';
 import 'package:pharma/View/Pages/signIn/SignIn.dart';
 import 'package:pharma/View/Pages/signUp/SignUp.dart';
 
@@ -34,7 +35,7 @@ final Map<String, WidgetBuilder> routes = {
   MyInfo.id: (context) => MyInfo(),
   Bills.id: (context) => Bills(),
   ShoppingCart.id: (context) => ShoppingCart(),
-  SearchResolts.id: (context) => SearchResolts(),
+  SearchResults.id: (context) => SearchResults(),
   MostWanted.id: (context) => MostWanted(),
   BasketResults.id: (context) => BasketResults(),
   AddBasketPage.id: (context) => AddBasketPage(),
@@ -47,4 +48,5 @@ final Map<String, WidgetBuilder> routes = {
   AdminSchedualPage.id: (context) => AdminSchedualPage(),
   SignedUsersPage.id: (context) => SignedUsersPage(),
   AboutUsPage.id: (context) => AboutUsPage(),
+  AddNewAdminPage.id: (context) => AddNewAdminPage(),
 };

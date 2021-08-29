@@ -46,6 +46,7 @@ dependencies:
   page_transition: ^2.0.1-nullsafety.0
   shared_preferences: ^2.0.6
   image_picker: ^0.8.2
+  sizer: ^2.0.13
 
 
 

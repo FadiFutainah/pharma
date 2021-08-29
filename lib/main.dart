@@ -7,7 +7,9 @@ import 'Common/routes.dart';
 import 'Common/themes.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
 import 'Providers/CartProvider.dart';
-import 'View/Pages/Home/UserHomePage.dart';
+import 'View/Pages/Admin/AddNewAdminPage.dart';
+import 'View/Pages/Admin/SignedUsersPage.dart';
+import 'View/Pages/Home/AdminHomePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,12 +33,12 @@ class MyApp extends StatelessWidget {
           // splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.white,
           pageTransitionType: PageTransitionType.fade,
-          nextScreen: UserHomePage(),
+          nextScreen: SignedUsersPage(),
         ),
         theme: primaryTheme,
         debugShowCheckedModeBanner: debugDisableShadows,
         routes: routes,
-        showPerformanceOverlay: true,
+        // showPerformanceOverlay: true,
         // showSemanticsDebugger: true,
       ),
     );

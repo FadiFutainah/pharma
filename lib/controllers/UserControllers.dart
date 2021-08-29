@@ -36,7 +36,7 @@ class UserController {
   Future<List<UserModel>> getSignedUsers() async {
     try {
       var response = await http.get(
-        Uri.parse(baseUrl + 'showusersbysignups'),
+        Uri.parse(baseUrl + 'showusers'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',

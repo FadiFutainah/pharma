@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:pharma/Providers/CartProvider.dart';
-import 'package:pharma/View/Components/barGanaral.dart';
+import 'package:pharma/View/Components/GeneralAppBar.dart';
 import 'package:pharma/controllers/ProductController.dart';
 import 'package:pharma/models/ProductModel.dart';
 import 'package:provider/provider.dart';
 
-class SearchResolts extends StatefulWidget {
+class SearchResults extends StatefulWidget {
   final String productName;
   final String companyName;
-  const SearchResolts({Key key, this.productName, this.companyName})
+  const SearchResults({Key key, this.productName, this.companyName})
       : super(key: key);
-  static const String id = 'searchResolts';
+  static const String id = 'SearchResults';
 
   @override
-  _SearchResoltsState createState() => _SearchResoltsState();
+  _SearchResultsState createState() => _SearchResultsState();
 }
 
-class _SearchResoltsState extends State<SearchResolts> {
+class _SearchResultsState extends State<SearchResults> {
   int counter = 0;
 
   int _controller = 0;
@@ -37,7 +37,7 @@ class _SearchResoltsState extends State<SearchResolts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BarGeneral(
+      appBar: GeneralAppBar(
         title: 'نتائج البحث',
       ),
       body: FutureBuilder<ProductModel>(

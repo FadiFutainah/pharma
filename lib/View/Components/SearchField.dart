@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts_arabic/fonts.dart';
-import 'package:pharma/View/Pages/searchResults/SearchResolts.dart';
+import 'package:pharma/View/Pages/searchResults/SearchResults.dart';
 import 'package:pharma/controllers/ProductController.dart';
 import 'package:textfield_search/textfield_search.dart';
 
@@ -56,7 +56,7 @@ class _SearchFiledState extends State<SearchField> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SearchResolts(
+                            builder: (context) => SearchResults(
                               productName: textEditingController.text,
                             ),
                           ));

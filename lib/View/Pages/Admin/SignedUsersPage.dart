@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharma/View/Components/MyButton.dart';
-import 'package:pharma/View/Components/barGanaral.dart';
+import 'package:pharma/View/Components/GeneralAppBar.dart';
+import 'package:pharma/View/Components/MyTextField.dart';
 import 'package:pharma/controllers/UserControllers.dart';
 import 'package:pharma/models/UserModel.dart';
 
@@ -26,7 +27,7 @@ class _SignedUsersPageState extends State<SignedUsersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BarGeneral(title: 'المستخدمين'),
+      appBar: GeneralAppBar(title: ' المستخدمين الفعالين'),
       body: FutureBuilder(
         future: futureUsers,
         builder: (context, snapshot) {
@@ -46,89 +47,111 @@ class _SignedUsersPageState extends State<SignedUsersPage> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(8),
-                    child: ListTile(
-                      title: Text(snapshot.data[index].name),
-                      subtitle: Text(snapshot.data[index].pharmacyName),
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          widget.userController
-                              .deleteSignedUp(snapshot.data[index].id);
-                        },
-                      ),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => Dialog(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              height: MediaQuery.of(context).size.height * 0.4,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'معلومات المستخدم',
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.08,
-                                  ),
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.2,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.7,
-                                    child: Directionality(
-                                      textDirection: TextDirection.rtl,
-                                      child: GridView(
-                                        gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                mainAxisExtent: 35),
-                                        children: [
-                                          Text('رقم الهاتف'),
-                                          Text(snapshot.data[index].phone
-                                              .toString()),
-                                          Text('رقم الجوال'),
-                                          Text(snapshot.data[index].mobilePhone
-                                              .toString()),
-                                          Text('العنوان'),
-                                          Text(snapshot.data[index].address
-                                              .toString()),
-                                        ],
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text(snapshot.data[index].name),
+                          subtitle: Text(snapshot.data[index].pharmacyName),
+                          // trailing: IconButton(
+                          //   icon: Icon(Icons.delete),
+                          //   onPressed: () {
+                          //     widget.userController
+                          //         .deleteSignedUp(snapshot.data[index].id);
+                          //   },
+                          // ),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => Dialog(
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.4,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'معلومات المستخدم',
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  MyButton(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    text: 'الموافقة',
-                                    onPressed: () async {
-                                      String response = await widget
-                                          .userController
-                                          .approveUser(snapshot.data[index].id);
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            response,
-                                            textAlign: TextAlign.center,
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.08,
+                                      ),
+                                      Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.2,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.7,
+                                        child: Directionality(
+                                          textDirection: TextDirection.rtl,
+                                          child: GridView(
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 2,
+                                                    mainAxisExtent: 35),
+                                            children: [
+                                              Text('رقم الهاتف'),
+                                              // Text(snapshot.data[index].phone
+                                              //     .toString()),
+                                              Text('1231231'),
+                                              Text('رقم الجوال'),
+                                              // Text(snapshot
+                                              //     .data[index].mobilePhone
+                                              //     .toString()),
+                                              Text('91231232'),
+                                              Text('العنوان'),
+                                              Text(snapshot.data[index].address
+                                                  .toString()),
+                                              Text('كلمة السر'),
+                                              Text('123456789'),
+                                            ],
                                           ),
                                         ),
-                                      );
-                                      Get.back();
-                                      Get.off(SignedUsersPage());
-                                    },
+                                      ),
+                                      // MyButton(
+                                      //   width:
+                                      //       MediaQuery.of(context).size.width *
+                                      //           0.4,
+                                      //   text: 'الموافقة',
+                                      //   onPressed: () async {
+                                      //     String response = await widget
+                                      //         .userController
+                                      //         .approveUser(
+                                      //             snapshot.data[index].id);
+                                      //     ScaffoldMessenger.of(context)
+                                      //         .showSnackBar(
+                                      //       SnackBar(
+                                      //         content: Text(
+                                      //           response,
+                                      //           textAlign: TextAlign.center,
+                                      //         ),
+                                      //       ),
+                                      //     );
+                                      //     Get.back();
+                                      //     Get.off(SignedUsersPage());
+                                      //   },
+                                      // ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                        );
-                      },
+                            );
+                          },
+                        ),
+                        // MyTextField(
+                        //   controller: TextEditingController(),
+                        //   labelText: 'ادخل اسم المستخدم من فضلك',
+                        //   validator: (s) => null,
+                        //   type: TextInputType.name,
+                        // ),
+                      ],
                     ),
                   ),
                 );

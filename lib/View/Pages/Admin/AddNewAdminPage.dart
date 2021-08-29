@@ -8,22 +8,17 @@ import 'package:pharma/View/Pages/WelcomePage.dart';
 import 'package:pharma/models/UserModel.dart';
 import 'package:provider/provider.dart';
 
-class SignUp extends StatefulWidget {
-  static const String id = 'SignUp';
-
-  const SignUp({Key key}) : super(key: key);
+class AddNewAdminPage extends StatefulWidget {
+  static const String id = 'AddNewAdminPage';
 
   @override
-  _SignUpState createState() => _SignUpState();
+  _AddNewAdminPageState createState() => _AddNewAdminPageState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _AddNewAdminPageState extends State<AddNewAdminPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController pharNamec = TextEditingController();
   final TextEditingController namec = TextEditingController();
-  final TextEditingController addressc = TextEditingController();
-  final TextEditingController mobNumc = TextEditingController();
-  final TextEditingController numc = TextEditingController();
+
   final TextEditingController passc = TextEditingController();
   final TextEditingController confirmPassc = TextEditingController();
 
@@ -31,7 +26,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: GeneralAppBar(title: 'تسجيل الدخول', hasShoppingCart: false),
+      appBar: GeneralAppBar(title: 'إضافة مدير', hasShoppingCart: false),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -42,51 +37,11 @@ class _SignUpState extends State<SignUp> {
                   height: MediaQuery.of(context).size.height / 40,
                 ),
                 MyTextField(
-                  controller: pharNamec,
-                  labelText: 'اسم الصيدلية',
-                  type: TextInputType.text,
-                  validator: (String value) {
-                    if (value.length < 4) return 'اسم الصيدلية قصير للغاية';
-                    return null;
-                  },
-                ),
-                MyTextField(
                   controller: namec,
                   labelText: 'الاسم الكامل',
                   type: TextInputType.text,
                   validator: (String value) {
                     if (value.length < 4) return 'اسم المستخدم قصير للغاية';
-                    return null;
-                  },
-                ),
-                MyTextField(
-                  controller: addressc,
-                  labelText: 'العنوان بالتفصيل',
-                  type: TextInputType.text,
-                  validator: (String value) {
-                    if (value.isEmpty) return 'ادخل العنوان من فضلك';
-                    return null;
-                  },
-                ),
-                MyTextField(
-                  controller: mobNumc,
-                  labelText: 'رقم الموبايل',
-                  type: TextInputType.number,
-                  validator: (String value) {
-                    if (value.isEmpty) return 'ادخل رقم الجوال من فضلك';
-                    if (num.tryParse(value) == null)
-                      return 'ادخل رقماً من فضلك';
-                    return null;
-                  },
-                ),
-                MyTextField(
-                  controller: numc,
-                  labelText: 'رقم الصيدلية',
-                  type: TextInputType.number,
-                  validator: (String value) {
-                    if (value.isEmpty) return 'ادخل رقم الصيدلية من فضلك';
-                    if (num.tryParse(value) == null)
-                      return 'ادخل رقماً من فضلك';
                     return null;
                   },
                 ),
@@ -120,33 +75,29 @@ class _SignUpState extends State<SignUp> {
                         confirmPassc.clear();
                       }
                       if (_formKey.currentState.validate()) {
-                        var response = await Provider.of<AuthProvider>(context,
-                                listen: false)
-                            .signup(
-                          UserModel(
-                            pharmacyName: pharNamec.text,
-                            name: namec.text,
-                            address: addressc.text,
-                            phone: numc.text,
-                            mobilePhone: mobNumc.text,
-                            password: passc.text,
-                          ),
-                        );
+                        // var response = await Provider.of<AuthProvider>(context,
+                        //         listen: false)
+                        //     .signup(
+                        //   UserModel(
+
+                        //     password: passc.text,
+                        //   ),
+                        // );
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              response,
+                              'response',
                               textAlign: TextAlign.center,
                             ),
                           ),
                         );
-                        if (response == 'تم التسجيل بنجاح') {
+                        if ('response' == 'تم التسجيل بنجاح') {
                           Get.to(WelcomePage());
                         }
                       }
                     },
                     child: Text(
-                      'تسجيل',
+                      'إضافة',
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     style: ButtonStyle(

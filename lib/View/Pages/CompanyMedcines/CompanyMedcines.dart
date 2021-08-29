@@ -1,7 +1,7 @@
 import 'package:numberpicker/numberpicker.dart';
 import 'package:flutter/material.dart';
 import 'package:pharma/Providers/CartProvider.dart';
-import 'package:pharma/View/Components/barGanaral.dart';
+import 'package:pharma/View/Components/GeneralAppBar.dart';
 import 'package:pharma/controllers/ProductController.dart';
 import 'package:pharma/models/ProductModel.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +9,7 @@ import 'package:provider/provider.dart';
 class CompanyMedcines extends StatefulWidget {
   final companyId;
   final String companyName;
-  const CompanyMedcines({Key key, this.companyName, this.companyId})
-      : super(key: key);
+   CompanyMedcines({ this.companyName, this.companyId});
   static const String id = 'companyMedcines';
 
   @override
@@ -29,15 +28,13 @@ class _CompanyMedcinesState extends State<CompanyMedcines> {
   @override
   void initState() {
     super.initState();
-
-    /////// user Id //////
     futureProducts = productController.getByCompanyId(widget.companyId, 1);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BarGeneral(
+      appBar: GeneralAppBar(
         title: widget.companyName,
       ),
       body: FutureBuilder<List<ProductModel>>(

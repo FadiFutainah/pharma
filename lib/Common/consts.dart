@@ -1,12 +1,11 @@
-String editableUrl = '192.168.1.4';
+String editableUrl = '192.168.1.5';
 String baseUrl = 'http://' + editableUrl + ':8000/api/';
-String token = '2|JX7JM19r1UCUHtC3KXtMFXOXomWrIYbmKSMalq99';
+String token = '20|E2PDKOVcNciDn8MLkcnVd3Pc5VzEY5XOCN83kqBG';
 String imgUrl = 'http://' + editableUrl + ':8000/upload/image_company/';
 String schedUrl =
     'http://' + editableUrl + ':8000/upload/scheduale/scheduale.jpg';
-// 2|JX7JM19r1UCUHtC3KXtMFXOXomWrIYbmKSMalq99
-// 3|rMx8kNHpgFRHuZv8UXLuHg636pIljgib8ht4lW93
-// 15|WRDxa832LltCNkTzpCynwxUBbTQjOEgKJmgyhuzu
+// 23|J5Z5iLGFWZTXqZrc5ka5WsRV1wVdXxVaIsfeHLH8
+// 20|E2PDKOVcNciDn8MLkcnVd3Pc5VzEY5XOCN83kqBG
 
 int addFree(int quantity, int sale, int addsale) =>
     (quantity ~/ sale * addsale);

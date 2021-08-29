@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/View/Pages/signUp/SignUp.dart';
@@ -138,7 +139,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamed(SignUp.id);
+                    Get.to(SignUp());
                   },
                 ),
               ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:pharma/View/Components/barGanaral.dart';
+import 'package:pharma/View/Components/GeneralAppBar.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -10,7 +10,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BarGeneral(title: 'أهلاً وسهلاً', hasShoppingCart: false),
+      appBar: GeneralAppBar(title: 'أهلاً وسهلاً', hasShoppingCart: false),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

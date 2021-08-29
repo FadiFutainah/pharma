@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharma/Common/consts.dart';
-import 'package:pharma/View/Components/barGanaral.dart';
+import 'package:pharma/View/Components/GeneralAppBar.dart';
 import 'package:pharma/View/Pages/CompanyMedcines/CompanyMedcines.dart';
 import 'package:pharma/controllers/CompanyController.dart';
 import 'package:pharma/models/CompanyModel.dart';
@@ -26,7 +26,7 @@ class _CompaniesState extends State<Companies> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BarGeneral(
+      appBar: GeneralAppBar(
         title: 'الشركات',
       ),
       body: FutureBuilder(
@@ -38,43 +38,35 @@ class _CompaniesState extends State<Companies> {
             } else {
               return GridView.builder(
                 itemCount: snapshot.data.length,
-                itemBuilder: (buildContext, int index) => Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CompanyMedcines(
-                                companyId: snapshot.data[index].id,
-                                companyName: snapshot.data[index].name,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Center(
-                          child: Container(
-                            // decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(60)),
-                            child: Image.network(
-                              imgUrl + snapshot.data[index].image,
-                              fit: BoxFit.fill,
-                              errorBuilder: (BuildContext context,
-                                  Object exception, StackTrace stackTrace) {
-                                return Icon(
-                                  Icons.broken_image_outlined,
-                                  color: Colors.grey,
-                                  size: 150,
-                                );
-                              },
-                            ),
+                itemBuilder: (buildContext, int index) => Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CompanyMedcines(
+                            companyId: snapshot.data[index].id,
+                            companyName: snapshot.data[index].name,
                           ),
                         ),
+                      );
+                    },
+                    child: Center(
+                      child: Image.network(
+                        imgUrl + snapshot.data[index].image,
+                        fit: BoxFit.cover,
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace stackTrace) {
+                          return Icon(
+                            Icons.broken_image_outlined,
+                            color: Colors.grey,
+                            size: 150,
+                          );
+                        },
                       ),
                     ),
-                  ],
+                  ),
                 ),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,

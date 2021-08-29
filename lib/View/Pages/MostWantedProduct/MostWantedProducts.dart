@@ -1,6 +1,6 @@
 import 'package:pharma/Controllers/ProductController.dart';
 import 'package:flutter/material.dart';
-import 'package:pharma/View/Components/barGanaral.dart';
+import 'package:pharma/View/Components/GeneralAppBar.dart';
 import 'package:pharma/models/ProductModel.dart';
 
 class MostWanted extends StatefulWidget {
@@ -25,7 +25,7 @@ class _MostWantedState extends State<MostWanted> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: BarGeneral(
+        appBar: GeneralAppBar(
           title: 'الأكثر طلباً',
         ),
         body: FutureBuilder<List<ProductModel>>(
