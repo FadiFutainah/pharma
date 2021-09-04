@@ -1,35 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/View/Components/GeneralAppBar.dart';
 import 'package:pharma/View/Components/drawerGeneral.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class MyInfo extends StatelessWidget {
-  static const String id = 'MyInfo';
+class MyInfo extends StatefulWidget {
+  @override
+  _MyInfoState createState() => _MyInfoState();
+}
+
+class _MyInfoState extends State<MyInfo> {
+  Future<Map<String, String>> getCredentials() async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    return {
+      'username': storage.getString('username') ?? '',
+      'pharmacyName': storage.getString('pharmacyName') ?? 'زياد فارما'
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffffb52d),
       drawer: DrawerGeneral(),
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        backgroundColor: Color(0xffffb52d),
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.edit,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-        ],
-        title: Text(
-          'My Info',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: MediaQuery.of(context).size.height / 25),
-        ),
-        centerTitle: true,
+      appBar: GeneralAppBar(
+        hasShoppingCart: false,
+        title: 'معلوماتي',
       ),
       body: SafeArea(
         child: Padding(
@@ -51,7 +46,7 @@ class MyInfo extends StatelessWidget {
                       padding: EdgeInsets.all(
                           MediaQuery.of(context).size.height / 35),
                       child: Text(
-                        'Ahmad',
+                        '',
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height / 35,
                           //color: Colors.white

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/Common/consts.dart';
+import 'package:pharma/View/Components/GeneralAppBar.dart';
 import 'package:pharma/controllers/NotesController.dart';
 import 'package:pharma/models/NoteModel.dart';
-
-//needs edit
 
 class SuggestionsPage extends StatefulWidget {
   static const String id = 'SuggestionsPage';
@@ -18,32 +18,16 @@ class _SuggestionsPageState extends State<SuggestionsPage> {
 
   @override
   void initState() {
-    notes = notesController.showNotes();
     super.initState();
+    notes = notesController.showNotes();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xffffb52d),
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-        ),
-        title: Text(
-          'الاقتراحات والشكاوي',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
+      appBar: GeneralAppBar(
+        hasShoppingCart: false,
+        title: 'الاقتراحات والشكاوي',
       ),
       body: FutureBuilder(
         future: notes,
@@ -75,15 +59,7 @@ class _SuggestionsPageState extends State<SuggestionsPage> {
                         onPressed: () async {
                           var response = await notesController
                               .deleteNote(snapshot.data[index].id);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                response,
-                                textAlign: TextAlign.center,
-                              ),
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
+                          showSnackBar(response, context);
                           Navigator.of(context)
                               .pushReplacementNamed(SuggestionsPage.id);
                         },
@@ -96,7 +72,12 @@ class _SuggestionsPageState extends State<SuggestionsPage> {
           } else if (snapshot.hasError) {
             return Center(child: Text('لا يوجد اتصال بالانترنت'));
           }
-          return Center(child: CircularProgressIndicator());
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Color(0xffffb52d),
+              strokeWidth: 5,
+            ),
+          );
         },
       ),
     );

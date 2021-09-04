@@ -10,22 +10,27 @@ class BillTable extends StatelessWidget {
     List<TableRow> list = [];
 
     for (int i = 0; i < billModel.products.length; i++) {
-      list.add(TableRow(
-        children: [
-          Text(
-            billModel.products[i].pivotModel.total.toString(),
-            textAlign: TextAlign.center,
-          ),
-          Text(billModel.products[i].price.toString(),
-              textAlign: TextAlign.center),
+      list.add(
+        TableRow(
+          children: [
+            Text(
+              billModel.products[i].pivotModel.total.toString(),
+              textAlign: TextAlign.center,
+            ),
+            Text(billModel.products[i].price.toString(),
+                textAlign: TextAlign.center),
 
-          ///Text(billModel.products[i]..toString(), textAlign: TextAlign.center),
-          Text((billModel.products[i].quantity).toString(),
-              textAlign: TextAlign.center),
-          Text(billModel.products[i].name.toString(),
-              textAlign: TextAlign.center),
-        ],
-      ));
+            ///Text(billModel.products[i]..toString(), textAlign: TextAlign.center),
+            Text(
+                (billModel
+                        .products[i].pivotModel.quentityToBoughtBySpeceficUser)
+                    .toString(),
+                textAlign: TextAlign.center),
+            Text(billModel.products[i].name.toString(),
+                textAlign: TextAlign.center),
+          ],
+        ),
+      );
     }
 
     return Column(

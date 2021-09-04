@@ -7,6 +7,7 @@ class SallatProducts {
   int price = 0;
   String createdAt = '';
   int sale;
+  int addSale;
   SallatProducts(
       {this.id,
       this.sale,
@@ -15,7 +16,8 @@ class SallatProducts {
       this.price,
       this.sallatId,
       this.quentity,
-      this.createdAt});
+      this.createdAt,
+      this.addSale});
 
   SallatProducts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -25,6 +27,7 @@ class SallatProducts {
     sallatId = json['sallat_id'];
     quentity = json['quantity'];
     createdAt = json['created_at'];
+    addSale = json['add_sale'];
   }
 
   Map<String, dynamic> addBasketToJson() => {
@@ -33,5 +36,6 @@ class SallatProducts {
         'price': price,
         'sale': sale,
         'total': total,
+        'add_sale': addSale,
       };
 }

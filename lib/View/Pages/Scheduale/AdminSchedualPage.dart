@@ -1,15 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pharma/Common/consts.dart';
 import 'package:pharma/View/Pages/Home/AdminHomePage.dart';
 import 'package:pharma/controllers/SceduleController.dart';
 
-class AdminSchedualPage extends StatelessWidget {
+class AdminSchedualPage extends StatefulWidget {
   static const String id = 'Adminschedual';
+
+  @override
+  _AdminSchedualPageState createState() => _AdminSchedualPageState();
+}
+
+class _AdminSchedualPageState extends State<AdminSchedualPage> {
   final SchedualController schedualController = SchedualController();
+  File file;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: Text('تعديل الجدول', style: TextStyle(color: Colors.white)),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Center(
@@ -29,35 +41,33 @@ class AdminSchedualPage extends StatelessWidget {
           fit: BoxFit.fill,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          // needs edit
-          String res = await schedualController
-              .uploadScedual('F:\\Desktop\\photos\\screenat\\schedual.jpg');
+          ImagePicker imagePicker = ImagePicker();
+          XFile image =
+              await imagePicker.pickImage(source: ImageSource.gallery);
+          setState(() {
+            file = File(image.path);
+          });
+          File newName = await changeFileNameOnly(file, 'scheduale.jpg');
+          String res = await schedualController.uploadScedual(newName.path);
           if (res == 'uploaded') {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'تم رفع الصورة بنجاح',
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            );
-            Navigator.of(context).pushNamed(AdminHomePage.id);
+            showSnackBar('تم رفع الصورة بنجاح', context);
+            Navigator.of(context).popAndPushNamed(AdminHomePage.id);
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  res,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            );
+            showSnackBar(res, context);
           }
         },
-        child: Icon(Icons.add, color: Colors.white),
+        label: Text('تعديل الصورة', style: TextStyle(color: Colors.white)),
         backgroundColor: Color(0xffffb52d),
       ),
     );
   }
+}
+
+Future<File> changeFileNameOnly(File file, String newFileName) {
+  var path = file.path;
+  var lastSeparator = path.lastIndexOf(Platform.pathSeparator);
+  var newPath = path.substring(0, lastSeparator + 1) + newFileName;
+  return file.rename(newPath);
 }

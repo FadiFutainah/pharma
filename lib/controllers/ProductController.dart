@@ -36,8 +36,8 @@ class ProductController {
     }
   }
 
-  Future<List<ProductModel>> getByCompanyId(int id, int userId) async {
-    var url = baseUrl + 'showproductsbycompany/$id/$userId';
+  Future<List<ProductModel>> getByCompanyId(int id) async {
+    var url = baseUrl + 'showproductsbycompany/$id';
     Uri uri = Uri.parse(url);
     try {
       final response = await http.get(
@@ -89,34 +89,28 @@ class ProductController {
     }
   }
 
-  Future<List> getProductsName() async {
-    var url = baseUrl + 'showproducts';
-    Uri uri = Uri.parse(url);
+  Future<List<String>> getProductsName() async {
     try {
-      final response = await http.get(
-        uri,
+      String url = baseUrl + 'getallnames';
+      var response = await http.get(
+        Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
       );
       if (response.statusCode == 200) {
-        var json = convert.jsonDecode(response.body);
-        List products = json;
-        List<String> string = [];
-        List<ProductModel> s;
-        s = products
-            .map((user) => new ProductModel.fromJsonWithstringHossa(user))
-            .toList();
-        for (int i = 0; i < s.length; i++) {
-          string.add(s[i].name);
+        List res = convert.jsonDecode(response.body);
+        List<String> ret = [];
+        for (var i in res) {
+          ret.add(i['name_product']);
         }
-        return string;
+        return ret;
       } else {
-        return [''];
+        return null;
       }
     } on Exception {
-      return [''];
+      return null;
     }
   }
 
@@ -145,3 +139,34 @@ class ProductController {
     }
   }
 }
+
+
+
+//  var url = baseUrl + 'showproducts';
+//     Uri uri = Uri.parse(url);
+//     try {
+//       final response = await http.get(
+//         uri,
+//         headers: <String, String>{
+//           'Content-Type': 'application/json; charset=UTF-8',
+//           'Authorization': 'Bearer $token',
+//         },
+//       );
+//       if (response.statusCode == 200) {
+//         var json = convert.jsonDecode(response.body);
+//         List products = json;
+//         List<String> string = [];
+//         List<ProductModel> s;
+//         s = products
+//             .map((user) => new ProductModel.fromJsonWithstringHossa(user))
+//             .toList();
+//         for (int i = 0; i < s.length; i++) {
+//           string.add(s[i].name);
+//         }
+//         return string;
+//       } else {
+//         return [''];
+//       }
+//     } on Exception {
+//       return [''];
+//     }

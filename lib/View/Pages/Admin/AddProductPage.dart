@@ -14,7 +14,7 @@ class AddProductPage extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'إضافة دواء',
+          'تعديل صنف',
           style: TextStyle(color: Colors.white),
         ),
         leading: IconButton(

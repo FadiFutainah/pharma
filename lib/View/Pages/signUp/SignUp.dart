@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:pharma/Common/consts.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
+import 'package:pharma/View/Components/MyButton.dart';
 import 'package:pharma/View/Components/MyPasswordField.dart';
 import 'package:pharma/View/Components/MyTextField.dart';
 import 'package:pharma/View/Components/GeneralAppBar.dart';
-import 'package:pharma/View/Pages/WelcomePage.dart';
 import 'package:pharma/models/UserModel.dart';
 import 'package:provider/provider.dart';
+
+import '../WelcomePage.dart';
 
 class SignUp extends StatefulWidget {
   static const String id = 'SignUp';
@@ -111,54 +113,33 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 15,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width / 2,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (passc.text.length > 7 &&
-                          confirmPassc.text != passc.text) {
-                        confirmPassc.clear();
-                      }
-                      if (_formKey.currentState.validate()) {
-                        var response = await Provider.of<AuthProvider>(context,
-                                listen: false)
-                            .signup(
-                          UserModel(
-                            pharmacyName: pharNamec.text,
-                            name: namec.text,
-                            address: addressc.text,
-                            phone: numc.text,
-                            mobilePhone: mobNumc.text,
-                            password: passc.text,
-                          ),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              response,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        );
-                        if (response == 'تم التسجيل بنجاح') {
-                          Get.to(WelcomePage());
-                        }
-                      }
-                    },
-                    child: Text(
-                      'تسجيل',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
+                MyButton(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  text: 'تسجيل',
+                  onPressed: () async {
+                    if (passc.text.length > 7 &&
+                        confirmPassc.text != passc.text) {
+                      confirmPassc.clear();
+                    }
+                    if (_formKey.currentState.validate()) {
+                      var response = await Provider.of<AuthProvider>(context,
+                              listen: false)
+                          .signup(
+                        UserModel(
+                          pharmacyName: pharNamec.text,
+                          name: namec.text,
+                          address: addressc.text,
+                          phone: numc.text,
+                          mobilePhone: mobNumc.text,
+                          password: passc.text,
                         ),
-                      ),
-                      backgroundColor:
-                          MaterialStateProperty.all(Color(0xffffb52d)),
-                    ),
-                  ),
+                      );
+                      showSnackBar(response, context);
+                      if (response == 'تم التسجيل بنجاح') {
+                        Navigator.of(context).pushNamed(WelcomePage.id);
+                      }
+                    }
+                  },
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.1),
               ],

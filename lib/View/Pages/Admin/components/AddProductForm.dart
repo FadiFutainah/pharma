@@ -75,8 +75,21 @@ class _AddProductFormState extends State<AddProductForm> {
 
   @override
   void initState() {
-    companyController.getCompanies().then((value) => companies = value);
-    productController.getProductsName().then((value) => products = value);
+    // companyController.getCompanies().then((value) => companies = value);
+    // productController.getProductsName().then((value) => products = value);
+    companies = [
+      CompanyModel(id: 1, image: 'RoundedLogo.png', name: 'اليوسف'),
+    ];
+    products = [
+      'ميني بين جل اليوسف',
+      'كولد فرين كبسول اليوسف',
+      'كالامينا لوشن 125 مل اليوسف',
+      'فازلين مضخة 400 اليوسف',
+      'سيترانول كريم اليوسف',
+      'زنك كريم اليوسف',
+      'بوفيدون محلول أزرق اليوسف',
+      'بانتا كريم 30 غ اليوسف',
+    ];
     super.initState();
   }
 
@@ -89,27 +102,27 @@ class _AddProductFormState extends State<AddProductForm> {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: MediaQuery.of(context).size.height / 40,
+                height: MediaQuery.of(context).size.height / 45,
               ),
               MyTextField(
                 controller: namec,
-                labelText: 'اسم الدواء',
+                labelText: 'اسم الصنف',
                 type: TextInputType.text,
                 validator: (String value) {
-                  if (value == '') return 'اسم الدواء لا يجب أن يكون فارغاً';
+                  if (value == '') return 'اسم الصنف لا يجب أن يكون فارغاً';
                   return null;
                 },
               ),
-              MyTextField(
-                controller: quantityc,
-                labelText: 'الكمية',
-                type: TextInputType.number,
-                validator: (String value) {
-                  if (value == '') return 'ادخل الكمية من فضلك';
-                  if (num.tryParse(value) == null) return 'ادخل رقماً من فضلك';
-                  return null;
-                },
-              ),
+              // MyTextField(
+              //   controller: quantityc,
+              //   labelText: 'الكمية',
+              //   type: TextInputType.number,
+              //   validator: (String value) {
+              //     if (value == '') return 'ادخل الكمية من فضلك';
+              //     if (num.tryParse(value) == null) return 'ادخل رقماً من فضلك';
+              //     return null;
+              //   },
+              // ),
               MyTextField(
                 controller: maxc,
                 labelText: 'الحصة الأسبوعية',
@@ -189,43 +202,33 @@ class _AddProductFormState extends State<AddProductForm> {
                     Expanded(child: SizedBox(width: 10), flex: 1),
                     Expanded(
                       flex: 3,
-                      child: PopupMenuButton(
-                        onSelected: (String value) {
-                          setState(() {
-                            selectedMedcine = value;
-                          });
+                      child: MyTextField(
+                        controller: addSalec,
+                        labelText: 'التحميل',
+                        type: TextInputType.number,
+                        validator: (String value) {
+                          if (value != '' && num.tryParse(value) == null)
+                            return 'ادخل رقماً من فضلك';
+                          return null;
                         },
-                        itemBuilder: (context) =>
-                            buildDropdownProductItems(products),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 32),
-                            Text(selectedMedcine,
-                                style: TextStyle(fontSize: 16)),
-                            Divider(color: Colors.grey[600]),
-                          ],
-                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 15,
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: PopupMenuButton(
                   onSelected: (String value) {
                     setState(() {
-                      selectedCompany = value;
+                      selectedMedcine = value;
                     });
                   },
-                  itemBuilder: (context) =>
-                      buildDropdownCompanyItems(companies),
+                  itemBuilder: (context) => buildDropdownProductItems(products),
                   child: Column(
                     children: [
-                      Text(selectedCompany, style: TextStyle(fontSize: 16)),
+                      SizedBox(height: 32),
+                      Text(selectedMedcine, style: TextStyle(fontSize: 16)),
                       Divider(color: Colors.grey[600]),
                     ],
                   ),
@@ -234,42 +237,63 @@ class _AddProductFormState extends State<AddProductForm> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 15,
               ),
+              // Container(
+              //   width: MediaQuery.of(context).size.width * 0.6,
+              //   child: PopupMenuButton(
+              //     onSelected: (String value) {
+              //       setState(() {
+              //         selectedCompany = value;
+              //       });
+              //     },
+              //     itemBuilder: (context) =>
+              //         buildDropdownCompanyItems(companies),
+              //     child: Column(
+              //       children: [
+              //         Text(selectedCompany, style: TextStyle(fontSize: 16)),
+              //         Divider(color: Colors.grey[600]),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 35,
+              ),
               MyButton(
                 text: 'إضافة',
                 width: MediaQuery.of(context).size.width / 2,
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    if (selectedCompany == 'اختر الشركة من فضلك') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            selectedCompany,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      );
-                    } else {
-                      productController.addProduct(
-                        ProductModel(
-                          name: namec.text,
-                          addSale: int.parse(salec.text),
-                          hossa: int.parse(maxc.text),
-                          price: int.parse(pricec.text),
-                          quantity: int.parse(quantityc.text),
-                          sale: int.parse(salec.text),
-                          companyId: companies
-                              .where(
-                                  (element) => element.name == selectedCompany)
-                              .first
-                              .id,
-                        ),
-                      );
-                    }
+                    // if (selectedCompany == 'اختر الشركة من فضلك') {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     SnackBar(
+                    //       content: Text(
+                    //         selectedCompany,
+                    //         textAlign: TextAlign.center,
+                    //       ),
+                    //     ),
+                    //   );
+                    // } else {
+                    //   productController.addProduct(
+                    //     ProductModel(
+                    //       name: namec.text,
+                    //       addSale: int.parse(salec.text),
+                    //       hossa: int.parse(maxc.text),
+                    //       price: int.parse(pricec.text),
+                    //       quantity: int.parse(quantityc.text),
+                    //       sale: int.parse(salec.text),
+                    //       companyId: companies
+                    //           .where(
+                    //               (element) => element.name == selectedCompany)
+                    //           .first
+                    //           .id,
+                    //     ),
+                    //   );
+                    // }
                   }
                 },
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height / 15,
+                height: MediaQuery.of(context).size.height / 42,
               ),
             ],
           ),

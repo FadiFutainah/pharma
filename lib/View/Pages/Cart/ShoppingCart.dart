@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/Common/consts.dart';
 import 'package:pharma/Providers/CartProvider.dart';
 import 'package:pharma/Services/Services.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
@@ -198,14 +199,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                 .isEmpty) {
                               return;
                             } else {
-                              ///// user Id ///////
                               await billController
                                   .addBill(Services.makeBillModel(
                                       Provider.of<Cart>(context, listen: false)
                                           .billProducts,
                                       Provider.of<Cart>(context, listen: false)
                                           .billHossa,
-                                      1,
                                       Provider.of<Cart>(context, listen: false)
                                           .total
                                           .toInt()))
@@ -356,9 +355,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         shrinkWrap: true,
                         itemCount: products.length,
                         itemBuilder: (context, index) => Row(
-                          ///mainAxisSize: MainAxisSize.max,
-                          //mainAxisAlignment: MainAxisAlignment.center,
-                          //crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Padding(
                               padding:
@@ -560,7 +556,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                         Provider.of<Cart>(context,
                                                 listen: false)
                                             .billHossa,
-                                        1,
                                         Provider.of<Cart>(context,
                                                 listen: false)
                                             .total
@@ -580,17 +575,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                   Provider.of<Cart>(context, listen: false)
                                       .removeAll();
                                 }
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      Provider.of<Cart>(context, listen: false)
-                                          .billRespons
-                                          .toString(),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    duration: Duration(seconds: 4),
-                                  ),
-                                );
+                                showSnackBar(
+                                    Provider.of<Cart>(context, listen: false)
+                                        .billRespons
+                                        .toString(),
+                                    context);
                               }
 
                               ///Provider.of<Cart>(context,listen: false).removeAllProducts();

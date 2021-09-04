@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
+import 'package:pharma/Common/consts.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
+import 'package:pharma/View/Components/MyButton.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
+import 'package:pharma/View/Pages/Home/UserHomePage.dart';
 import 'package:pharma/View/Pages/signUp/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -74,58 +77,35 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 25,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width / 1.8,
-                  height: MediaQuery.of(context).size.height / 18,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        var response = await Provider.of<AuthProvider>(context,
-                                listen: false)
-                            .logIn(userc.text, passc.text);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                          response,
-                          textAlign: TextAlign.center,
-                        )));
-                        if (Provider.of<AuthProvider>(context, listen: false)
-                            .isAuthenticated) {
-                          Navigator.of(context).pushNamed(HomePage.id);
-                        } else {
-                          switch (response) {
-                            case 'يجب عليك إنشاء حساب أولاً يا فهمان':
-                              userc.clear();
-                              break;
-                            case 'كلمة السر غير صحيحة ':
-                              passc.clear();
-                              break;
-                            default:
-                              userc.clear();
-                              passc.clear();
-                              break;
-                          }
+                MyButton(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  text: 'دخول',
+                  onPressed: () async {
+                    if (_formKey.currentState.validate()) {
+                      var response = await Provider.of<AuthProvider>(context,
+                              listen: false)
+                          .logIn(userc.text, passc.text);
+                      showSnackBar(response, context);
+                      if (Provider.of<AuthProvider>(context, listen: false)
+                          .isAuthenticated) {
+                        Navigator.of(context).pushNamed(HomePage.id);
+                      } else {
+                        switch (response) {
+                          case 'يجب عليك إنشاء حساب أولاً':
+                            userc.clear();
+                            break;
+                          case 'كلمة السر غير صحيحة ':
+                            passc.clear();
+                            break;
+                          default:
+                            userc.clear();
+                            passc.clear();
+                            break;
                         }
                       }
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Color(0xffffb52d)),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      'دخول',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily:
-                            Theme.of(context).textTheme.bodyText1.fontFamily,
-                      ),
-                    ),
-                  ),
+                    }
+                  },
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 20,
@@ -139,7 +119,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                   onPressed: () {
-                    Get.to(SignUp());
+                    Navigator.of(context).pushNamed(SignUp.id);
                   },
                 ),
               ],

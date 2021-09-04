@@ -6,6 +6,8 @@ class BasketsModel {
   int fullTotal = 0;
   int num = 0;
   int userId = 0;
+  String note = '';
+  String created_at = '';
   List<SallatProducts> sallatProducts = [];
 
   BasketsModel({
@@ -15,13 +17,17 @@ class BasketsModel {
     this.sallatProducts,
     this.num,
     this.fullTotal,
+    this.note,
+    this.created_at,
   });
 
   BasketsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     sallatName = json['name'];
     fullTotal = json['full_total'];
+    note = json['note'];
     num = json['num'];
+    created_at = json[''];
     if (json['sallat_products'] != null) {
       sallatProducts = [];
       json['sallat_products'].forEach((v) {

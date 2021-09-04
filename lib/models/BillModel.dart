@@ -16,7 +16,7 @@ class BillModel {
 
   BillModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    fullTotal = json['id_user'];
+    fullTotal = json['full_total'];
     createdAt = json['created_at'];
     if (json['products'] != null) {
       // edited now

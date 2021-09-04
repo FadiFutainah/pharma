@@ -23,7 +23,7 @@ class DrawerTile extends StatelessWidget {
               icon,
               color: Color.fromARGB(255, 255, 142, 1),
             ),
-            Expanded(
+            Flexible(
               child: Padding(
                 padding: const EdgeInsets.only(left: 8, right: 10),
                 child: Text(
@@ -31,7 +31,7 @@ class DrawerTile extends StatelessWidget {
                   maxLines: 2,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               ),

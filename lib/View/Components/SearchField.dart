@@ -2,14 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts_arabic/fonts.dart';
 import 'package:pharma/View/Pages/searchResults/SearchResults.dart';
 import 'package:pharma/controllers/ProductController.dart';
 import 'package:textfield_search/textfield_search.dart';
 
 class SearchField extends StatefulWidget {
-  ///const SearchFiled({ Key? key }) : super(key: key);
-
   @override
   _SearchFiledState createState() => _SearchFiledState();
 }
@@ -45,23 +44,19 @@ class _SearchFiledState extends State<SearchField> {
               filled: true,
               fillColor: Colors.white,
               suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: () {
-                    if (textEditingController.text == '') {
-                      return;
-                    } else {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SearchResults(
-                              productName: textEditingController.text,
-                            ),
-                          ));
-                    }
-                  }),
+                icon: Icon(
+                  Icons.search,
+                  color: Theme.of(context).primaryColor,
+                ),
+                onPressed: () {
+                  if (textEditingController.text == '') {
+                    return;
+                  } else {
+                    Get.to(
+                        SearchResults(productName: textEditingController.text));
+                  }
+                },
+              ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Theme.of(context).primaryColor,
@@ -84,11 +79,6 @@ class _SearchFiledState extends State<SearchField> {
               alignLabelWithHint: true,
               hintTextDirection: TextDirection.rtl,
             ),
-            // ----------------------------------//
-            // autofillHints: ,
-            //------------------------------------//
-            /*cursorColor: Colors.grey,
-            textAlign: TextAlign.right,*/
           ),
         ),
       ),

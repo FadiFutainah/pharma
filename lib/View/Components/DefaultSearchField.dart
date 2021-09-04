@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts_arabic/fonts.dart';
+import 'package:pharma/Common/consts.dart';
 import 'package:pharma/controllers/ProductController.dart';
 import 'package:textfield_search/textfield_search.dart';
 
@@ -50,15 +51,7 @@ class _DefaultSearchFiledState extends State<DefaultSearchField> {
                   if (textEditingController.text == '') {
                     return;
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        duration: Duration(milliseconds: 700),
-                        content: Text(
-                          'يرجى تسجيل الدخول أولاً',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    );
+                    showSnackBar('يرجى تسجيل الدخول أولاً', context);
                   }
                 },
               ),

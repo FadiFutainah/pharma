@@ -1,3 +1,4 @@
+import 'package:pharma/Common/consts.dart';
 import 'package:pharma/Providers/CartProvider.dart';
 import 'package:pharma/Services/Services.dart';
 import 'package:pharma/View/Components/BasketTable.dart';
@@ -8,7 +9,7 @@ import 'package:pharma/models/BasketModel.dart';
 import 'package:provider/provider.dart';
 
 class BasketResults extends StatelessWidget {
-  static const String id = '/BasketModel';
+  static const String id = 'BasketPage';
   final BasketsModel basketsModel;
   BasketResults({Key key, this.basketsModel}) : super(key: key);
 
@@ -44,6 +45,23 @@ class BasketResults extends StatelessWidget {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: MediaQuery.of(context).size.width / 1.5,
+              height: MediaQuery.of(context).size.height / 6,
+              child: Center(
+                child: Text(
+                  this.basketsModel.note,
+                  textAlign: TextAlign.right,
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: MediaQuery.of(context).size.width / 20,
+                  ),
+                ),
+              ),
+            ),
+          ),
           ClipRRect(
             borderRadius: BorderRadius.circular(25),
             child: Container(
@@ -53,44 +71,34 @@ class BasketResults extends StatelessWidget {
                 onPressed: () async {
                   await basketsController
                       .buyBasket(Services.makeBasketModelToBuy(
-                          1, basketsModel.sallatProducts[0].sallatId))
-                      .then((result) {
-                    Provider.of<Cart>(context, listen: false).basketRespons =
-                        result;
-                  });
+                          basketsModel.sallatProducts[0].sallatId))
+                      .then(
+                    (result) {
+                      Provider.of<Cart>(context, listen: false).basketRespons =
+                          result;
+                    },
+                  );
 
                   if (Provider.of<Cart>(context, listen: false)
                           .basketRespons
                           .compareTo('تم الشراء بنجاح') ==
                       0) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          Provider.of<Cart>(context, listen: false)
-                              .basketRespons
-                              .toString(),
-                          textAlign: TextAlign.center,
-                        ),
-                        duration: Duration(seconds: 4),
-                      ),
-                    );
+                    showSnackBar(
+                        Provider.of<Cart>(context, listen: false)
+                            .basketRespons
+                            .toString(),
+                        context);
 
                     Navigator.of(context).pushReplacementNamed(HomePage.id);
 
                     return;
                   }
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        Provider.of<Cart>(context, listen: false)
-                            .basketRespons
-                            .toString(),
-                        textAlign: TextAlign.center,
-                      ),
-                      duration: Duration(seconds: 4),
-                    ),
-                  );
+                  showSnackBar(
+                      Provider.of<Cart>(context, listen: false)
+                          .basketRespons
+                          .toString(),
+                      context);
 
                   return;
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pharma/Common/consts.dart';
 import 'package:pharma/View/Components/GeneralAppBar.dart';
 import 'package:pharma/View/Pages/CompanyMedcines/CompanyMedcines.dart';
@@ -28,6 +29,7 @@ class _CompaniesState extends State<Companies> {
     return Scaffold(
       appBar: GeneralAppBar(
         title: 'الشركات',
+        hasShoppingCart: false,
       ),
       body: FutureBuilder(
         future: futureCompany,
@@ -42,13 +44,10 @@ class _CompaniesState extends State<Companies> {
                   padding: const EdgeInsets.all(5.0),
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CompanyMedcines(
-                            companyId: snapshot.data[index].id,
-                            companyName: snapshot.data[index].name,
-                          ),
+                      Get.to(
+                        CompanyMedcines(
+                          companyId: snapshot.data[index].id,
+                          companyName: snapshot.data[index].name,
                         ),
                       );
                     },

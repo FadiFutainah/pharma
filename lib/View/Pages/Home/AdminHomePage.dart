@@ -1,6 +1,8 @@
+import 'package:pharma/Common/consts.dart';
+import 'package:pharma/Providers/ImagesProvider.dart';
 import 'package:pharma/View/Components/SearchField.dart';
 import 'package:pharma/View/Pages/Admin/AddBasketPage.dart';
-import 'package:pharma/View/Pages/Admin/AddCompanyPage.dart';
+import 'package:pharma/View/Pages/Admin/AddNewAdminPage.dart';
 import 'package:pharma/View/Pages/Admin/AddProductPage.dart';
 import 'package:pharma/View/Pages/Admin/components/AdminDrawer.dart';
 import 'package:pharma/View/Pages/Admin/components/ExpandableFab.dart';
@@ -18,6 +20,7 @@ import 'components/HomePageButton.dart';
 
 class AdminHomePage extends StatefulWidget {
   static const String id = '/AdminHomePage';
+  final ImagesProvider provider = ImagesProvider();
 
   @override
   _AdminHomePageState createState() => _AdminHomePageState();
@@ -37,27 +40,29 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    widget.provider.loadLogo(context);
+    // widget.provider.loadScheduale(context);
     return Scaffold(
       floatingActionButton: ExpandableFab(
         distance: 112.0,
         children: [
           ActionButton(
             onPressed: () {
-              Navigator.of(context).popAndPushNamed(AddBasketPage.id);
+              Navigator.of(context).pushNamed(AddBasketPage.id);
             },
             icon: const Icon(Icons.shopping_basket),
           ),
           ActionButton(
             onPressed: () {
-              Navigator.of(context).popAndPushNamed(AddProductPage.id);
+              Navigator.of(context).pushNamed(AddProductPage.id);
             },
             icon: const Icon(Icons.local_hospital),
           ),
           ActionButton(
             onPressed: () {
-              Navigator.of(context).popAndPushNamed(AddCompanyPage.id);
+              Navigator.of(context).pushNamed(AddNewAdminPage.id);
             },
-            icon: const Icon(Icons.store),
+            icon: const Icon(Icons.person_add),
           ),
         ],
       ),
@@ -80,11 +85,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 7,
                 ),
-
-///////////////////////////////////////
-
-////////////// first slider //////////////////
-
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                   child: Container(
@@ -106,15 +106,32 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             future: futureBaskets,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
-                                return CarouselSlider.builder(
+                                if (snapshot.data.length == 0) {
+                                  return Carousel(
+                                    borderRadius: true,
+                                    radius: Radius.circular(30),
+                                    autoplay: true,
+                                    dotColor: Colors.transparent,
+                                    dotIncreaseSize: 1.2,
+                                    dotHorizontalPadding: 2,
+                                    dotBgColor: Colors.transparent,
+                                    dotIncreasedColor: Colors.transparent,
+                                    images: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: InkWell(
+                                          onTap: () {},
+                                          child: Center(
+                                            child: Text('لا يوجد عروض'),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                } else {
+                                  return CarouselSlider.builder(
                                     options: CarouselOptions(
                                       autoPlay: true,
-
-                                      ///dotColor: Colors.grey[400],
-                                      //dotIncreaseSize: 1.2,
-                                      //dotHorizontalPadding: 2,
-                                      //dotBgColor: Colors.grey.withOpacity(0.1),
-                                      //dotIncreasedColor: Colors.orange,
                                     ),
                                     itemCount: snapshot.data.length,
                                     itemBuilder: (context, index, index1) {
@@ -122,60 +139,81 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                         borderRadius: BorderRadius.circular(30),
                                         child: InkWell(
                                           onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    BasketResults(
-                                                  basketsModel: snapshot
-                                                      .data[index]["basket"],
+                                            showSnackBar(
+                                                'لا يمكنك الدخول', context);
+                                          },
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.36,
+                                                child: Center(
+                                                  child: Text(
+                                                    snapshot.data[index]
+                                                        ['sallatName'],
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              12,
+                                                      color: Colors.blue[700],
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            );
-                                          },
-                                          child: Center(
-                                            child: Text(
-                                              snapshot.data[index]
-                                                  ['sallatName'],
-                                              style: TextStyle(fontSize: 30),
-                                            ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    40,
+                                              ),
+                                              Icon(
+                                                Icons.redeem,
+                                                size: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    8,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       );
-                                    }
-
-                                    ////////////// slider images here //////////////////
-                                    );
+                                    },
+                                  );
+                                }
                               } else if (snapshot.hasError) {
                                 return Carousel(
                                   borderRadius: true,
                                   radius: Radius.circular(30),
                                   autoplay: true,
-                                  dotColor: Colors.grey[400],
+                                  dotColor: Colors.transparent,
                                   dotIncreaseSize: 1.2,
                                   dotHorizontalPadding: 2,
-                                  dotBgColor: Colors.grey.withOpacity(0.1),
-                                  dotIncreasedColor: Colors.orange,
-
+                                  dotBgColor: Colors.transparent,
+                                  dotIncreasedColor: Colors.transparent,
                                   images: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(30),
                                       child: InkWell(
                                         onTap: () {},
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                          ),
+                                        child: Center(
+                                          child: Text('يوجد خطأ في الشبكة'),
                                         ),
                                       ),
                                     ),
                                   ],
-                                  ////////////// slider images here //////////////////
                                 );
                               }
                               return const Center(
@@ -187,9 +225,6 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     ),
                   ),
                 ),
-
-////////////////////////////////
-
                 HomePageButton(
                   function: () {
                     Navigator.of(context).pushNamed(MostWanted.id);

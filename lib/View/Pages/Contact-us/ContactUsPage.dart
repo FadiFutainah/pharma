@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pharma/Common/consts.dart';
+import 'package:pharma/View/Components/GeneralAppBar.dart';
 import 'package:pharma/View/Components/MyButton.dart';
-import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/NotesController.dart';
 import 'package:pharma/models/NoteModel.dart';
 
@@ -8,31 +9,12 @@ class ContactUsPage extends StatelessWidget {
   final NotesController notesController = NotesController();
   final TextEditingController namec = TextEditingController();
   final TextEditingController notec = TextEditingController();
-  static const String id = '/Contact-us';
+  static const String id = 'Contact-us';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xffffb52d),
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-        ),
-        title: Text(
-          'تواصل معنا',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: GeneralAppBar(title: 'تواصل معنا', hasShoppingCart: false),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -113,16 +95,11 @@ class ContactUsPage extends StatelessWidget {
                   var response = await notesController.sendNote(
                     NoteModel(pharmacyName: namec.text, notes: notec.text),
                   );
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        response,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  );
-                  notec.clear();
-                  Navigator.of(context).pushReplacementNamed(HomePage.id);
+                  showSnackBar(response, context);
+                  if (response == 'تم ارسال الرسالة بنجاح') {
+                    notec.clear();
+                    Navigator.of(context).pop();
+                  }
                 },
                 width: MediaQuery.of(context).size.width * 0.4,
               ),

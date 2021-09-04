@@ -5,8 +5,11 @@ import 'package:pharma/View/Components/DrawerComponent.dart';
 import 'package:pharma/View/Components/DrawerTile.dart';
 import 'package:pharma/View/Components/MyButton.dart';
 import 'package:pharma/View/Pages/About-us/AboutUs.dart';
+import 'package:pharma/View/Pages/Admin/AdminsPage.dart';
 import 'package:pharma/View/Pages/Admin/SignedUsersPage.dart';
+import 'package:pharma/View/Pages/Admin/UsersPage.dart';
 import 'package:pharma/View/Pages/Home/HomePage.dart';
+import 'package:pharma/View/Pages/Home/UserHomePage.dart';
 import 'package:pharma/View/Pages/Scheduale/AdminSchedualPage.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,17 +33,19 @@ class AdminDrawer extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.hasData) {
                 return DrawerComponent(
-                    username: snapshot.data['username'],
-                    pharmacyName: snapshot.data['pharmacyName']);
+                  username: snapshot.data['username'],
+                  pharmacyName: snapshot.data['pharmacyName'],
+                );
               } else {
                 return DrawerComponent(
-                    username: 'زياد فارما', pharmacyName: '');
+                  username: 'زياد فارما',
+                  pharmacyName: '',
+                );
               }
             },
           ),
           Padding(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height / 10),
+            padding: EdgeInsets.only(top: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -97,6 +102,20 @@ class AdminDrawer extends StatelessWidget {
                   text: 'المستخدمين',
                   function: () {
                     Navigator.of(context).pushNamed(SignedUsersPage.id);
+                  },
+                ),
+                DrawerTile(
+                  icon: Icons.person,
+                  text: 'المستخدمين الفاعلين',
+                  function: () {
+                    Get.to(UsersPage());
+                  },
+                ),
+                DrawerTile(
+                  icon: Icons.admin_panel_settings_outlined,
+                  text: 'المدراء',
+                  function: () {
+                    Navigator.of(context).pushNamed(AdminsPage.id);
                   },
                 ),
                 DrawerTile(

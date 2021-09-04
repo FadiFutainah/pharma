@@ -7,7 +7,7 @@ import 'package:pharma/models/UserModel.dart';
 class UserController {
   UserModel userModel;
   Future<List> getUserByName(String name) async {
-    var url = baseUrl + 'showusers';
+    var url = baseUrl + 's';
 
     Uri uri = Uri.parse(url);
     final response = await http.get(
@@ -36,7 +36,7 @@ class UserController {
   Future<List<UserModel>> getSignedUsers() async {
     try {
       var response = await http.get(
-        Uri.parse(baseUrl + 'showusers'),
+        Uri.parse(baseUrl + 'showusersbysignups'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
@@ -70,27 +70,6 @@ class UserController {
         } else {
           return 'لا يمكن حذف هذا المستخدم';
         }
-      } else {
-        return 'يوجد مشكلة في الشبكة';
-      }
-    } on SocketException {
-      return 'لا يوجد اتصال بالشبكة';
-    } on Exception {
-      return 'يوجد مشكلة في الشبكة';
-    }
-  }
-
-  Future<String> approveUser(int id) async {
-    try {
-      var response = await http.post(
-        Uri.parse(baseUrl + 'aproveuser/$id'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer $token',
-        },
-      );
-      if (response.statusCode == 200) {
-        return 'تمت الموافقة على هذا المستخدم';
       } else {
         return 'يوجد مشكلة في الشبكة';
       }

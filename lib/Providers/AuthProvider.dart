@@ -8,13 +8,21 @@ import 'package:pharma/models/UserModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
-  static bool _isAuthenticated = false;
-
+  static bool _isAuthenticated = true;
+  String role = 'moder';
+  String username = '';
   bool get isAuthenticated => _isAuthenticated;
+
+  Future<void> updateCredentials() async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    role ??= storage.getString('role');
+    username ??= storage.getString('username');
+    notifyListeners();
+  }
 
   Future<String> signup(UserModel user) async {
     try {
-      final http.Response response = await http.post(
+      var response = await http.post(
         Uri.parse(baseUrl + 'inputsignup'),
         body: {
           'name_pharmacy': user.pharmacyName,
@@ -42,20 +50,20 @@ class AuthProvider extends ChangeNotifier {
   Future<String> logIn(String username, String password) async {
     try {
       SharedPreferences storage = await SharedPreferences.getInstance();
-      final response = await http.post(
+      var response = await http.post(
         Uri.parse(baseUrl + 'login'),
         body: {'username': username, 'password': password},
       );
       if (response.statusCode == 200) {
-        if (response.body == 'يجب عليك إنشاء حساب أولاً يا فهمان' ||
+        if (response.body == 'يجب عليك إنشاء حساب أولاً' ||
             response.body == 'كلمة السر غير صحيحة ') {
           _isAuthenticated = false;
           notifyListeners();
           return response.body;
         } else {
-          // implement authorization
-          storage.setString('username', username);
-          storage.setString('token', json.decode(response.body)['token']);
+          await storage.setString('username', username);
+          await storage.setString('token', json.decode(response.body)['token']);
+          await storage.setString('role', json.decode(response.body)['role']);
           _isAuthenticated = true;
           notifyListeners();
           return 'تم تسجيل الدخول بنجاح';
@@ -63,7 +71,7 @@ class AuthProvider extends ChangeNotifier {
       } else {
         _isAuthenticated = false;
         notifyListeners();
-        return 'response.body';
+        return 'يوجد مشكلة في الشبكة';
       }
     } on SocketException {
       return 'لا يوجد اتصال بالشبكة';
@@ -72,36 +80,42 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> tryLogin(BuildContext context) async {
+  Future<String> tryLogin() async {
     try {
       SharedPreferences storage = await SharedPreferences.getInstance();
       if (isAuthenticated) {
-        return true;
+        return 'moder';
+        return storage.get('role');
       } else {
-        logIn(storage.get('username'), storage.get('password'));
+        logIn(storage.get('username') ?? '', storage.get('password') ?? '')
+            .timeout(Duration(seconds: 45));
         if (isAuthenticated) {
-          return true;
+          return storage.get('role');
         } else {
-          return false;
+          return 'faild';
         }
       }
+    } on SocketException {
+      return 'لا يوجد اتصال بالشبكة';
     } on Exception {
-      return false;
+      return 'faild';
     }
   }
 
-  Future<void> logout() async {
+  Future<String> logout() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     String token = storage.getString('token');
     try {
-      final response = await http.post(
-        Uri.parse(baseUrl + '/logout'),
-        headers: {
-          HttpHeaders.authorizationHeader: '$token',
+      var response = await http.post(
+        Uri.parse(baseUrl + 'logout'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
         },
-      );
+      ).timeout(Duration(seconds: 25));
       if (response.statusCode == 200) {
         _isAuthenticated = false;
+        storage.clear();
         notifyListeners();
         return 'تم تسجيل الخروج بنجاح';
       } else {

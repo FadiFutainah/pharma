@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:convert' as convert;
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -26,6 +27,8 @@ class NotesController {
       } else {
         return 'يوجد مشكلة في الشبكة';
       }
+    } on SocketException {
+      return 'لا يوجد اتصال في الشبكة';
     } on Exception {
       return 'يوجد مشكلة في الشبكة';
     }
@@ -41,11 +44,15 @@ class NotesController {
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
-      ).timeout(Duration(seconds: 10));
+      ).timeout(Duration(seconds: 40));
       if (response.statusCode == 200) {
-        var json = convert.jsonDecode(response.body);
-        List notes = json;
-        return notes.map((note) => NoteModel.fromJson(note)).toList();
+        if (response.body == 'ليس لديك الصلاحية لأنك مستخدم') {
+          return null;
+        } else {
+          var json = jsonDecode(response.body);
+          List notes = json;
+          return notes.map((note) => NoteModel.fromJson(note)).toList();
+        }
       } else {
         return null;
       }

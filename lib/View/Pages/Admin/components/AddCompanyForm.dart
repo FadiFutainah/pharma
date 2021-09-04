@@ -49,11 +49,11 @@ class _AddCompanyFormState extends State<AddCompanyForm> {
                     : Icon(Icons.access_alarm),
               ),
               IconButton(
-                onPressed: () {
-                  setState(() async {
-                    ImagePicker imagePicker = ImagePicker();
-                    XFile image = await imagePicker.pickImage(
-                        source: ImageSource.gallery);
+                onPressed: () async {
+                  ImagePicker imagePicker = ImagePicker();
+                  XFile image =
+                      await imagePicker.pickImage(source: ImageSource.gallery);
+                  setState(() {
                     file = File(image.path);
                   });
                 },

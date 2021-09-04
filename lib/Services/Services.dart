@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:pharma/models/BasketModel.dart';
 import 'package:pharma/models/BillModel.dart';
 import 'package:pharma/models/BillProductModel.dart';
+import 'package:pharma/models/BillSallatModel.dart';
 import 'package:pharma/models/HossaProductModel.dart';
 import 'package:pharma/models/PivoitModal.dart';
 import 'package:pharma/models/ProductModel.dart';
+import 'package:pharma/models/SallatProducts.dart';
 
 class Services {
   static ProductModel convartFromHossaProductModelTProductModel(
@@ -20,21 +22,18 @@ class Services {
     return productModel;
   }
 
-  static BasketsModel makeBasketModelToBuy(int userId, int sallatId) {
+  static BasketsModel makeBasketModelToBuy(int sallatId) {
     BasketsModel respons = BasketsModel();
-    respons.userId = userId;
     respons.id = sallatId;
     return respons;
   }
 
-  static BillModel makeBillModel(
-      listProduct, listHossa, int id, int fullTotal) {
+  static BillModel makeBillModel(listProduct, listHossa, int fullTotal) {
     for (int i = 0; i < listHossa.length; i++) {
       listProduct.add(listHossa[i]);
     }
 
     BillModel respons = BillModel();
-    respons.userId = 1;
     respons.fullTotal = fullTotal;
     respons.products = [];
     for (int i = 0; i < listProduct.length; i++) {
@@ -71,28 +70,33 @@ class Services {
   static TableRow makeTableRow(ProductModel productModel, double quantity) {
     //////// need edit /////
     int freeProduct = 0;
-
-    if (quantity >= productModel.sale) {
-      freeProduct = quantity ~/ productModel.sale * productModel.addSale;
-    }
-
-    double safi = (quantity % productModel.sale == 0)
-        ? productModel.price.toDouble()
-        : ((productModel.sale * productModel.price) /
+    double total = 0;
+    double safi = productModel.price.toDouble();
+    if (productModel.sale != 0 && productModel.addSale != 0) {
+      if (quantity % productModel.sale == 0) {
+        freeProduct = quantity ~/ productModel.sale * productModel.addSale;
+      } else {
+        freeProduct = 0;
+        safi = ((productModel.sale * productModel.price) /
                 (productModel.sale + productModel.addSale))
             .toDouble();
-    double total = quantity % productModel.sale * safi +
-        (quantity - (quantity % productModel.sale)) * productModel.price;
+        total = quantity % productModel.sale * safi +
+            (quantity - (quantity % productModel.sale)) * productModel.price;
+      }
+    } else {
+      total = quantity % productModel.sale +
+          (quantity - (quantity % productModel.sale)) * productModel.price;
+    }
 
     return TableRow(
       children: [
         Text(
-          total.toInt().toString(),
+          total.ceil().toString(),
           textAlign: TextAlign.center,
           /*style: TextStyle(fontSize: 25),*/
         ),
         Text(
-          safi.toString(),
+          safi.ceil().toString(),
           textAlign: TextAlign.center, /*style: TextStyle(fontSize: 25)*/
         ),
         Text(
@@ -111,26 +115,97 @@ class Services {
     );
   }
 
+  ////// bills services to get //////
+
+  static List<BillProductModel> convertListOfSallatProductToListOfBillProduct(
+      List<SallatProducts> list) {
+    List<BillProductModel> billProductModel = [];
+    if (list != null && list.isNotEmpty) {
+      for (int i = 0; i < list.length; i++) {
+        BillProductModel bb = BillProductModel();
+        bb.id = list[i].id;
+        bb.name = list[i].productsName;
+        bb.price = list[i].price;
+        bb.sale = list[i].sale;
+        bb.addSale = list[i].addSale;
+        PivotModel pivotModel = PivotModel();
+        pivotModel.total = list[i].total;
+        pivotModel.quentityToBoughtBySpeceficUser = list[i].quentity;
+        bb.pivotModel = pivotModel;
+        billProductModel.add(bb);
+      }
+    }
+    return billProductModel;
+  }
+
+  static BillModel convertBillSallatModelToBillModel(BillSallatModel b) {
+    BillModel billModel = BillModel();
+    billModel.id = b.id;
+    billModel.createdAt = b.createdAt;
+    billModel.fullTotal = b.sallat.fullTotal;
+    billModel.products = Services.convertListOfSallatProductToListOfBillProduct(
+        b.sallat.sallatProducts);
+    return billModel;
+  }
+
+  static List<BillModel> convartListOfBasketModelToListOfBillModel(
+      List<BillSallatModel> list) {
+    List<BillModel> billModel = [];
+    if (list != null && list.isNotEmpty) {
+      for (int i = 0; i < list.length; i++) {
+        billModel.add(Services.convertBillSallatModelToBillModel(list[i]));
+      }
+    }
+
+    return billModel;
+  }
+
+  static List<BillModel> convertToListOfBillModel(
+      List<BillModel> billModel, List<BillSallatModel> billSallatModel) {
+    List<BillModel> response = [];
+    if (billModel != null && billSallatModel != null) {
+      for (int i = 0; i < billModel.length; i++) {
+        response.add(billModel[i]);
+      }
+      for (int i = 0; i < billSallatModel.length; i++) {
+        response.add(
+            Services.convertBillSallatModelToBillModel(billSallatModel[i]));
+      }
+    }
+
+    return response;
+  }
+
   static TableRow makeTableRowForHossa(
       ProductModel productModel, double quantity) {
-    int freeProduct = quantity ~/ productModel.sale * productModel.addSale;
-    double safi = (quantity % productModel.sale == 0)
-        ? productModel.price.toDouble()
-        : ((productModel.sale * productModel.price) /
+    int freeProduct = 0;
+    double total = 0;
+    double safi = productModel.price.toDouble();
+    if (productModel.sale != 0 && productModel.addSale != 0) {
+      if (quantity % productModel.sale == 0) {
+        freeProduct = quantity ~/ productModel.sale * productModel.addSale;
+      } else {
+        freeProduct = 0;
+        safi = ((productModel.sale * productModel.price) /
                 (productModel.sale + productModel.addSale))
             .toDouble();
-    double total = quantity % productModel.sale * safi +
-        (quantity - (quantity % productModel.sale)) * productModel.price;
+        total = quantity % productModel.sale * safi +
+            (quantity - (quantity % productModel.sale)) * productModel.price;
+      }
+    } else {
+      total = quantity % productModel.sale +
+          (quantity - (quantity % productModel.sale)) * productModel.price;
+    }
 
     return TableRow(
       children: [
         Text(
-          total.toInt().toString(),
+          total.ceil().toString(),
           textAlign: TextAlign.center,
           /*style: TextStyle(fontSize: 25),*/
         ),
         Text(
-          safi.toString(),
+          safi.ceil().toString(),
           textAlign: TextAlign.center, /*style: TextStyle(fontSize: 25)*/
         ),
         Text(
@@ -138,7 +213,7 @@ class Services {
           textAlign: TextAlign.center, /*style: TextStyle(fontSize: 25)*/
         ),
         Text(
-          quantity.toString(),
+          quantity.toInt().toString(),
           textAlign: TextAlign.center, /*style: TextStyle(fontSize: 25)*/
         ),
         Text(

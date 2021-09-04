@@ -25,93 +25,165 @@ class _MostWantedState extends State<MostWanted> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: GeneralAppBar(
-          title: 'الأكثر طلباً',
-        ),
-        body: FutureBuilder<List<ProductModel>>(
+      appBar: GeneralAppBar(
+        title: 'الأكثر طلباً',
+        hasShoppingCart: false,
+      ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.symmetric(
+                    vertical: BorderSide(color: Colors.black),
+                    horizontal: BorderSide(color: Colors.grey),
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width / 5,
+                child: Center(
+                  child: Text(
+                    'السعر'.toString(),
+                    style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width / 20),
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.symmetric(
+                    horizontal: BorderSide(color: Colors.grey),
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width / 3.35,
+                child: Center(
+                  child: Text(
+                    'العرض'.toString(),
+                    style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width / 20),
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.symmetric(
+                    vertical: BorderSide(color: Colors.black),
+                    horizontal: BorderSide(color: Colors.grey),
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width / 2,
+                child: Center(
+                  child: Text(
+                    'الاسم',
+                    textDirection: TextDirection.rtl,
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width / 20,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          FutureBuilder<List<ProductModel>>(
             future: futureProducts,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data.isEmpty) {
                   return Center(child: Text('لا يوجد معلومات'));
                 } else {
-                  return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border:
-                                Border(bottom: BorderSide(color: Colors.grey)),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width / 4,
-                                child: Center(
-                                  child: Text(
-                                    snapshot.data[index].price.toString(),
-                                    style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width /
-                                                20),
-                                  ),
-                                ),
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.6,
+                    child: ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          height: MediaQuery.of(context).size.height * 0.1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(color: Colors.grey),
                               ),
-                              Container(
-                                width: MediaQuery.of(context).size.width / 4,
-                                child: Center(
-                                  child: Text(
-                                    snapshot.data[index].addSale.toString() +
-                                        ' + ' +
-                                        snapshot.data[index].sale.toString(),
-                                    style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width /
-                                                20),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.symmetric(
+                                      vertical: BorderSide(color: Colors.black),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width / 4,
-                                child: Center(
-                                  child: Text(
-                                    snapshot.data[index].name,
-                                    textDirection: TextDirection.rtl,
-                                    overflow: TextOverflow.clip,
-                                    style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width /
-                                              20,
+                                  width: MediaQuery.of(context).size.width / 5,
+                                  child: Center(
+                                    child: Text(
+                                      snapshot.data[index].price.toString(),
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              20),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width / 4,
-                                child: Center(
-                                  child: Text(
-                                    index.toString(),
-                                    style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width /
-                                                20),
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 5,
+                                  child: Center(
+                                    child: (snapshot.data[index].sale != null &&
+                                            snapshot.data[index].sale != 0)
+                                        ? Text(
+                                            snapshot.data[index].addSale
+                                                    .toString() +
+                                                ' + ' +
+                                                snapshot.data[index].sale
+                                                    .toString(),
+                                            style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    20),
+                                          )
+                                        : Text(''),
                                   ),
                                 ),
-                              )
-                            ],
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.symmetric(
+                                      vertical: BorderSide(color: Colors.black),
+                                    ),
+                                  ),
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: Center(
+                                    child: Text(
+                                      snapshot.data[index].name,
+                                      textDirection: TextDirection.rtl,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.clip,
+                                      style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.width /
+                                                20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   );
                 }
               } else if (snapshot.hasError) {
                 return Center(child: Text('لا يوجد اتصال بالانترنت'));
               }
               return Center(child: CircularProgressIndicator());
-            }));
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

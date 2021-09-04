@@ -15,23 +15,29 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      child: ElevatedButton(
-        onPressed: onPressed,
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Container(
+        width: width,
+        height: height,
         child: Text(
           text,
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(8)),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-            ),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontFamily: Theme.of(context).textTheme.bodyText1.fontFamily,
           ),
-          backgroundColor: MaterialStateProperty.all(Color(0xffffb52d)),
         ),
+      ),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(8)),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0),
+          ),
+        ),
+        backgroundColor: MaterialStateProperty.all(Color(0xffffb52d)),
       ),
     );
   }

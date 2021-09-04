@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:pharma/Common/consts.dart';
@@ -20,7 +21,8 @@ class SchedualController {
       );
 
       final response = await request.send();
-
+      print(response.statusCode);
+      log('-------------------------');
       if (response.statusCode == 200) {
         return 'uploaded';
       } else {

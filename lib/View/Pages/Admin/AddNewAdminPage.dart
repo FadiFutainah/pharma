@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pharma/Providers/AuthProvider.dart';
+import 'package:pharma/Common/consts.dart';
 import 'package:pharma/View/Components/MyPasswordField.dart';
 import 'package:pharma/View/Components/MyTextField.dart';
 import 'package:pharma/View/Components/GeneralAppBar.dart';
-import 'package:pharma/View/Pages/WelcomePage.dart';
-import 'package:pharma/models/UserModel.dart';
-import 'package:provider/provider.dart';
+import 'package:pharma/View/Pages/Home/AdminHomePage.dart';
+import 'package:pharma/controllers/AdminController.dart';
 
 class AddNewAdminPage extends StatefulWidget {
   static const String id = 'AddNewAdminPage';
@@ -18,10 +17,9 @@ class AddNewAdminPage extends StatefulWidget {
 class _AddNewAdminPageState extends State<AddNewAdminPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController namec = TextEditingController();
-
   final TextEditingController passc = TextEditingController();
   final TextEditingController confirmPassc = TextEditingController();
-
+  final AdminController adminController = AdminController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,24 +73,13 @@ class _AddNewAdminPageState extends State<AddNewAdminPage> {
                         confirmPassc.clear();
                       }
                       if (_formKey.currentState.validate()) {
-                        // var response = await Provider.of<AuthProvider>(context,
-                        //         listen: false)
-                        //     .signup(
-                        //   UserModel(
-
-                        //     password: passc.text,
-                        //   ),
-                        // );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'response',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        );
-                        if ('response' == 'تم التسجيل بنجاح') {
-                          Get.to(WelcomePage());
+                        var response = await adminController.addAdmin(
+                            namec.text, passc.text);
+                        if (response == 'تم إضافة المدير بنجاح') {
+                          showSnackBar(response, context);
+                          Navigator.of(context).pushNamed(AdminHomePage.id);
+                        } else {
+                          showSnackBar(response, context);
                         }
                       }
                     },

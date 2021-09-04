@@ -25,6 +25,7 @@ class DefaultBarHomePage extends StatelessWidget
             Icons.shopping_cart_outlined,
           ),
           onPressed: () {
+            ScaffoldMessenger.of(context).removeCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 duration: Duration(milliseconds: 700),

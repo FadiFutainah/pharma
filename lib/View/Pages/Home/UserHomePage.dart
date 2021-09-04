@@ -26,24 +26,16 @@ class _UserHomePageState extends State<UserHomePage> {
 
   Future<List<Map<String, dynamic>>> futureBaskets;
 
-  // delete when end
-
-  // Future<void> test() async {
-  //   SharedPreferences s = await SharedPreferences.getInstance();
-  //   s.clear();
-  // }
-
   @override
   void initState() {
-    // test();
-    futureBaskets = basketsController.getAllBaskets();
     super.initState();
+    futureBaskets = basketsController.getAllBaskets();
   }
 
   @override
   Widget build(BuildContext context) {
     widget.provider.loadLogo(context);
-
+    // widget.provider.loadScheduale(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 245, 245, 245),
       drawer: Container(
@@ -129,17 +121,51 @@ class _UserHomePageState extends State<UserHomePage> {
                                               ),
                                             );
                                           },
-                                          child: Center(
-                                            child: Text(
-                                              snapshot.data[index]
-                                                  ['sallatName'],
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          15),
-                                            ),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.36,
+                                                child: Center(
+                                                  child: Text(
+                                                    snapshot.data[index]
+                                                        ['sallatName'],
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              12,
+                                                      color: Colors.blue[700],
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    40,
+                                              ),
+                                              Icon(
+                                                Icons.redeem,
+                                                size: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    8,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       );

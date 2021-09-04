@@ -26,11 +26,11 @@ class UserModel {
     name = json['name'];
     pharmacyName = json['name_pharmacy'];
     address = json['address'];
-    // mobilePhone = json['mobile_phone'];
-    // phone = json['phone'];
-    // password = json['password'];
-    // createdAt = json['created_at'];
-    // updatedAt = json['updated_at'];
+    mobilePhone = json['mobile_phone'];
+    phone = json['phone'];
+    password = json['password'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {

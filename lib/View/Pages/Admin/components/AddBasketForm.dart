@@ -1,7 +1,7 @@
 import 'package:pharma/View/Components/MyButton.dart';
 import 'package:pharma/View/Components/MyTextField.dart';
 import 'package:flutter/material.dart';
-import 'package:pharma/View/Pages/Home/HomePage.dart';
+import 'package:pharma/View/Pages/Home/AdminHomePage.dart';
 
 class AddBasketForm extends StatefulWidget {
   @override
@@ -194,7 +194,7 @@ class _AddBasketFormState extends State<AddBasketForm> {
                 text: 'ارسال',
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    Navigator.of(context).popAndPushNamed(HomePage.id);
+                    Navigator.of(context).popAndPushNamed(AdminHomePage.id);
                   }
                 },
               ),

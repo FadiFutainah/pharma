@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pharma/Common/consts.dart';
 import 'package:pharma/Providers/AuthProvider.dart';
 import 'package:pharma/View/Pages/About-us/AboutUs.dart';
 import 'package:pharma/View/Pages/Bills/Bills.dart';
@@ -56,7 +57,7 @@ class DrawerGeneralAuth extends StatelessWidget {
                   icon: Icons.fact_check_outlined,
                   text: 'الفواتير',
                   function: () {
-                    Navigator.popAndPushNamed(context, Bills.id);
+                    Navigator.pushNamed(context, Bills.id);
                   },
                 ),
                 DrawerTile(
@@ -79,31 +80,7 @@ class DrawerGeneralAuth extends StatelessWidget {
                   function: () {
                     showDialog(
                       context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text(
-                          'تأكيد تسجيل الخروج',
-                          textAlign: TextAlign.center,
-                        ),
-                        actions: [
-                          SizedBox(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.05),
-                          Center(
-                            child: MyButton(
-                              text: 'موافق',
-                              width: MediaQuery.of(context).size.width * 0.35,
-                              onPressed: () {
-                                Provider.of<AuthProvider>(context,
-                                        listen: false)
-                                    .logout();
-                                Get.offAll(HomePage());
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.01)
-                        ],
-                      ),
+                      builder: (context) => ConfirmDialog(),
                     );
                   },
                 ),
@@ -112,6 +89,37 @@ class DrawerGeneralAuth extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ConfirmDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        'تأكيد تسجيل الخروج',
+        textAlign: TextAlign.center,
+      ),
+      actions: [
+        SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+        Center(
+          child: MyButton(
+            text: 'موافق',
+            width: MediaQuery.of(context).size.width * 0.35,
+            onPressed: () async {
+              String response =
+                  await Provider.of<AuthProvider>(context, listen: false)
+                      .logout();
+              showSnackBar(response, context);
+              if (response == 'تم تسجيل الخروج بنجاح') {
+                Get.offAll(HomePage());
+              }
+            },
+          ),
+        ),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.01)
+      ],
     );
   }
 }

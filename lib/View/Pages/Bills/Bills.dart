@@ -1,7 +1,9 @@
+import 'package:get/get.dart';
+import 'package:pharma/Services/Services.dart';
 import 'package:pharma/View/Components/BillTable.dart';
 import 'package:flutter/material.dart';
-import 'package:pharma/View/Pages/Home/HomePage.dart';
 import 'package:pharma/controllers/BillController.dart';
+import 'package:pharma/models/AllBillsModel.dart';
 import 'package:pharma/models/BillModel.dart';
 
 class Bills extends StatefulWidget {
@@ -14,12 +16,22 @@ class Bills extends StatefulWidget {
 class _BillsState extends State<Bills> {
   BillController billController = new BillController();
 
-  Future<List<BillModel>> futureBill;
-
+  Future<AllBillsModel> futureBill;
+  AllBillsModel bills = AllBillsModel();
+  List<BillModel> billModel = [];
   @override
-  void initState() {
+  initState() {
     super.initState();
-    futureBill = billController.getBillsByUser(2);
+
+    futureBill = billController.getBillsByUser();
+    futureBill.then((value) {
+      setState(() {
+        bills = value;
+      });
+    });
+
+    billModel = Services.convertToListOfBillModel(
+        bills.billModel, bills.billSallatModel);
   }
 
   @override
@@ -32,7 +44,7 @@ class _BillsState extends State<Bills> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, HomePage.id);
+            Get.back();
           },
         ),
         backgroundColor: Color(0xffffb52d),
@@ -46,49 +58,39 @@ class _BillsState extends State<Bills> {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-        future: futureBill,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, index) {
-                return SingleChildScrollView(
-                  physics: ScrollPhysics(),
-                  child: Padding(
+      body: ListView.builder(
+        itemCount: billModel.length,
+        itemBuilder: (context, index) {
+          return SingleChildScrollView(
+            physics: ScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: Column(
+                children: [
+                  Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 8),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8, bottom: 8),
-                          child: Text(snapshot.data[index].createdAt
-                              .toString()
-                              .substring(0, 10)),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Container(
-                            child: BillTable(
-                              billModel: snapshot.data[index],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 23),
-                          child: Divider(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      billModel[index].createdAt.toString().substring(0, 10),
                     ),
                   ),
-                );
-              },
-            );
-          } else if (snapshot.hasError) {
-            return Center(child: Text('لا يوجد اتصال بالانترنت'));
-          }
-          return Center(child: CircularProgressIndicator());
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Container(
+                      child: BillTable(
+                        billModel: billModel[index],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 23),
+                    child: Divider(
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
     );

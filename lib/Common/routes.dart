@@ -5,6 +5,7 @@ import 'package:pharma/View/Pages/Admin/AddCompanyPage.dart';
 import 'package:pharma/View/Pages/Admin/AddNewAdminPage.dart';
 import 'package:pharma/View/Pages/Admin/AddProductPage.dart';
 import 'package:pharma/View/Pages/Admin/AddUserPage.dart';
+import 'package:pharma/View/Pages/Admin/AdminsPage.dart';
 import 'package:pharma/View/Pages/Admin/SignedUsersPage.dart';
 import 'package:pharma/View/Pages/BasketResult/BasketResult.dart';
 import 'package:pharma/View/Pages/Bills/Bills.dart';
@@ -25,28 +26,28 @@ import 'package:pharma/View/Pages/signIn/SignIn.dart';
 import 'package:pharma/View/Pages/signUp/SignUp.dart';
 
 final Map<String, WidgetBuilder> routes = {
-  ContactUsPage.id: (context) => ContactUsPage(),
-  HomePage.id: (context) => HomePage(),
+  Bills.id: (context) => Bills(),
   SignIn.id: (context) => SignIn(),
   SignUp.id: (context) => SignUp(),
+  HomePage.id: (context) => HomePage(),
   Companies.id: (context) => Companies(),
-  CompanyMedcines.id: (context) => CompanyMedcines(),
-  WelcomePage.id: (context) => WelcomePage(),
-  MyInfo.id: (context) => MyInfo(),
-  Bills.id: (context) => Bills(),
-  ShoppingCart.id: (context) => ShoppingCart(),
-  SearchResults.id: (context) => SearchResults(),
   MostWanted.id: (context) => MostWanted(),
+  AdminsPage.id: (context) => AdminsPage(),
+  AboutUsPage.id: (context) => AboutUsPage(),
+  AddUserPage.id: (context) => AddUserPage(),
+  WelcomePage.id: (context) => WelcomePage(),
+  SchedualPage.id: (context) => SchedualPage(),
+  ShoppingCart.id: (context) => ShoppingCart(),
+  ContactUsPage.id: (context) => ContactUsPage(),
+  SearchResults.id: (context) => SearchResults(),
   BasketResults.id: (context) => BasketResults(),
   AddBasketPage.id: (context) => AddBasketPage(),
+  AdminHomePage.id: (context) => AdminHomePage(),
   AddCompanyPage.id: (context) => AddCompanyPage(),
   AddProductPage.id: (context) => AddProductPage(),
-  AddUserPage.id: (context) => AddUserPage(),
-  AdminHomePage.id: (context) => AdminHomePage(),
   SuggestionsPage.id: (context) => SuggestionsPage(),
-  SchedualPage.id: (context) => SchedualPage(),
-  AdminSchedualPage.id: (context) => AdminSchedualPage(),
   SignedUsersPage.id: (context) => SignedUsersPage(),
-  AboutUsPage.id: (context) => AboutUsPage(),
   AddNewAdminPage.id: (context) => AddNewAdminPage(),
+  CompanyMedcines.id: (context) => CompanyMedcines(),
+  AdminSchedualPage.id: (context) => AdminSchedualPage(),
 };
